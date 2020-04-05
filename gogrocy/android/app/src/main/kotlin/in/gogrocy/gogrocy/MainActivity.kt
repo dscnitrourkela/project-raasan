@@ -1,4 +1,4 @@
-package in.gogrocy.gogrocy
+package `in`.gogrocy.gogrocy
 
 import androidx.annotation.NonNull;
 import io.flutter.embedding.android.FlutterActivity
