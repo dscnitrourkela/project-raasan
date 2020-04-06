@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 void main() => runApp(MyApp());
 
@@ -6,11 +7,11 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return MaterialApp(
-      title: 'Flutter Demo',
+      title: 'GoGrocy',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MyHomePage(title: 'Gogrocy'),
+      home: MyHomePage(title: 'GoGrocy'),
     );
   }
 }
@@ -28,6 +29,8 @@ class _MyHomePageState extends State<MyHomePage> {
 
   @override
   Widget build(BuildContext context) {
+    constants.mediaQueryData = MediaQuery.of(context);
+    print(constants.LoginSizeConfig.loginIllustrationWidth.toString());
     return Scaffold(
       appBar: AppBar(
         title: Text(widget.title),
