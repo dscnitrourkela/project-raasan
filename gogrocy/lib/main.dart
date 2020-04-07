@@ -1,17 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
+import 'package:gogrocy/ui/views/dummy_views.dart';
 
-void main() => runApp(MyApp());
+void main() {
+  setupLocator();
+  runApp(MyApp());
+}
 
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-    return MaterialApp(
+        return MaterialApp(
       title: 'GoGrocy',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MyHomePage(title: 'GoGrocy'),
+      home: MyHomePage(),
     );
   }
 }
