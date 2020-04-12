@@ -5,9 +5,9 @@ MediaQueryData mediaQueryData;
 double screenHeight = mediaQueryData.size.height;
 double screenWidth = mediaQueryData.size.width;
 
-class LoginSizeConfig {
-  static double loginTextFieldWidth = 0.842 * screenWidth;
-  static double loginTextFieldHeight = 0.842 * screenHeight;
-  static double loginIllustrationWidth = 0.956 * screenWidth;
-  static double loginIllustrationHeight = 0.384 * screenHeight;
+class LoginConfig {
+  static double textFieldWidth = 0.842 * screenWidth;
+  static double textFieldHeight = 0.842 * screenHeight;
+  static double illustrationWidth = 0.956 * screenWidth;
+  static double illustrationHeight = 0.384 * screenHeight;
 }
