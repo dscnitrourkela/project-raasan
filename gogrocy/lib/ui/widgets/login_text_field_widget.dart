@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 
-
 class LoginTextFieldWidget extends StatefulWidget {
   LoginTextFieldWidget();
 
@@ -17,13 +16,12 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
   FocusNode phoneFocusNode = FocusNode();
   FocusNode otpFocusNode = FocusNode();
 
-
   @override
   void initState() {
     super.initState();
     phoneFocusNode.addListener(_onPhoneFocusChange);
+    otpFocusNode.addListener(_onOtpFocusChange);
   }
-
 
   @override
   void dispose() {
@@ -32,13 +30,20 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
     super.dispose();
   }
 
-  _onPhoneFocusChange(){
+  _onPhoneFocusChange() {
     setState(() {
       isPhoneFieldActive = !isPhoneFieldActive;
     });
   }
 
-  Widget textFieldContainer({TextFormField mobileTextField, PinCodeTextField otpTextField}) {
+  _onOtpFocusChange() {
+    setState(() {
+      isOtpFieldActive = !isOtpFieldActive;
+    });
+  }
+
+  Widget textFieldContainer(
+      {TextFormField mobileTextField, PinCodeTextField otpTextField}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Container(
@@ -55,7 +60,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Text(
-                mobileTextField!=null?'Let\'s Begin':'Enter OTP',
+                'Let\'s Begin',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Gilroy',
@@ -65,7 +70,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                 children: <Widget>[
                   Expanded(
                     flex: 3,
-                    child: mobileTextField!=null?mobileTextField:otpTextField,
+                    child: mobileTextField,
                   ),
                   Expanded(
                     flex: 0,
@@ -79,11 +84,8 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                             size: 40.0,
                           ),
                           onPressed: () {
-                            phoneFocusNode.unfocus();
+                            //phoneFocusNode.unfocus();
                             FocusScope.of(context).requestFocus(otpFocusNode);
-                            setState(() {
-                              isOtpFieldActive = !isOtpFieldActive;
-                            });
                             controller.animateToPage(1,
                                 duration: Duration(milliseconds: 250),
                                 curve: Curves.easeOut);
@@ -94,7 +96,49 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                   ),
                 ],
               ),
-              Text(mobileTextField!=null?'You will receive an OTP for verifying this number':'Retry')
+              Text(
+                'You will receive an OTP for verifying this number',
+              ),
+            ],
+          ),
+        ),
+      ),
+    );
+  }
+
+  Widget otpFieldContainer(
+      {TextFormField mobileTextField, PinCodeTextField otpTextField}) {
+    return Padding(
+      padding: EdgeInsets.symmetric(horizontal: 20.0),
+      child: Container(
+        decoration: BoxDecoration(
+          color: Colors.white,
+          borderRadius: BorderRadius.circular(16.0),
+        ),
+        child: Padding(
+          padding: const EdgeInsets.symmetric(
+            horizontal: 20.0,
+          ),
+          child: Column(
+            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisSize: MainAxisSize.max,
+            children: <Widget>[
+              Text(
+                'Enter OTP',
+                style: TextStyle(
+                    fontWeight: FontWeight.bold,
+                    fontFamily: 'Gilroy',
+                    fontSize: 20.0),
+              ),
+              Row(
+                children: <Widget>[
+                  Expanded(
+                    flex: 3,
+                    child: otpTextField,
+                  ),
+                ],
+              ),
+              Text('Retry'),
             ],
           ),
         ),
@@ -119,10 +163,10 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
     );
   }
 
-  PinCodeTextField otpTextField(){
+  PinCodeTextField otpTextField() {
     return PinCodeTextField(
       focusNode: otpFocusNode,
-      onChanged: (value){},
+      onChanged: (value) {},
       length: 6,
       fieldHeight: 42.0,
       fieldWidth: 40.0,
@@ -139,21 +183,29 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
   @override
   Widget build(BuildContext context) {
     print(isPhoneFieldActive.toString());
-    print('primary '+ FocusScope.of(context).hasPrimaryFocus.toString());
+    print('primary ' + FocusScope.of(context).hasPrimaryFocus.toString());
     return AnimatedPositioned(
       duration: Duration(milliseconds: 180),
       curve: Curves.easeOut,
       left: 0.0,
       right: 0.0,
-      bottom:
-          isPhoneFieldActive ? (MediaQuery.of(context).viewInsets.bottom + 10.0) : 10.0,
+      bottom: MediaQuery.of(context).viewInsets.bottom+10.0,
       child: SizedBox(
         height: 200.0,
         child: PageView(
           controller: controller,
+          onPageChanged: (position){
+            if(position!=0){
+              otpFocusNode.unfocus();
+              phoneFocusNode.requestFocus();
+            }else{
+              phoneFocusNode.unfocus();
+              otpFocusNode.requestFocus();
+            }
+          },
           children: <Widget>[
             textFieldContainer(mobileTextField: mobileTextField()),
-            textFieldContainer(otpTextField: otpTextField()),
+            otpFieldContainer(otpTextField: otpTextField()),
           ],
         ),
       ),
