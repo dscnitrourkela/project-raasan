@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 import 'package:gogrocy/ui/views/dummy_views.dart';
+import 'package:gogrocy/ui/views/landing_page.dart';
 
 void main() {
   setupLocator();
@@ -11,12 +13,13 @@ void main() {
 class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
-        return MaterialApp(
+    SystemChrome.setEnabledSystemUIOverlays([]);
+    return MaterialApp(
       title: 'GoGrocy',
       theme: ThemeData(
         primarySwatch: Colors.green,
       ),
-      home: MyHomePage(),
+      home: HomePageView(),
     );
   }
 }
@@ -31,7 +34,6 @@ class MyHomePage extends StatefulWidget {
 }
 
 class _MyHomePageState extends State<MyHomePage> {
-
   @override
   Widget build(BuildContext context) {
     constants.mediaQueryData = MediaQuery.of(context);
