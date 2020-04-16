@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/core/viewModels/animations_model.dart';
+import 'package:gogrocy/service_locator.dart';
 import 'package:provider/provider.dart';
 
 class DetailsForm extends StatefulWidget {
@@ -12,6 +14,7 @@ class DetailsForm extends StatefulWidget {
 }
 
 class _DetailsFormState extends State<DetailsForm> {
+  final NavigationService navigationService = locator<NavigationService>();
   @override
   Widget build(BuildContext context) {
     return Provider<AnimationsModel>(
@@ -121,7 +124,11 @@ class _DetailsFormState extends State<DetailsForm> {
               SizedBox(
                 height: 10.0,
               ),
-              FlatButton(onPressed: () {}, child: Text('SKIP')),
+              FlatButton(
+                  onPressed: () {
+                    navigationService.navigateTo('home');
+                  },
+                  child: Text('SKIP')),
             ],
           ),
         ),

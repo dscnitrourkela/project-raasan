@@ -22,8 +22,8 @@ class OnBoardingWidget extends StatelessWidget {
                   alignment: Alignment(-2.0, 0.0),
                   child: Image.asset(
                     'assets/images/woman.png',
-                    width: constants.LoginConfig.illustrationWidth,
-                    height: constants.LoginConfig.illustrationHeight,
+                    width: constants.LoginConfig.loginIllustrationWidth,
+                    height: constants.LoginConfig.loginIllustrationHeight,
                   ),
                 ),
                 Padding(

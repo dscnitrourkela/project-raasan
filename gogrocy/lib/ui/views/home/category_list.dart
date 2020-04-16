@@ -2,14 +2,14 @@ import 'package:flutter/material.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 class CategoryList extends StatelessWidget {
-  List<String> categoryTitle = [
+  final List<String> categoryTitle = [
     "Pulses",
     "Groceries",
     "Packed Foods",
     "Toiletries"
   ];
 
-  List<String> assetPaths = [
+  final List<String> assetPaths = [
     "assets/images/pulses.png",
     "assets/images/grocery.png",
     "assets/images/packed.png",
@@ -57,8 +57,9 @@ class CategoryList extends StatelessWidget {
                     Align(
                         alignment: Alignment(0, -3),
                         child: Image(
-                            image: AssetImage(assetPaths[index]),
-                        fit: BoxFit.contain,))
+                          image: AssetImage(assetPaths[index]),
+                          fit: BoxFit.contain,
+                        ))
                   ],
                 ),
               ),

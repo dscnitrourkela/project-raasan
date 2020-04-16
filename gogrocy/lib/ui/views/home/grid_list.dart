@@ -5,8 +5,9 @@ import 'package:gogrocy/ui/views/base_view.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 class GridList extends StatelessWidget {
-  ScrollController _scrollController = new ScrollController();
-  String BASE_IMG_URL = "https://res.cloudinary.com/gogrocy/image/upload/v1/";
+  final ScrollController _scrollController = new ScrollController();
+  final String baseImgUrl =
+      "https://res.cloudinary.com/gogrocy/image/upload/v1/";
 
   @override
   Widget build(BuildContext context) {
@@ -22,9 +23,11 @@ class GridList extends StatelessWidget {
               crossAxisCount: 2, childAspectRatio: 1, crossAxisSpacing: 8.0),
           itemBuilder: (context, index) {
             // ignore: missing_return
-            if(model.state==ViewState.Idle)if(model.state==ViewState.Busy)
+            if (model.state == ViewState.Idle) if (model.state ==
+                ViewState.Busy)
               return CircularProgressIndicator();
-            else return Padding(
+            else
+              return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
                   width: constants.HomePageConfig.productGridWidth,

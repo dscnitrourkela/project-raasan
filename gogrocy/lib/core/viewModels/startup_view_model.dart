@@ -12,7 +12,7 @@ class StartupViewModel extends BaseModel {
     var hasLoggedInUser = await authenticationService.isUserLoggedIn();
     Future.delayed(Duration(seconds: 3), () {
       if (hasLoggedInUser) {
-        navigationService.navigateTo('awesome');
+        navigationService.navigateTo('home');
       } else {
         navigationService.navigateTo('login');
       }

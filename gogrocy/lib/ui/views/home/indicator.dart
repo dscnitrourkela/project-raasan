@@ -3,7 +3,7 @@ import 'package:gogrocy/ui/shared/constants.dart' as constants;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class Indicator extends StatelessWidget {
-  PageController controller;
+  final PageController controller;
 
   Indicator(this.controller);
 
