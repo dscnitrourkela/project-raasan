@@ -20,11 +20,15 @@ dependencies:
   flutter:
     sdk: flutter
   animations: any
+  fancy_bottom_navigation: ^0.3.2
   firebase_auth: any
   get_it: ^4.0.1
+  http: 0.12.0+4
   pin_code_fields: ^2.5.1
   provider: ^4.0.4
+  shared_preferences: ^0.5.6+3
   smooth_page_indicator: ^0.1.5
+
 
   # The following adds the Cupertino Icons font to your application.
   # Use with the CupertinoIcons class for iOS style icons.
