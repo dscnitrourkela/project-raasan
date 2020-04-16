@@ -1,6 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gogrocy/core/viewModels/login_model.dart';
+import 'package:gogrocy/service_locator.dart';
+import 'package:gogrocy/ui/widgets/otp_field.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
+import 'package:provider/provider.dart';
 
 class LoginTextFieldWidget extends StatefulWidget {
   LoginTextFieldWidget();
@@ -10,40 +14,36 @@ class LoginTextFieldWidget extends StatefulWidget {
 }
 
 class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
-  bool isPhoneFieldActive = false;
   bool isOtpFieldActive = false;
   PageController controller = PageController();
-  FocusNode phoneFocusNode = FocusNode();
-  FocusNode otpFocusNode = FocusNode();
+  TextEditingController phoneController = TextEditingController();
+  TextEditingController otpController = TextEditingController();
+  FocusNode phoneFocusNode;
+  FocusNode otpFocusNode;
 
   @override
   void initState() {
     super.initState();
+    phoneFocusNode = FocusNode();
+    otpFocusNode = FocusNode();
     phoneFocusNode.addListener(_onPhoneFocusChange);
-    otpFocusNode.addListener(_onOtpFocusChange);
   }
 
   @override
   void dispose() {
+    super.dispose();
     phoneFocusNode.dispose();
     otpFocusNode.dispose();
-    super.dispose();
   }
 
   _onPhoneFocusChange() {
-    setState(() {
-      isPhoneFieldActive = !isPhoneFieldActive;
-    });
-  }
-
-  _onOtpFocusChange() {
-    setState(() {
-      isOtpFieldActive = !isOtpFieldActive;
-    });
+    setState(() {});
   }
 
   Widget textFieldContainer(
-      {TextFormField mobileTextField, PinCodeTextField otpTextField}) {
+      {TextFormField mobileTextField,
+      PinCodeTextField otpTextField,
+      LoginModel model}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Container(
@@ -77,18 +77,19 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                     child: Padding(
                       padding: EdgeInsets.only(left: 8.0),
                       child: Visibility(
-                        visible: isPhoneFieldActive,
+                        visible: phoneFocusNode.hasFocus,
                         child: IconButton(
                           icon: Icon(
                             Icons.check_circle,
                             size: 40.0,
                           ),
                           onPressed: () {
-                            //phoneFocusNode.unfocus();
-                            FocusScope.of(context).requestFocus(otpFocusNode);
                             controller.animateToPage(1,
                                 duration: Duration(milliseconds: 250),
                                 curve: Curves.easeOut);
+                            model.loginWithPhone(
+                                context: context,
+                                phoneNumber: phoneController.text);
                           },
                         ),
                       ),
@@ -107,7 +108,9 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
   }
 
   Widget otpFieldContainer(
-      {TextFormField mobileTextField, PinCodeTextField otpTextField}) {
+      {TextFormField mobileTextField,
+      OtpTextField otpTextField,
+      LoginModel model}) {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 20.0),
       child: Container(
@@ -136,6 +139,30 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                     flex: 3,
                     child: otpTextField,
                   ),
+                  Expanded(
+                    flex: 0,
+                    child: Padding(
+                      padding: EdgeInsets.only(left: 8.0),
+                      child: Visibility(
+                        visible: otpFocusNode.hasFocus,
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.check_circle,
+                            size: 40.0,
+                          ),
+                          onPressed: () {
+                            model.loginWithOtp(
+                                otp: otpController.text,
+                                phoneNumber: phoneController.text,
+                                context: context);
+                            SystemChannels.textInput
+                                .invokeMethod('TextInput.hide');
+                            Navigator.of(context).pushNamed('awesome');
+                          },
+                        ),
+                      ),
+                    ),
+                  )
                 ],
               ),
               Text('Retry'),
@@ -146,10 +173,19 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
     );
   }
 
-  TextFormField mobileTextField() {
+  TextFormField mobileTextField(TextEditingController phoneController) {
     return TextFormField(
       focusNode: phoneFocusNode,
       textAlign: TextAlign.center,
+      controller: phoneController,
+      textInputAction: TextInputAction.next,
+      onFieldSubmitted: (value) {
+        controller.animateToPage(
+          1,
+          duration: Duration(milliseconds: 250),
+          curve: Curves.easeOut,
+        );
+      },
       cursorColor: Colors.lightGreen,
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
@@ -163,50 +199,46 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
     );
   }
 
-  PinCodeTextField otpTextField() {
-    return PinCodeTextField(
-      focusNode: otpFocusNode,
-      onChanged: (value) {},
-      length: 6,
-      fieldHeight: 42.0,
-      fieldWidth: 40.0,
-      shape: PinCodeFieldShape.box,
-      borderRadius: BorderRadius.circular(12.0),
-      borderWidth: 2.0,
-      inactiveColor: Colors.black,
-      textInputType: TextInputType.number,
-      activeColor: Colors.lightGreen,
-      disabledColor: Colors.black,
-    );
-  }
-
   @override
   Widget build(BuildContext context) {
-    print(isPhoneFieldActive.toString());
+    //print(isPhoneFieldActive.toString());
     print('primary ' + FocusScope.of(context).hasPrimaryFocus.toString());
-    return AnimatedPositioned(
-      duration: Duration(milliseconds: 180),
-      curve: Curves.easeOut,
-      left: 0.0,
-      right: 0.0,
-      bottom: MediaQuery.of(context).viewInsets.bottom+10.0,
-      child: SizedBox(
-        height: 200.0,
-        child: PageView(
-          controller: controller,
-          onPageChanged: (position){
-            if(position!=0){
-              otpFocusNode.unfocus();
-              phoneFocusNode.requestFocus();
-            }else{
-              phoneFocusNode.unfocus();
-              otpFocusNode.requestFocus();
-            }
-          },
-          children: <Widget>[
-            textFieldContainer(mobileTextField: mobileTextField()),
-            otpFieldContainer(otpTextField: otpTextField()),
-          ],
+    //TextEditingController phoneController = TextEditingController();
+    return ChangeNotifierProvider<LoginModel>(
+      create: (_) => locator<LoginModel>(),
+      child: Consumer<LoginModel>(
+        builder: (context, model, child) => AnimatedPositioned(
+          duration: Duration(milliseconds: 180),
+          curve: Curves.easeOut,
+          left: 0.0,
+          right: 0.0,
+          bottom: MediaQuery.of(context).viewInsets.bottom + 10.0,
+          child: SizedBox(
+            height: 200.0,
+            child: PageView(
+              controller: controller,
+              onPageChanged: (position) {
+                if (position == 0) {
+                  //FocusScope.of(context).unfocus();
+                  FocusScope.of(context).requestFocus(phoneFocusNode);
+                } else {
+                  //FocusScope.of(context).unfocus();
+                  FocusScope.of(context).requestFocus(otpFocusNode);
+                }
+              },
+              children: <Widget>[
+                textFieldContainer(
+                  mobileTextField: mobileTextField(phoneController),
+                  model: model,
+                ),
+                otpFieldContainer(
+                  otpTextField: OtpTextField(
+                      otpFocusNode: otpFocusNode, controller: otpController),
+                  model: model,
+                ),
+              ],
+            ),
+          ),
         ),
       ),
     );

@@ -16,7 +16,6 @@ class LoginView extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    constants.mediaQueryData = MediaQuery.of(context);
     return ChangeNotifierProvider<LoginModel>(
         create: (_) => locator<LoginModel>(),
         child: Consumer<LoginModel>(
@@ -32,7 +31,7 @@ class LoginView extends StatelessWidget {
                       mainAxisSize: MainAxisSize.max,
                       crossAxisAlignment: CrossAxisAlignment.center,
                       children: <Widget>[
-                        TitleText(),
+                        Hero(tag: 'GoGrocy', child: TitleText()),
                         OnBoardingWidget(controller),
                         SmoothPageIndicator(
                           controller: controller,
@@ -55,7 +54,9 @@ class LoginView extends StatelessWidget {
                     IgnorePointer(
                       child: AnimatedOpacity(
                         duration: Duration(milliseconds: 180),
-                        opacity: (MediaQuery.of(context).viewInsets.bottom>0)?0.5:0.0,
+                        opacity: (MediaQuery.of(context).viewInsets.bottom > 0)
+                            ? 0.5
+                            : 0.0,
                         child: BackdropFilter(
                           filter: ImageFilter.blur(sigmaX: 0, sigmaY: 0),
                           child: Container(

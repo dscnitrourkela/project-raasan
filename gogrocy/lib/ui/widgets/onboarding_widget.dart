@@ -3,6 +3,7 @@ import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 class OnBoardingWidget extends StatelessWidget {
   final PageController controller;
+
   OnBoardingWidget(this.controller);
 
   @override
@@ -18,13 +19,11 @@ class OnBoardingWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Align(
-                  alignment: Alignment(-2.0,0.0),
+                  alignment: Alignment(-2.0, 0.0),
                   child: Image.asset(
                     'assets/images/woman.png',
-                    width:
-                    constants.LoginConfig.illustrationWidth,
-                    height: constants
-                        .LoginConfig.illustrationHeight,
+                    width: constants.LoginConfig.illustrationWidth,
+                    height: constants.LoginConfig.illustrationHeight,
                   ),
                 ),
                 Padding(

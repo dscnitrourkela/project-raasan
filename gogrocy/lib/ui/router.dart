@@ -1,21 +1,47 @@
 import 'package:flutter/material.dart';
+import 'package:gogrocy/ui/views/awesome_animation_view.dart';
 import 'package:gogrocy/ui/views/login_view.dart';
 
-class Router{
-  static Route<dynamic> generateRoute(RouteSettings settings){
-    switch(settings.name){
+ Route<dynamic> generateRoute(RouteSettings settings) {
+    switch (settings.name) {
       case '/':
-        return MaterialPageRoute(builder: (_) => LoginView());
+        return MaterialPageRoute(builder: (context) => LoginView());
       case 'login':
-        return MaterialPageRoute(builder: (_) => LoginView());
+        return PageRouteBuilder(
+          pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
+            return LoginView();
+          },
+          transitionsBuilder: (BuildContext context,
+              Animation<double> animation,
+              Animation<double> secondaryAnimation,
+              Widget child) =>
+              FadeTransition(
+                opacity: animation,
+                child: child,
+              ),
+        );
+      case 'awesome':
+        return PageRouteBuilder(
+          pageBuilder: (BuildContext context, Animation<double> animation,
+              Animation<double> secondaryAnimation) {
+            return AwesomeAnimationView();
+          },
+          transitionsBuilder: (BuildContext context,
+                  Animation<double> animation,
+                  Animation<double> secondaryAnimation,
+                  Widget child) =>
+              FadeTransition(
+            opacity: animation,
+            child: child,
+          ),
+        );
       default:
         return MaterialPageRoute(
-          builder: (_) => Scaffold(
-            body: Center(
-              child: Text('No route defined for ${settings.name}'),
-            ),
-          )
-        );
+            builder: (context) => Scaffold(
+                  body: Center(
+                    child: Text('No route defined for ${settings.name}'),
+                  ),
+                ));
     }
   }
-}

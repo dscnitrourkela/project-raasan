@@ -12,15 +12,15 @@ class TitleText extends StatelessWidget {
       padding: EdgeInsets.symmetric(vertical: constants.screenHeight * 0.05),
       child: Center(
           child: Text(
-            'GOGROCY',
-            textAlign: TextAlign.center,
-            style: TextStyle(
-              color: Colors.black,
-              fontFamily: 'Gilroy',
-              fontSize: 30.0,
-              fontWeight: FontWeight.bold,
-            ),
-          )),
+        'GOGROCY',
+        textAlign: TextAlign.center,
+        style: TextStyle(
+          color: Colors.black,
+          fontFamily: 'Gilroy',
+          fontSize: 30.0,
+          fontWeight: FontWeight.bold,
+        ),
+      )),
     );
   }
 }

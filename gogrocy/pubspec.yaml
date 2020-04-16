@@ -20,9 +20,9 @@ dependencies:
   flutter:
     sdk: flutter
   animations: any
-  firebase_auth: ^0.15.5+3
+  firebase_auth: any
   get_it: ^4.0.1
-  pin_code_fields: ^2.4.0
+  pin_code_fields: ^2.5.1
   provider: ^4.0.4
   smooth_page_indicator: ^0.1.5
 
