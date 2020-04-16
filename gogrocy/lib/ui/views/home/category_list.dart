@@ -5,15 +5,15 @@ class CategoryList extends StatelessWidget {
   List<String> categoryTitle = [
     "Pulses",
     "Groceries",
-    "Oils",
-    "Domestic Items"
+    "Packed Foods",
+    "Toiletries"
   ];
 
   List<String> assetPaths = [
     "assets/images/pulses.png",
     "assets/images/grocery.png",
-    "assets/images/pulses.png",
-    "assets/images/pulses.png"
+    "assets/images/packed.png",
+    "assets/images/toiletries.png"
   ];
 
   @override

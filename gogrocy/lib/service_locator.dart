@@ -7,6 +7,6 @@ GetIt locator = GetIt.instance;
 
 void setupLocator() {
   locator.registerLazySingleton(()=>Apis());
-  locator.registerLazySingleton(()=>AllProductsModel());
+  locator.registerFactory(()=>AllProductsModel());
   locator.registerFactory(()=>BottomNavBarProvider());
 }

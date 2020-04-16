@@ -57,6 +57,8 @@ flutter:
     - assets/images/carousel_3.png
     - assets/images/pulses.png
     - assets/images/grocery.png
+    - assets/images/toiletries.png
+    - assets/images/packed.png
   # The following line ensures that the Material Icons font is
   # included with your application, so that you can use the icons in
   # the material Icons class.

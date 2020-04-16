@@ -51,6 +51,9 @@ class HomePageConfig{
   static double categoryBoxHeight=(86/823)*screenHeight;
   static double categotyBoxWidth=(168/411)*screenWidth;
 
+  static double productGridWidth=(171/823)*screenHeight;
+  static double productGridHeight=(171/411)*screenHeight;
+
 
 
 }
