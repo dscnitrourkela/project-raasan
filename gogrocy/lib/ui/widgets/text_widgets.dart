@@ -17,7 +17,7 @@ class TitleText extends StatelessWidget {
         style: TextStyle(
           color: Colors.black,
           fontFamily: 'Gilroy',
-          fontSize: 30.0,
+          fontSize: constants.LoginConfig.titleTextSize,
           fontWeight: FontWeight.bold,
         ),
       )),

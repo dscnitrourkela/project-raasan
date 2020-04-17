@@ -30,6 +30,7 @@
 .pub/
 /build/
 /android/app/google-services.json
+/android/key.properties
 
 
 # Web related

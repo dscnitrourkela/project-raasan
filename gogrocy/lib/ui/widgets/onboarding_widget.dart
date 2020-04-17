@@ -22,26 +22,26 @@ class OnBoardingWidget extends StatelessWidget {
                   alignment: Alignment(-2.0, 0.0),
                   child: Image.asset(
                     'assets/images/woman.png',
-                    width: constants.LoginConfig.loginIllustrationWidth,
-                    height: constants.LoginConfig.loginIllustrationHeight,
+                    width: constants.OnBoardingConfig.illustrationWidth,
+                    height: constants.OnBoardingConfig.illustrationHeight,
                   ),
                 ),
                 Padding(
                   padding: EdgeInsets.symmetric(vertical: 18.0),
                   child: SizedBox(
-                    width: 300.0,
+                    width: 0.354 * constants.screenHeight,
                     child: Text(
                       'The widest selection of home essentials just a few taps away',
                       textAlign: TextAlign.center,
                       style: TextStyle(
-                        height: 1.13,
-                        fontSize: 20.0,
+                        height: 1.15,
+                        fontSize: constants.OnBoardingConfig.footerTextSize,
                         fontFamily: 'Gilroy',
                         fontWeight: FontWeight.normal,
                       ),
                     ),
                   ),
-                )
+                ),
               ],
             ),
           );

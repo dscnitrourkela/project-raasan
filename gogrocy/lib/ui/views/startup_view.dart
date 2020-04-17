@@ -8,7 +8,8 @@ class StartupView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     constants.mediaQueryData = MediaQuery.of(context);
-
+    print(constants.screenWidth);
+    print(constants.screenHeight);
     return BaseView<StartupViewModel>(
       onModelReady: (model) => model.handleStartUpLogic(),
       builder: (context, model, child) => Scaffold(

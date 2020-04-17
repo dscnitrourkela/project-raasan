@@ -7,6 +7,7 @@ import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/widgets/login_text_field_widget.dart';
 import 'package:gogrocy/ui/widgets/onboarding_widget.dart';
 import 'package:gogrocy/ui/widgets/text_widgets.dart';
+import 'package:gogrocy/ui/widgets/vertical_spaces.dart';
 import 'package:provider/provider.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 import 'package:smooth_page_indicator/smooth_page_indicator.dart';
@@ -46,9 +47,7 @@ class LoginView extends StatelessWidget {
                             spacing: 10.0,
                           ),
                         ),
-                        SizedBox(
-                          height: 250.0,
-                        ),
+                        VerticalSpaces.extraLarge,
                       ],
                     ),
                     IgnorePointer(

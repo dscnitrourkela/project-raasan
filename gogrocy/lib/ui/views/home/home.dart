@@ -4,6 +4,7 @@ import 'package:gogrocy/ui/views/home/category_list.dart';
 import 'package:gogrocy/ui/views/home/grid_list.dart';
 import 'package:gogrocy/ui/views/home/indicator.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
+import 'package:gogrocy/ui/widgets/bottom_navbar.dart';
 
 class Home extends StatelessWidget {
   final PageController controller = new PageController();
@@ -77,6 +78,7 @@ class Home extends StatelessWidget {
           GridList(),
         ],
       ),
+      //bottomNavigationBar: BottomNavBar(),
     );
   }
 }
