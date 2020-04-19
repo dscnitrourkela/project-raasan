@@ -13,7 +13,7 @@ class Apis {
     var client = new http.Client();
     bool connectionState = await checkStatus();
     if (connectionState) //TODO: Add a proper else return
-    {
+        {
       var products = List<Product>();
       var response = await client.post(allProducts);
       var parsed = json.decode(response.body) as List<dynamic>;
