@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:gogrocy/ui/views/awesome_animation_view.dart';
 import 'package:gogrocy/ui/views/home/home.dart';
+import 'package:gogrocy/ui/views/landing_page.dart';
 import 'package:gogrocy/ui/views/login_view.dart';
 
 Route<dynamic> generateRoute(RouteSettings settings) {
@@ -8,7 +9,7 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case '/':
       return MaterialPageRoute(builder: (context) => LoginView());
     case 'home':
-      return MaterialPageRoute(builder: (context) => Home());
+      return MaterialPageRoute(builder: (context) => HomePageView());
     case 'login':
       return PageRouteBuilder(
         pageBuilder: (BuildContext context, Animation<double> animation,

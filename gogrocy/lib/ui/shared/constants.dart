@@ -20,8 +20,10 @@ class OnBoardingConfig{
 }
 
 class BottomNavBarConfig {
-  static double bottomNavBarHeight = 0.0842 * screenHeight;
+  static double bottomNavBarHeight = (70/823) * screenHeight;
   static double bottomNavBarWidth = screenWidth;
+  static double activeIconSize=(66/411)*screenWidth;
+  static double inactiveIconSize=(24/411)*screenWidth;
 }
 
 class AppBarConfig {

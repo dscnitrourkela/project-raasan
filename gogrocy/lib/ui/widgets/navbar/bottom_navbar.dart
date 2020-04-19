@@ -120,7 +120,7 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                   type: MaterialType.circle,
                   child: Padding(
                     padding: EdgeInsets.all(15.0),
-                    child: _icon,
+                    child: Center(child: _icon,),
                   ),
                 ),
               ),
@@ -129,19 +129,19 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
           Positioned(
             left: 0,
             right: 0,
-            bottom: 0 - (75.0 - widget.height),
+            bottom: 0 - (75.0- widget.height),
             child: CustomPaint(
               painter: NavCustomPainter(
                   _pos, _length, widget.color, Directionality.of(context)),
               child: Container(
-                height: 75.0,
+                height: constants.BottomNavBarConfig.bottomNavBarHeight,
               ),
             ),
           ),
           Positioned(
             left: 0,
             right: 0,
-            bottom: 0 - (75.0 - widget.height),
+            bottom: 0 - (75 - widget.height),
             child: SizedBox(
                 height: 70.0,
                 child: Row(
