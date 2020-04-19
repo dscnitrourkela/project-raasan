@@ -19,18 +19,18 @@ class CurvedNavigationBar extends StatefulWidget {
     Key key,
     @required this.items,
     this.index = 0,
-    this.color = Colors.white,
+    this.color = Colors.transparent,
     this.buttonBackgroundColor,
     this.backgroundColor = Colors.blueAccent,
     this.onTap,
     this.animationCurve = Curves.easeOut,
     this.animationDuration = const Duration(milliseconds: 600),
-    this.height = 75.0,
+    this.height,
   })
       : assert(items != null),
         assert(items.length >= 1),
         assert(0 <= index && index < items.length),
-        assert(0 <= height && height <= 75.0),
+        assert(0 <= height && height <= constants.BottomNavBarConfig.customNavBarMaxHeight),
         super(key: key);
 
   @override
@@ -94,14 +94,14 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
         .of(context)
         .size;
     return Container(
-      color: widget.backgroundColor,
+      color: Colors.transparent,
       height: widget.height,
       child: Stack(
         overflow: Overflow.visible,
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           Positioned(
-            bottom: -40 - (75.0 - widget.height),
+            bottom: widget.height - constants.BottomNavBarConfig.bottomPositioningValue,
             left: Directionality.of(context) == TextDirection.rtl
                 ? null
                 : _pos * size.width,
@@ -113,13 +113,13 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
               child: Transform.translate(
                 offset: Offset(
                   0,
-                  -(1 - _buttonHide) * 80,
+                  -(1 - _buttonHide) * constants.BottomNavBarConfig.buttonOffsetMultiplier,
                 ),
                 child: Material(
                   color: widget.buttonBackgroundColor ?? widget.color,
                   type: MaterialType.circle,
                   child: Padding(
-                    padding: EdgeInsets.all(15.0),
+                    padding: EdgeInsets.all(constants.BottomNavBarConfig.buttonPadding),
                     child: Center(child: _icon,),
                   ),
                 ),
@@ -129,12 +129,13 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
           Positioned(
             left: 0,
             right: 0,
-            bottom: 0 - (75.0- widget.height),
+            bottom: widget.height-constants.BottomNavBarConfig.customPaintBottomPositionValue,
             child: CustomPaint(
               painter: NavCustomPainter(
                   _pos, _length, widget.color, Directionality.of(context)),
               child: Container(
-                height: constants.BottomNavBarConfig.bottomNavBarHeight,
+                height: constants.BottomNavBarConfig.customNavBarMaxHeight,
+                color: Colors.transparent,
               ),
             ),
           ),
@@ -143,7 +144,7 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
             right: 0,
             bottom: 0 - (75 - widget.height),
             child: SizedBox(
-                height: 70.0,
+                height: 75.0,
                 child: Row(
                     children: widget.items.map((item) {
                       return NavButton(
@@ -175,33 +176,5 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
       _animationController.animateTo(newPosition,
           duration: widget.animationDuration, curve: widget.animationCurve);
     });
-  }
-}
-
-class MyClipper extends CustomClipper<Path> {
-  final double left;
-  final double radius;
-  final int itemsLength;
-  final AnimationController controller;
-
-  MyClipper(this.left, this.radius, this.controller, this.itemsLength);
-
-  @override
-  Path getClip(Size size) {
-    Path path = Path();
-    path.moveTo(0, 0);
-    path.lineTo(left + 42, 0);
-    path.arcToPoint(Offset(left + radius * 2, 0),
-        clockwise: false, radius: Radius.circular(1));
-    path.lineTo(size.width, 0);
-    path.lineTo(size.width, size.height);
-    path.lineTo(0, size.height);
-    path.close();
-    return path;
-  }
-
-  @override
-  bool shouldReclip(CustomClipper<Path> oldClipper) {
-    return true;
   }
 }

@@ -22,10 +22,11 @@ class NavButton extends StatelessWidget {
           onTap(index);
         },
         child: Container(
+            color: Colors.transparent,
             height: 75.0,
             child: Transform.translate(
               offset: Offset(
-                  0, difference < 1.0 / length ? verticalAlignment * 50 : 0),
+                  0, difference < 1.0 / length ? verticalAlignment * 70 : 0),
               child: Opacity(
                   opacity: difference < 1.0 / length * 0.99 ? opacity : 1.0,
                   child: child),

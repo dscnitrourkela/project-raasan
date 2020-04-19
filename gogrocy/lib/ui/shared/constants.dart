@@ -8,22 +8,28 @@ double screenWidth = mediaQueryData.size.width;
 class LoginConfig {
   static double loginTextFieldWidth = 0.842 * screenWidth;
   static double loginTextFieldHeight = 0.842 * screenHeight;
+
   //static double loginIllustrationWidth = 0.956 * screenWidth;
   //static double loginIllustrationHeight = 0.384 * screenHeight;
   static double titleTextSize = 0.071 * screenWidth;
 }
 
-class OnBoardingConfig{
+class OnBoardingConfig {
   static double illustrationWidth = 0.956 * screenWidth;
   static double illustrationHeight = 0.384 * screenHeight;
   static double footerTextSize = 0.047 * screenWidth;
 }
 
 class BottomNavBarConfig {
-  static double bottomNavBarHeight = (70/823) * screenHeight;
+  static double bottomNavBarHeight = (70 / 823) * screenHeight;
   static double bottomNavBarWidth = screenWidth;
-  static double activeIconSize=(66/411)*screenWidth;
-  static double inactiveIconSize=(24/411)*screenWidth;
+  static double activeIconSize = (66 / 411) * screenWidth;
+  static double inactiveIconSize = (24 / 411) * screenWidth;
+  static double buttonPadding = 0.047 * screenWidth;
+  static double buttonOffsetMultiplier = 0.196 * screenWidth;
+  static double bottomPositioningValue = 0.271 * screenWidth;
+  static double customPaintBottomPositionValue = 0.177 * screenWidth;
+  static double customNavBarMaxHeight = 0.177 * screenWidth;
 }
 
 class AppBarConfig {

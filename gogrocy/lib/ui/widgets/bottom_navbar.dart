@@ -5,7 +5,6 @@ import 'package:gogrocy/ui/widgets/navbar/bottom_navbar.dart';
 import 'package:provider/provider.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
-
 class BottomNavBar extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -14,7 +13,7 @@ class BottomNavBar extends StatelessWidget {
     return CurvedNavigationBar(
       //key: _bottomNavigationKey,
       index: 0,
-      height: 75,
+      height: constants.BottomNavBarConfig.bottomNavBarHeight,
       items: <Widget>[
         Icon(
           Icons.shopping_cart,
@@ -23,12 +22,12 @@ class BottomNavBar extends StatelessWidget {
         ),
         Icon(
           Icons.explore,
-          size: 35,
+          size: constants.BottomNavBarConfig.inactiveIconSize,
           color: Colors.white,
         ),
         Icon(
           Icons.person,
-          size: 35,
+          size: constants.BottomNavBarConfig.inactiveIconSize,
           color: Colors.white,
         ),
       ],
