@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 class NavButton extends StatelessWidget {
   final double position;
@@ -23,7 +24,7 @@ class NavButton extends StatelessWidget {
         },
         child: Container(
             color: Colors.transparent,
-            height: 75.0,
+            height: constants.BottomNavBarConfig.customNavBarMaxHeight,
             child: Transform.translate(
               offset: Offset(
                   0, difference < 1.0 / length ? verticalAlignment * 70 : 0),

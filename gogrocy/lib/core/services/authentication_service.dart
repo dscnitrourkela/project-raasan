@@ -1,9 +1,13 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:gogrocy/core/services/shared_prefs.dart';
+import 'package:gogrocy/service_locator.dart';
 
 class AuthenticationService {
   final firebaseInstance = FirebaseAuth.instance;
   String verificationId;
+
+  final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
 
   Future verifyPhoneNumber(BuildContext context, String phoneNumber) async {
     final PhoneVerificationCompleted verificationCompleted =
@@ -14,7 +18,7 @@ class AuthenticationService {
 
     final PhoneVerificationFailed verificationFailed =
         (AuthException exception) {
-      print(exception.message);
+      print("VFAIL " + exception.message);
     };
 
     final PhoneCodeSent phoneCodeSent =
@@ -39,15 +43,20 @@ class AuthenticationService {
       FirebaseUser currentUser = await firebaseInstance.currentUser();
       return currentUser != null;
     } catch (e) {
+      print(e.message);
       return e.message;
     }
   }
 
   signInWithNumber(BuildContext context, AuthCredential credential) async {
-    FirebaseUser user =
-        (await firebaseInstance.signInWithCredential(credential)).user;
-    FirebaseUser currentUser = await firebaseInstance.currentUser();
-    assert(user.uid == currentUser.uid);
+    try {
+      FirebaseUser user =
+          (await firebaseInstance.signInWithCredential(credential)).user;
+      FirebaseUser currentUser = await firebaseInstance.currentUser();
+      assert(user.uid == currentUser.uid);
+    } catch (exception) {
+      print(exception.message);
+    }
   }
 
   Future signInWithOtp(String verificationId, String otp) async {
@@ -63,7 +72,11 @@ class AuthenticationService {
   }
 
   Future<bool> isUserLoggedIn() async {
-    var user = await firebaseInstance.currentUser();
-    return user != null;
+    var loggedIn = await _sharedPrefsService.hasUser();
+    if(loggedIn){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

@@ -20,8 +20,11 @@ dependencies:
   flutter:
     sdk: flutter
   animations: any
+  cloud_firestore: ^0.13.5
+  connectivity: ^0.4.8+2
   fancy_bottom_navigation: ^0.3.2
   firebase_auth: any
+  firebase_messaging: ^6.0.13
   get_it: ^4.0.1
   http: 0.12.0+4
   pin_code_fields: ^2.5.1

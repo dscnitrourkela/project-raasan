@@ -2,22 +2,25 @@ import 'package:flutter/material.dart';
 
 bool isLoggedIn = false;
 MediaQueryData mediaQueryData;
+double scaleRatio = mediaQueryData.devicePixelRatio/2.002;
 double screenHeight = mediaQueryData.size.height;
 double screenWidth = mediaQueryData.size.width;
 
 class LoginConfig {
-  static double loginTextFieldWidth = 0.842 * screenWidth;
-  static double loginTextFieldHeight = 0.842 * screenHeight;
+  static double loginTextFieldWidth = 280 * scaleRatio;
+  static double titleTextSize = 22 * scaleRatio;
+}
 
-  //static double loginIllustrationWidth = 0.956 * screenWidth;
-  //static double loginIllustrationHeight = 0.384 * screenHeight;
-  static double titleTextSize = 0.071 * screenWidth;
+class SignUpConfig{
+  static double textFieldWidth = 275 * scaleRatio;
+  static double raisedButtonWidth = 0.283 * screenWidth;
+  static double raisedButtonHeight = 0.095 * screenWidth;
 }
 
 class OnBoardingConfig {
-  static double illustrationWidth = 0.956 * screenWidth;
-  static double illustrationHeight = 0.384 * screenHeight;
-  static double footerTextSize = 0.047 * screenWidth;
+  static double illustrationWidth = 316.21 * scaleRatio;
+  static double illustrationHeight = 280 * scaleRatio;
+  static double footerTextSize = 14 * scaleRatio;
 }
 
 class BottomNavBarConfig {

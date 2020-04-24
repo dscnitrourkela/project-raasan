@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gogrocy/ui/views/awesome_animation_view.dart';
+import 'package:gogrocy/ui/views/signup_view.dart';
 import 'package:gogrocy/ui/views/home/home.dart';
 import 'package:gogrocy/ui/views/landing_page.dart';
 import 'package:gogrocy/ui/views/login_view.dart';
@@ -24,10 +24,11 @@ Route<dynamic> generateRoute(RouteSettings settings) {
         ),
       );
     case 'awesome':
+      Map<String,String> args = settings.arguments;
       return PageRouteBuilder(
         pageBuilder: (BuildContext context, Animation<double> animation,
             Animation<double> secondaryAnimation) {
-          return AwesomeAnimationView();
+          return SignUpView(mobile: args["phoneNumber"], countryCode: args["countryCode"],);
         },
         transitionsBuilder: (BuildContext context, Animation<double> animation,
                 Animation<double> secondaryAnimation, Widget child) =>

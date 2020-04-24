@@ -1,23 +1,23 @@
 import 'package:shared_preferences/shared_preferences.dart';
 
-class SharedPrefs {
-  SharedPreferences _sharedPrefs;
-
-  SharedPrefs() {
-    initSharedPrefs();
+class SharedPrefsService {
+  Future<bool> setJWT(String s) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setString("jwt", s);
   }
 
-  initSharedPrefs() async{
-    _sharedPrefs=await SharedPreferences.getInstance();
+  Future<String> getJWT() async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getString("jwt");
   }
 
-  setJWT(String s) async{
-    _sharedPrefs.setString("jwt",s);
+  Future<bool> setLoggedIn(bool t) async {
+    SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.setBool("loggedIn", t);
   }
 
-  Future<String> getJWT() async{
-    String jwt =  _sharedPrefs.getString("jwt");
-    return jwt;
+  Future<bool> hasUser() async {
+    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    return prefs.getBool("loggedIn")??false;
   }
-
 }
