@@ -20,4 +20,12 @@ class SharedPrefs {
     return jwt;
   }
 
+  setCartPrice(String s) async{
+    _sharedPrefs.setString("cart", s);
+  }
+
+  Future<String> getCartPrice() async{
+    return _sharedPrefs.getString('cart');
+  }
+
 }

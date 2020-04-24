@@ -26,6 +26,11 @@ class _DetailsFormState extends State<DetailsForm> {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: <Widget>[
+              FlatButton(
+              onPressed: () {
+        navigationService.navigateTo('home');
+        },
+            child: Text('SKIP')),
               Text('What do we call you?'),
               SizedBox(
                 height: 10.0,
@@ -124,11 +129,7 @@ class _DetailsFormState extends State<DetailsForm> {
               SizedBox(
                 height: 10.0,
               ),
-              FlatButton(
-                  onPressed: () {
-                    navigationService.navigateTo('home');
-                  },
-                  child: Text('SKIP')),
+
             ],
           ),
         ),

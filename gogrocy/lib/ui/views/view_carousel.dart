@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gogrocy/core/services/bottom_appbar_provider.dart';
+import 'package:gogrocy/ui/views/cart/cart.dart';
 import 'package:gogrocy/ui/views/home/home.dart';
 import 'package:provider/provider.dart';
 
@@ -16,9 +17,10 @@ class ViewCarousel extends StatelessWidget {
     });
     return PageView(
       children: <Widget>[
+        Cart(),
         Home(),
-        Home(),
-        Home(),
+        Cart(),
+
       ],
       physics: NeverScrollableScrollPhysics(),
       controller: controller,

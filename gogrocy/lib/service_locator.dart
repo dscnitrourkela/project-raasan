@@ -1,6 +1,7 @@
 import 'package:get_it/get_it.dart';
 import 'package:gogrocy/core/services/authentication_service.dart';
 import 'package:gogrocy/core/services/navigation_service.dart';
+import 'package:gogrocy/core/viewModels/cart_view_model.dart';
 import 'package:gogrocy/core/viewModels/login_model.dart';
 import 'package:gogrocy/core/viewModels/startup_view_model.dart';
 import 'package:gogrocy/ui/views/awesome_animation_view.dart';
@@ -18,5 +19,6 @@ void setupLocator() {
   locator.registerFactory<LoginModel>(() => LoginModel());
   locator.registerLazySingleton(()=>Apis());
   locator.registerFactory(()=>AllProductsModel());
+  locator.registerFactory(()=>CartViewModel());
   locator.registerFactory(()=>BottomNavBarProvider());
 }
