@@ -79,16 +79,20 @@ class Apis {
           mobile: mobile, countryCode: countryCode, password: password);
       if (user.success) {
         print("login via sign up success");
-        assert(await verifyUserApi(user.jwt), "verify user failed");
-        assert(
-            await addAddressApi(
-                name: name,
-                locality: locality,
-                city: city,
-                contact: mobile,
-                pinCode: zip,
-                jwt: user.jwt),
-            "add address failed");
+        if(user.jwt!=null){
+          assert(await verifyUserApi(user.jwt), "verify user failed");
+          assert(
+          await addAddressApi(
+              name: name,
+              locality: locality,
+              city: city,
+              contact: mobile,
+              pinCode: zip,
+              jwt: user.jwt),
+          "add address failed");
+        }else{
+          print("JWT FAIL: ACCOUNT NOT VALIDATED");
+        }
       } else {
         print("login via sign up fail");
         print(user.message);
