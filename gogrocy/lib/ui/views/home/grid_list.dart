@@ -23,15 +23,12 @@ class GridList extends StatelessWidget {
               crossAxisCount: 2, childAspectRatio: 1, crossAxisSpacing: 8.0),
           itemBuilder: (context, index) {
             // ignore: missing_return
-            if (model.state == ViewState.Idle) if (model.state ==
-                ViewState.Busy)
-              return CircularProgressIndicator();
+            if (model.state == ViewState.Busy)
+              return SizedBox(width:20.0,height: 20.0,child: Center(child: CircularProgressIndicator()));
             else
               return Padding(
                 padding: const EdgeInsets.all(8.0),
                 child: Container(
-                  width: constants.HomePageConfig.productGridWidth,
-                  height: constants.HomePageConfig.productGridHeight,
                   decoration: BoxDecoration(
                       border: Border.all(color: Colors.black26),
                       borderRadius: BorderRadius.all(Radius.circular(10.0))),
@@ -39,43 +36,49 @@ class GridList extends StatelessWidget {
                     children: <Widget>[
                       Flexible(
                           flex: 4,
-                          child: Image(
-                            image: NetworkImage(
-                                'https://res.cloudinary.com/gogrocy/image/upload/v1/' +
-                                    model.allProducts[index + 1].image),
-                            fit: BoxFit.fitWidth,
+                          child: SizedBox(
+                            height: constants.HomePageConfig.productGridHeight*4/6,
+                            child: Image(
+                              image: NetworkImage(
+                                  'https://res.cloudinary.com/gogrocy/image/upload/v1/' +
+                                      model.allProducts[index].image),
+                              fit: BoxFit.fitWidth,
+                            ),
                           )),
                       Flexible(
                         flex: 2,
-                        child: Row(
-                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                          crossAxisAlignment: CrossAxisAlignment.end,
-                          children: <Widget>[
-                            Flexible(
-                                flex: 7,
+                        child: Center(
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                            crossAxisAlignment: CrossAxisAlignment.end,
+                            children: <Widget>[
+                              Flexible(
+                                  flex: 8,
+                                  child: Padding(
+                                    padding: const EdgeInsets.only(left: 4,top: 4,bottom: 4),
+                                    child: Text(
+                                      model.allProducts[index].name,
+                                      style: TextStyle(
+                                          fontSize: 14.0,
+                                          fontWeight: FontWeight.w500),
+                                      maxLines: 2,
+                                    ),
+                                  )),
+                              Flexible(
                                 child: Padding(
-                                  padding: const EdgeInsets.all(8.0),
+                                  padding: const EdgeInsets.only(right: 4,top: 4,bottom: 4),
                                   child: Text(
-                                    model.allProducts[index + 1].name,
+                                    '₹' + model.allProducts[index].price,
                                     style: TextStyle(
-                                        fontSize: 14.0,
+                                        fontSize: 18.0,
+                                        color: Color(0xff5FD900),
                                         fontWeight: FontWeight.w500),
                                   ),
-                                )),
-                            Flexible(
-                              child: Padding(
-                                padding: const EdgeInsets.all(8.0),
-                                child: Text(
-                                  '₹' + model.allProducts[index + 1].price,
-                                  style: TextStyle(
-                                      fontSize: 18.0,
-                                      color: Color(0xff5FD900),
-                                      fontWeight: FontWeight.w500),
                                 ),
-                              ),
-                              flex: 3,
-                            )
-                          ],
+                                flex: 7,
+                              )
+                            ],
+                          ),
                         ),
                       )
                     ],

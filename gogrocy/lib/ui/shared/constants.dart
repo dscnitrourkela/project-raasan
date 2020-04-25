@@ -57,13 +57,28 @@ class HomePageConfig {
   static double viewAllButtonHeight = (25.89 / 823) * screenHeight;
 
   static double lookingForPaddingTop = (37 / 823) * screenHeight;
-  static double lookingForPaddingBottom = (37 / 823) * screenHeight;
+  static double lookingForPaddingBottom = (20 / 823) * screenHeight;
 
   static double categoryListHeight = (168 / 823) * screenHeight;
   static double categoryListWidth = (168 / 411) * screenWidth;
   static double categoryBoxHeight = (86 / 823) * screenHeight;
-  static double categotyBoxWidth = (168 / 411) * screenWidth;
+  static double categoryBoxWidth = (168 / 411) * screenWidth;
+  static double categoryImageWidth=(144/411)*screenWidth;
+  static double categoryImageHeight=(115/823)*screenHeight;
 
   static double productGridWidth = (171 / 823) * screenHeight;
   static double productGridHeight = (171 / 411) * screenHeight;
+}
+
+class CartConfig {
+
+  static double checkoutButtonWidth=(106/411)*screenWidth;
+  static double checkoutButtonHeight=(28/823)*screenHeight;
+
+  static double imageWidth=(155/411)*screenWidth;
+  static double imageHeight=(147/823)*screenHeight;
+
+  static double counterHeight=(25.46/823)*screenHeight;
+  static double counterWidth=(91/411)*screenWidth;
+
 }
