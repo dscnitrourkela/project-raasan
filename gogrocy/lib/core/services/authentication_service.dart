@@ -41,6 +41,7 @@ class AuthenticationService {
           codeSent: phoneCodeSent,
           codeAutoRetrievalTimeout: retrievalTimeout);
       FirebaseUser currentUser = await firebaseInstance.currentUser();
+      print(currentUser.uid + "    " + currentUser.phoneNumber);
       return currentUser != null;
     } catch (e) {
       print(e.message);
@@ -54,6 +55,7 @@ class AuthenticationService {
           (await firebaseInstance.signInWithCredential(credential)).user;
       FirebaseUser currentUser = await firebaseInstance.currentUser();
       assert(user.uid == currentUser.uid);
+      return currentUser != null;
     } catch (exception) {
       print(exception.message);
     }

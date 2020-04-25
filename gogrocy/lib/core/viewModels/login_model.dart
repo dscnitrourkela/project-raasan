@@ -70,7 +70,6 @@ class LoginModel extends BaseModel {
 
     var result = await authenticationService.signInWithOtp(
         authenticationService.verificationId, otp);
-    //var finalNumber = countryCode + " " + phoneNumber;
 
     setState(ViewState.Idle);
 
@@ -112,6 +111,7 @@ class LoginModel extends BaseModel {
       print('Login With Password successful');
       FireStoreService.addUser(
           phoneNumber: phoneNumber, countryCode: countryCode);
+      _sharedPrefsService.setLoggedIn(true);
       navigationService.navigateTo('home');
     } else {
       print(user.message);

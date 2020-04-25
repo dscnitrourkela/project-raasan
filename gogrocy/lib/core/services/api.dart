@@ -17,7 +17,7 @@ const String userStatus = baseUrl + "checkMobile";
 const String login = baseUrl + "login";
 const String signUp = baseUrl + "signup";
 const String verifyUser = baseUrl + "verifyUser";
-const String addAddress = baseUrl + "";
+const String addAddress = baseUrl + "add_address";
 
 class Apis {
   final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
@@ -42,17 +42,18 @@ class Apis {
       "contact": contact,
       "city": city,
       "zip": pinCode,
-      "state":"Odisha",
-      "country":"India",
+      "state": "Odisha",
+      "country": "India",
     };
     http.Response result = await http.post(addAddress,
         headers: {HttpHeaders.authorizationHeader: "Bearer $jwt"}, body: body);
+    print(result.body);
     if ((json.decode(result.body))["success"]) {
       print("Add Address success");
       return true;
     } else
       print("add address fail");
-      return false;
+    return false;
   }
 
   Future<SignUpModel> signUpApi(
@@ -77,25 +78,19 @@ class Apis {
       print("signUpModel success");
       var user = await loginApi(
           mobile: mobile, countryCode: countryCode, password: password);
-      if (user.success) {
-        print("login via sign up success");
-        if(user.jwt!=null){
-          assert(await verifyUserApi(user.jwt), "verify user failed");
-          assert(
-          await addAddressApi(
-              name: name,
-              locality: locality,
-              city: city,
-              contact: mobile,
-              pinCode: zip,
-              jwt: user.jwt),
-          "add address failed");
-        }else{
-          print("JWT FAIL: ACCOUNT NOT VALIDATED");
-        }
+      print("login via sign up success");
+      if (user.jwt != null) {
+        await verifyUserApi(user.jwt);
+        await addAddressApi(
+          name: name,
+          locality: locality,
+          city: city,
+          contact: mobile,
+          pinCode: zip,
+          jwt: user.jwt,
+        );
       } else {
-        print("login via sign up fail");
-        print(user.message);
+        print("JWT FAIL: ACCOUNT NOT VALIDATED");
       }
       return signUpModel;
     } else {
