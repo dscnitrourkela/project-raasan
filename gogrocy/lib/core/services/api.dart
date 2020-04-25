@@ -48,6 +48,7 @@ class Apis {
       "state": "Odisha",
       "country": "India",
     };
+    print(body);
     http.Response result = await http.post(addAddress,
         headers: {HttpHeaders.authorizationHeader: "Bearer $jwt"}, body: body);
     print(result.body);
@@ -171,8 +172,9 @@ class Apis {
   Future<bool> verifyUserApi(String jwt) async {
     http.Response result = await http.post(verifyUser,
         headers: {HttpHeaders.authorizationHeader: "Bearer $jwt"});
-    if ((json.decode(result.body))["success"])
-      return true;
+    if ((json.decode(result.body))["success"]){
+      print("VERIFIED USER");
+      return true;}
     else
       return false;
   }

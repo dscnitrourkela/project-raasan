@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/core/services/shared_prefs.dart';
 import 'package:gogrocy/service_locator.dart';
 
@@ -8,12 +9,18 @@ class AuthenticationService {
   String verificationId;
 
   final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
+  final NavigationService _navigationService = locator<NavigationService>();
 
-  Future verifyPhoneNumber(BuildContext context, String phoneNumber) async {
+  Future verifyPhoneNumber(BuildContext context, String phoneNumber, String countryCode) async {
     final PhoneVerificationCompleted verificationCompleted =
-        (AuthCredential credential) {
+        (AuthCredential credential) async {
       print('Verification Complete');
-      signInWithNumber(context, credential);
+      await signInWithNumber(context, credential);
+      print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+      _navigationService.navigateTo('awesome', arguments:{
+        "phoneNumber": phoneNumber,
+        "countryCode": countryCode
+      });
     };
 
     final PhoneVerificationFailed verificationFailed =
@@ -34,8 +41,8 @@ class AuthenticationService {
 
     try {
       await firebaseInstance.verifyPhoneNumber(
-          phoneNumber: phoneNumber,
-          timeout: Duration(seconds: 60),
+          phoneNumber: countryCode + " " + phoneNumber,
+          timeout: Duration(seconds: 10),
           verificationCompleted: verificationCompleted,
           verificationFailed: verificationFailed,
           codeSent: phoneCodeSent,
@@ -49,7 +56,7 @@ class AuthenticationService {
     }
   }
 
-  signInWithNumber(BuildContext context, AuthCredential credential) async {
+  Future signInWithNumber(BuildContext context, AuthCredential credential) async {
     try {
       FirebaseUser user =
           (await firebaseInstance.signInWithCredential(credential)).user;
@@ -75,6 +82,7 @@ class AuthenticationService {
 
   Future<bool> isUserLoggedIn() async {
     var loggedIn = await _sharedPrefsService.hasUser();
+    print(loggedIn);
     if(loggedIn){
       return true;
     }else{
