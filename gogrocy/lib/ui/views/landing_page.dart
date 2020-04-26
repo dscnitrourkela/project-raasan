@@ -14,11 +14,13 @@ class HomePageView extends StatelessWidget {
     return ChangeNotifierProvider<BottomNavBarProvider>(
         create: (BuildContext context) => BottomNavBarProvider(),
         child: Consumer<BottomNavBarProvider>(builder: (context, counter, _) {
-          return Scaffold(
-            backgroundColor: Colors.white,
-            appBar: TopAppBar(),
-            body: ViewCarousel(),
-            bottomNavigationBar: BottomNavBar(),
+          return SafeArea(
+            child: Scaffold(
+              backgroundColor: Colors.white,
+              appBar: TopAppBar(),
+              body: ViewCarousel(),
+              bottomNavigationBar: BottomNavBar(),
+            ),
           );
         }));
   }

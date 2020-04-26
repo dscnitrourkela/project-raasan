@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
+import 'package:gogrocy/ui/shared/colors.dart' as colors;
 
 class CategoryList extends StatelessWidget {
   final List<String> categoryTitle = [
@@ -37,9 +38,9 @@ class CategoryList extends StatelessWidget {
                       child: ClipRRect(
                         borderRadius: BorderRadius.all(Radius.circular(5)),
                         child: Container(
-                          width: constants.HomePageConfig.categotyBoxWidth,
+                          width: constants.HomePageConfig.categoryBoxWidth,
                           height: constants.HomePageConfig.categoryBoxHeight,
-                          color: Color.fromRGBO(196, 196, 196, 0.3),
+                          color: colors.CATEGORY_LIST_BOX,
                         ),
                       ),
                     ),
@@ -55,10 +56,14 @@ class CategoryList extends StatelessWidget {
                       ),
                     ),
                     Align(
-                        alignment: Alignment(0, -3),
-                        child: Image(
-                          image: AssetImage(assetPaths[index]),
-                          fit: BoxFit.contain,
+                        alignment: Alignment(0,-1),
+                        child: SizedBox(
+                          height: constants.HomePageConfig.categoryImageHeight,
+                          width: constants.HomePageConfig.categoryImageWidth,
+                          child: Image(
+                            image: AssetImage(assetPaths[index]),
+                            fit: BoxFit.contain,
+                          ),
                         ))
                   ],
                 ),

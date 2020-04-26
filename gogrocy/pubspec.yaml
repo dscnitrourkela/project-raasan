@@ -11,7 +11,7 @@ description: Gogrocy mobile app
 # In iOS, build-name is used as CFBundleShortVersionString while build-number used as CFBundleVersion.
 # Read more about iOS versioning at
 # https://developer.apple.com/library/archive/documentation/General/Reference/InfoPlistKeyReference/Articles/CoreFoundationKeys.html
-version: 0.1.0+1
+version: 0.2.0+2
 
 environment:
   sdk: ">=2.1.0 <3.0.0"
@@ -20,8 +20,11 @@ dependencies:
   flutter:
     sdk: flutter
   animations: any
+  cloud_firestore: ^0.13.5
+  connectivity: ^0.4.8+2
   fancy_bottom_navigation: ^0.3.2
   firebase_auth: any
+  firebase_messaging: ^6.0.13
   get_it: ^4.0.1
   http: 0.12.0+4
   pin_code_fields: ^2.5.1

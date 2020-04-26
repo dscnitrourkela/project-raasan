@@ -1,20 +1,29 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:gogrocy/core/models/sign_up_arguments.dart';
+import 'package:gogrocy/core/services/navigation_service.dart';
+import 'package:gogrocy/core/services/shared_prefs.dart';
+import 'package:gogrocy/service_locator.dart';
 
 class AuthenticationService {
   final firebaseInstance = FirebaseAuth.instance;
   String verificationId;
 
-  Future verifyPhoneNumber(BuildContext context, String phoneNumber) async {
+  final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
+  final NavigationService _navigationService = locator<NavigationService>();
+
+  Future verifyPhoneNumber(BuildContext context, String phoneNumber, String countryCode) async {
     final PhoneVerificationCompleted verificationCompleted =
-        (AuthCredential credential) {
+        (AuthCredential credential) async {
       print('Verification Complete');
-      signInWithNumber(context, credential);
+      await signInWithNumber(context, credential);
+      print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+      _navigationService.navigateTo('awesome', arguments: SignUpArguments(phoneNumber, countryCode));
     };
 
     final PhoneVerificationFailed verificationFailed =
         (AuthException exception) {
-      print(exception.message);
+      print("VFAIL " + exception.message);
     };
 
     final PhoneCodeSent phoneCodeSent =
@@ -30,24 +39,31 @@ class AuthenticationService {
 
     try {
       await firebaseInstance.verifyPhoneNumber(
-          phoneNumber: phoneNumber,
-          timeout: Duration(seconds: 60),
+          phoneNumber: countryCode + " " + phoneNumber,
+          timeout: Duration(seconds: 10),
           verificationCompleted: verificationCompleted,
           verificationFailed: verificationFailed,
           codeSent: phoneCodeSent,
           codeAutoRetrievalTimeout: retrievalTimeout);
       FirebaseUser currentUser = await firebaseInstance.currentUser();
+      print(currentUser.uid + "    " + currentUser.phoneNumber);
       return currentUser != null;
     } catch (e) {
+      print(e.message);
       return e.message;
     }
   }
 
-  signInWithNumber(BuildContext context, AuthCredential credential) async {
-    FirebaseUser user =
-        (await firebaseInstance.signInWithCredential(credential)).user;
-    FirebaseUser currentUser = await firebaseInstance.currentUser();
-    assert(user.uid == currentUser.uid);
+  Future signInWithNumber(BuildContext context, AuthCredential credential) async {
+    try {
+      FirebaseUser user =
+          (await firebaseInstance.signInWithCredential(credential)).user;
+      FirebaseUser currentUser = await firebaseInstance.currentUser();
+      assert(user.uid == currentUser.uid);
+      return currentUser != null;
+    } catch (exception) {
+      print(exception.message);
+    }
   }
 
   Future signInWithOtp(String verificationId, String otp) async {
@@ -63,7 +79,12 @@ class AuthenticationService {
   }
 
   Future<bool> isUserLoggedIn() async {
-    var user = await firebaseInstance.currentUser();
-    return user != null;
+    var loggedIn = await _sharedPrefsService.hasUser();
+    print(loggedIn);
+    if(loggedIn){
+      return true;
+    }else{
+      return false;
+    }
   }
 }

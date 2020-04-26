@@ -1,13 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:flutter/services.dart';
+import 'package:gogrocy/core/services/firestore_service.dart';
 import 'package:gogrocy/core/services/navigation_service.dart';
-import 'package:gogrocy/core/viewModels/animations_model.dart';
+import 'package:gogrocy/core/viewModels/signup_view_model.dart';
 import 'package:gogrocy/service_locator.dart';
+import 'package:gogrocy/ui/widgets/vertical_spaces.dart';
 import 'package:provider/provider.dart';
+import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 class DetailsForm extends StatefulWidget {
   final womanScaleController;
+  final mobile;
+  final countryCode;
 
-  DetailsForm(this.womanScaleController);
+  DetailsForm(this.womanScaleController, this.mobile, this.countryCode);
 
   @override
   _DetailsFormState createState() => _DetailsFormState();
@@ -15,97 +21,196 @@ class DetailsForm extends StatefulWidget {
 
 class _DetailsFormState extends State<DetailsForm> {
   final NavigationService navigationService = locator<NavigationService>();
+
   @override
   Widget build(BuildContext context) {
-    return Provider<AnimationsModel>(
-      create: (context) =>
-          AnimationsModel(controller: widget.womanScaleController),
-      child: Consumer<AnimationsModel>(
+    return ChangeNotifierProvider<SignUpViewModel>(
+      create: (context) => SignUpViewModel(
+          controller: widget.womanScaleController,
+          mobile: widget.mobile,
+          countryCode: widget.countryCode),
+      child: Consumer<SignUpViewModel>(
         builder: (context, model, child) => FadeTransition(
           opacity: model.formFadeAnimation,
-          child: Column(
-            crossAxisAlignment: CrossAxisAlignment.start,
-            children: <Widget>[
-              Text('What do we call you?'),
-              SizedBox(
-                height: 10.0,
-              ),
-              SizedBox(
-                width: 350.0,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10.0),
+          child: Form(
+            key: model.detailsFormKey,
+            child: Column(
+              crossAxisAlignment: CrossAxisAlignment.start,
+              children: <Widget>[
+                Text('What do we call you?'),
+                VerticalSpaces.small10,
+                SizedBox(
+                  width: constants.SignUpConfig.textFieldWidth,
+                  child: TextFormField(
+                    textCapitalization: TextCapitalization.words,
+                    textInputAction: TextInputAction.next,
+                    focusNode: model.nameNode,
+                    onFieldSubmitted: (value) {
+                      model.addressNode.requestFocus();
+                    },
+                    controller: model.nameController,
+                    validator: (value) {
+                      if (value.isEmpty)
+                        return "Enter your name";
+                      else
+                        return null;
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      hintText: 'Name',
                     ),
-                    hintText: 'Name',
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Text('Where do you live?'),
-              SizedBox(
-                height: 10.0,
-              ),
-              SizedBox(
-                width: 350.0,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10.0),
+                VerticalSpaces.small20,
+                Text('Where do you live?'),
+                VerticalSpaces.small10,
+                SizedBox(
+                  width: constants.SignUpConfig.textFieldWidth,
+                  child: TextFormField(
+                    controller: model.addressController,
+                    focusNode: model.addressNode,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (value) {
+                      model.cityNode.requestFocus();
+                    },
+                    validator: (value) {
+                      if (value.isNotEmpty) {
+                        return null;
+                      } else {
+                        return "Enter an address";
+                      }
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      hintText: 'House/ Flat Number, Locality',
                     ),
-                    hintText: 'House/ Flat Number',
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              SizedBox(
-                width: 350.0,
-                child: TextFormField(
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10.0),
+                VerticalSpaces.small20,
+                SizedBox(
+                  width: constants.SignUpConfig.textFieldWidth,
+                  child: TextFormField(
+                    controller: model.cityController,
+                    textInputAction: TextInputAction.next,
+                    focusNode: model.cityNode,
+                    onFieldSubmitted: (value) {
+                      model.pinCodeNode.requestFocus();
+                    },
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Enter city name";
+                      } else {
+                        return null;
+                      }
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      hintText: 'City',
                     ),
-                    hintText: 'Street Number',
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 20.0,
-              ),
-              Text(
-                'Create password.',
-                style: TextStyle(fontSize: 14.0),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              SizedBox(
-                width: 350.0,
-                child: TextFormField(
-                  obscureText: true,
-                  cursorColor: Colors.green,
-                  decoration: InputDecoration(
-                    border: OutlineInputBorder(
-                      borderSide: BorderSide(color: Colors.grey),
-                      borderRadius: BorderRadius.circular(10.0),
+                VerticalSpaces.small20,
+                SizedBox(
+                  width: constants.SignUpConfig.textFieldWidth,
+                  child: TextFormField(
+                    textInputAction: TextInputAction.next,
+                    keyboardType: TextInputType.number,
+                    controller: model.pinCodeController,
+                    focusNode: model.pinCodeNode,
+                    validator: (value) {
+                      if (value.length != 6) {
+                        return "Pincode must be 6 digits";
+                      } else {
+                        return null;
+                      }
+                    },
+                    onFieldSubmitted: (value) {
+                      model.passwordNode.requestFocus();
+                    },
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      hintText: 'Pincode',
                     ),
-                    hintText: 'Enter password',
                   ),
                 ),
-              ),
-              SizedBox(height: 30.0),
-              Padding(
-                padding: const EdgeInsets.only(left: 130.0),
-                child: SizedBox(
-                  width: 120.0,
-                  height: 40.0,
+                VerticalSpaces.small20,
+                Text(
+                  'Create password',
+                  style: TextStyle(fontSize: 14.0 * constants.scaleRatio),
+                ),
+                VerticalSpaces.small10,
+                SizedBox(
+                  width: constants.SignUpConfig.textFieldWidth,
+                  child: TextFormField(
+                    focusNode: model.passwordNode,
+                    textInputAction: TextInputAction.next,
+                    onFieldSubmitted: (value) {
+                      model.cPasswordNode.requestFocus();
+                    },
+                    validator: (value) {
+                      if (value.length < 8) {
+                        return "Password should be at least 8 characters";
+                      } else {
+                        return null;
+                      }
+                    },
+                    controller: model.passwordController,
+                    obscureText: true,
+                    cursorColor: Colors.green,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      hintText: 'Enter password',
+                    ),
+                  ),
+                ),
+                VerticalSpaces.small20,
+                SizedBox(
+                  width: constants.SignUpConfig.textFieldWidth,
+                  child: TextFormField(
+                    validator: (value) {
+                      if (value.isNotEmpty &&
+                          value != null &&
+                          value != model.passwordController.text) {
+                        model.passwordController.clear();
+                        model.cPasswordController.clear();
+                        return "Password should match in both fields";
+                      } else {
+                        return null;
+                      }
+                    },
+                    focusNode: model.cPasswordNode,
+                    textInputAction: TextInputAction.done,
+                    controller: model.cPasswordController,
+                    obscureText: true,
+                    cursorColor: Colors.green,
+                    decoration: InputDecoration(
+                      border: OutlineInputBorder(
+                        borderSide: BorderSide(color: Colors.grey),
+                        borderRadius: BorderRadius.circular(10.0),
+                      ),
+                      hintText: 'Confirm password',
+                    ),
+                  ),
+                ),
+                VerticalSpaces.small20,
+                SizedBox(
+                  width: constants.SignUpConfig.raisedButtonWidth,
+                  height: constants.SignUpConfig.raisedButtonHeight,
                   child: RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
@@ -117,19 +222,22 @@ class _DetailsFormState extends State<DetailsForm> {
                           fontFamily: 'Gilroy',
                           fontWeight: FontWeight.bold),
                     ),
-                    onPressed: () {},
+                    onPressed: () async {
+                      assert(model.detailsFormKey.currentState.validate(),
+                          "details form error");
+                      var result = await model.signUpWithApi();
+                      if (result)
+                        {
+                          FireStoreService.addUser(
+                              phoneNumber: widget.mobile,
+                              countryCode: widget.countryCode);
+                        }
+                    },
                   ),
                 ),
-              ),
-              SizedBox(
-                height: 10.0,
-              ),
-              FlatButton(
-                  onPressed: () {
-                    navigationService.navigateTo('home');
-                  },
-                  child: Text('SKIP')),
-            ],
+                VerticalSpaces.small10,
+              ],
+            ),
           ),
         ),
       ),

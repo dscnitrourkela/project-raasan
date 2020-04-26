@@ -2,26 +2,37 @@ import 'package:flutter/material.dart';
 
 bool isLoggedIn = false;
 MediaQueryData mediaQueryData;
+double scaleRatio = mediaQueryData.devicePixelRatio/2.002;
 double screenHeight = mediaQueryData.size.height;
 double screenWidth = mediaQueryData.size.width;
 
 class LoginConfig {
-  static double loginTextFieldWidth = 0.842 * screenWidth;
-  static double loginTextFieldHeight = 0.842 * screenHeight;
-  //static double loginIllustrationWidth = 0.956 * screenWidth;
-  //static double loginIllustrationHeight = 0.384 * screenHeight;
-  static double titleTextSize = 0.071 * screenWidth;
+  static double loginTextFieldWidth = 280 * scaleRatio;
+  static double titleTextSize = 22 * scaleRatio;
 }
 
-class OnBoardingConfig{
-  static double illustrationWidth = 0.956 * screenWidth;
-  static double illustrationHeight = 0.384 * screenHeight;
-  static double footerTextSize = 0.047 * screenWidth;
+class SignUpConfig{
+  static double textFieldWidth = 275 * scaleRatio;
+  static double raisedButtonWidth = 0.283 * screenWidth;
+  static double raisedButtonHeight = 0.095 * screenWidth;
+}
+
+class OnBoardingConfig {
+  static double illustrationWidth = 316.21 * scaleRatio;
+  static double illustrationHeight = 280 * scaleRatio;
+  static double footerTextSize = 14 * scaleRatio;
 }
 
 class BottomNavBarConfig {
-  static double bottomNavBarHeight = 0.0842 * screenHeight;
+  static double bottomNavBarHeight = (70 / 823) * screenHeight;
   static double bottomNavBarWidth = screenWidth;
+  static double activeIconSize = (66 / 411) * screenWidth;
+  static double inactiveIconSize = (24 / 411) * screenWidth;
+  static double buttonPadding = 0.047 * screenWidth;
+  static double buttonOffsetMultiplier = 0.196 * screenWidth;
+  static double bottomPositioningValue = 0.271 * screenWidth;
+  static double customPaintBottomPositionValue = 0.177 * screenWidth;
+  static double customNavBarMaxHeight = 0.177 * screenWidth;
 }
 
 class AppBarConfig {
@@ -46,13 +57,28 @@ class HomePageConfig {
   static double viewAllButtonHeight = (25.89 / 823) * screenHeight;
 
   static double lookingForPaddingTop = (37 / 823) * screenHeight;
-  static double lookingForPaddingBottom = (37 / 823) * screenHeight;
+  static double lookingForPaddingBottom = (20 / 823) * screenHeight;
 
   static double categoryListHeight = (168 / 823) * screenHeight;
   static double categoryListWidth = (168 / 411) * screenWidth;
   static double categoryBoxHeight = (86 / 823) * screenHeight;
-  static double categotyBoxWidth = (168 / 411) * screenWidth;
+  static double categoryBoxWidth = (168 / 411) * screenWidth;
+  static double categoryImageWidth=(144/411)*screenWidth;
+  static double categoryImageHeight=(115/823)*screenHeight;
 
   static double productGridWidth = (171 / 823) * screenHeight;
   static double productGridHeight = (171 / 411) * screenHeight;
+}
+
+class CartConfig {
+
+  static double checkoutButtonWidth=(106/411)*screenWidth;
+  static double checkoutButtonHeight=(28/823)*screenHeight;
+
+  static double imageWidth=(155/411)*screenWidth;
+  static double imageHeight=(147/823)*screenHeight;
+
+  static double counterHeight=(25.46/823)*screenHeight;
+  static double counterWidth=(91/411)*screenWidth;
+
 }

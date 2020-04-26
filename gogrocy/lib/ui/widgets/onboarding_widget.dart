@@ -27,12 +27,15 @@ class OnBoardingWidget extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.symmetric(vertical: 18.0),
+                  padding: EdgeInsets.only(top: 0.021 * constants.screenHeight),
                   child: SizedBox(
-                    width: 0.354 * constants.screenHeight,
+                    width: 203 * (2.550/2.002),
+                    height: 40.0 * (2.550/2.002),
                     child: Text(
                       'The widest selection of home essentials just a few taps away',
                       textAlign: TextAlign.center,
+                      maxLines: 2,
+                      overflow: TextOverflow.visible,
                       style: TextStyle(
                         height: 1.15,
                         fontSize: constants.OnBoardingConfig.footerTextSize,

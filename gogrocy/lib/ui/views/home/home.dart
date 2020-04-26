@@ -4,7 +4,8 @@ import 'package:gogrocy/ui/views/home/category_list.dart';
 import 'package:gogrocy/ui/views/home/grid_list.dart';
 import 'package:gogrocy/ui/views/home/indicator.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
-import 'package:gogrocy/ui/widgets/bottom_navbar.dart';
+import 'package:gogrocy/ui/shared/colors.dart' as colors;
+
 
 class Home extends StatelessWidget {
   final PageController controller = new PageController();
@@ -52,8 +53,9 @@ class Home extends StatelessWidget {
                   ],
                 ),
                 RawMaterialButton(
+                  elevation: 0.0,
                   onPressed: () {},
-                  fillColor: Color.fromRGBO(95, 210, 0, 0.3),
+                  fillColor: colors.VIEW_ALL_BUTTON_BACKGROUND,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(3),
                   ),
@@ -64,7 +66,7 @@ class Home extends StatelessWidget {
                       child: Text(
                         'View All',
                         style: TextStyle(
-                            color: Color.fromRGBO(95, 210, 0, 1),
+                            color: colors.VIEW_ALL_BUTTON_TEXT,
                             fontSize: 13.0,
                             fontWeight: FontWeight.w500),
                       ),
