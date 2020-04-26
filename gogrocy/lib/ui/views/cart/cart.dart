@@ -30,26 +30,24 @@ class Cart extends StatelessWidget {
           else if (model.state == ViewState.Intermediate) {
             return ListView(
               shrinkWrap: true,
-              reverse: true,
               controller: scrollController,
               children: <Widget>[
-                SizedBox(height: 50,),
-                CartBill(model.cartList,),
+                CartHeader(model: model.cartList,checkoutButtonPressed: (){scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 500), curve: Curves.easeIn);print("Callback succeeds");},),
                 CartList(model, model.intermediateCartList),
-                CartHeader(model: model.cartList,checkoutButtonPressed: (){scrollController.animateTo(0, duration: Duration(milliseconds: 600), curve: Curves.easeIn);print("Callback succeeds");},),
+                CartBill(model.cartList,),
+                SizedBox(height: 50,),
 
               ],
             );
           } else
             return ListView(
               shrinkWrap: true,
-              reverse: true,
               controller: scrollController,
               children: <Widget>[
-                SizedBox(height: 50,),
-                CartBill(model.cartList),
+                CartHeader(model:model.cartList,checkoutButtonPressed:(){scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 500), curve: Curves.easeIn);print("Callback succeeds");}),
                 CartList(model, model.cartList),
-                CartHeader(model:model.cartList,checkoutButtonPressed:(){scrollController.animateTo(0, duration: Duration(milliseconds: 600), curve: Curves.easeIn);print("Callback succeeds");}),
+                CartBill(model.cartList),
+                SizedBox(height: 50,),
 
               ],
             );

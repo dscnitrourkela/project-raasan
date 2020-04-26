@@ -164,12 +164,13 @@ class Apis {
   Future<cart_list> getCartList() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
+    String jwt=await _sharedPrefsService.getJWT();
     if (connectionState) //TODO: Add a proper else return
     {
       var response = await client.post(cartList, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
-        'Authorization': 'Bearer $TOKEN',
+        'Authorization': 'Bearer $jwt',
       });
       return cart_list.fromJson(json.decode(response.body));
     } else
