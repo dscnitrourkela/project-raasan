@@ -1,7 +1,11 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gogrocy/core/services/shared_prefs.dart';
+import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
+  final SharedPrefsService sharedPrefsService = locator<SharedPrefsService>();
   @override
   Widget build(BuildContext context) {
     constants.mediaQueryData = MediaQuery.of(context);
@@ -33,12 +37,20 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                               color: Colors.green,
                               fontWeight: FontWeight.w500),
                         ),
-                        Text(
-                          "Sector 9",
-                          style: TextStyle(
-                              fontSize: constants.AppBarConfig.addressFontSize,
-                              color: Colors.black,
-                              fontWeight: FontWeight.w500),
+                        FutureBuilder(
+                          future: sharedPrefsService.getCity(),
+                          builder: (context, snapshot){
+                            if(snapshot.connectionState!=ConnectionState.done)
+                              return SizedBox(width:8,height: 8,child: Center(child: CircularProgressIndicator(strokeWidth: 1.5,),));
+                            else
+                              return Text(
+                                snapshot.data,
+                                style: TextStyle(
+                                    fontSize: constants.AppBarConfig.addressFontSize,
+                                    color: Colors.black,
+                                    fontWeight: FontWeight.w500),
+                              );
+                          },
                         )
                       ],
                     ),

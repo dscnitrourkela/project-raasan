@@ -13,6 +13,7 @@ class BottomNavBar extends StatelessWidget {
     var provider = Provider.of<BottomNavBarProvider>(context);
     return FancyBottomNavigation(
       barBackgroundColor: Colors.black,
+      initialSelection: 1,
       inactiveIconColor: Colors.grey,
       textColor: Colors.white,
       tabs: [

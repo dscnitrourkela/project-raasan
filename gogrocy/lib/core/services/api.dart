@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:gogrocy/core/models/Address.dart';
 import 'package:gogrocy/core/models/cart_edit.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
 import 'package:gogrocy/core/models/product.dart';
@@ -24,6 +25,7 @@ const String verifyUser = baseUrl + "verifyUser";
 const String addAddress = baseUrl + "add_address";
 const String cartList = baseUrl + 'getCartItems';
 const String editCart=baseUrl+ "add_to_cart";
+const String getAddress=baseUrl+"getAddress";
 
 class Apis {
   final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
@@ -131,12 +133,13 @@ class Apis {
       "product_id":product_id,
       "quantity":quantity
     };
+    String jwt=await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
     if (connectionState) //TODO: Add a proper else return
     {
       var response = await client.post(editCart, headers: {
-        'Authorization': 'Bearer $TOKEN',
+        'Authorization': 'Bearer $jwt',
       },body: body);
       return CartEdit.fromJson(json.decode(response.body));
     } else
@@ -160,6 +163,28 @@ class Apis {
       return null;
     }
   }
+
+  Future<List<Address>> getAddresses() async{
+    var client = new http.Client();
+    bool connectionState = await checkStatus();
+    String jwt=await _sharedPrefsService.getJWT();
+    if (connectionState) //TODO: Add a proper else return
+        {
+      var address = List<Address>();
+      var response = await client.post(getAddress, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $jwt',
+      });
+      var parsed = json.decode(response.body) as List<dynamic>;
+      for (var product in parsed) {
+        address.add(Address.fromJson(product));
+      }
+      return address;
+    } else
+      (print("Network failure"));
+  }
+
 
   Future<cart_list> getCartList() async {
     var client = new http.Client();
