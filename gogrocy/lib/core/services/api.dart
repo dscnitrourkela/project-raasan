@@ -1,6 +1,7 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
+import 'package:gogrocy/core/models/cart_edit.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
 import 'package:gogrocy/core/models/product.dart';
 import 'package:gogrocy/core/models/signup_model.dart';
@@ -11,7 +12,8 @@ import 'package:gogrocy/service_locator.dart';
 import 'package:http/http.dart' as http;
 
 const String baseUrl = "https://gogrocy.in/api/";
-const String TOKEN='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1ODY5NzYxMjEsImlzcyI6Imh0dHBzOlwvXC9nb2dyb2N5LmluXC8iLCJuYmYiOjE1ODY5NzYxMzEsImRhdGEiOnsidXNlcl9pZCI6Ijg1IiwidXNlcl9yb2xlIjoiMSJ9fQ.3jwji_K1l07ttdUUjn4UJbJfuAbrC0msqk7jeftpSzDR7u2d8RCiGWz3ritX3hQIa0MGUe2fIaidErX-xtTQdA';
+const String TOKEN =
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1ODY5NzYxMjEsImlzcyI6Imh0dHBzOlwvXC9nb2dyb2N5LmluXC8iLCJuYmYiOjE1ODY5NzYxMzEsImRhdGEiOnsidXNlcl9pZCI6Ijg1IiwidXNlcl9yb2xlIjoiMSJ9fQ.3jwji_K1l07ttdUUjn4UJbJfuAbrC0msqk7jeftpSzDR7u2d8RCiGWz3ritX3hQIa0MGUe2fIaidErX-xtTQdA';
 
 const String allProducts = baseUrl + "getProducts";
 const String singleProduct = baseUrl + "getProduct";
@@ -20,7 +22,8 @@ const String login = baseUrl + "login";
 const String signUp = baseUrl + "signup";
 const String verifyUser = baseUrl + "verifyUser";
 const String addAddress = baseUrl + "add_address";
-const String cartList=baseUrl+'getCartItems';
+const String cartList = baseUrl + 'getCartItems';
+const String editCart=baseUrl+ "add_to_cart";
 
 class Apis {
   final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
@@ -121,6 +124,25 @@ class Apis {
       return user;
     }
   }
+
+  Future<CartEdit> editCartList(
+      {@required String product_id, @required String quantity}) async {
+    Map<String,String>body={
+      "product_id":product_id,
+      "quantity":quantity
+    };
+    var client = new http.Client();
+    bool connectionState = await checkStatus();
+    if (connectionState) //TODO: Add a proper else return
+    {
+      var response = await client.post(editCart, headers: {
+        'Authorization': 'Bearer $TOKEN',
+      },body: body);
+      return CartEdit.fromJson(json.decode(response.body));
+    } else
+      (print("Network failure"));
+  }
+
   Future<List<Product>> getAllProducts() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
@@ -143,8 +165,8 @@ class Apis {
     var client = new http.Client();
     bool connectionState = await checkStatus();
     if (connectionState) //TODO: Add a proper else return
-        {
-      var response = await client.post(cartList,headers: {
+    {
+      var response = await client.post(cartList, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer $TOKEN',

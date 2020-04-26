@@ -1,8 +1,19 @@
 import 'package:flutter/material.dart';
+import 'package:gogrocy/core/enums/viewstate.dart';
+import 'package:gogrocy/core/models/cart_list.dart';
+import 'package:gogrocy/core/viewModels/cart_view_model.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 class CartHeader extends StatelessWidget {
+
+  cart_list model;
+
+  CartHeader(cart_list m){
+    model=m;
+  }
+
+
   @override
   Widget build(BuildContext context) {
     return Stack(
@@ -29,7 +40,7 @@ class CartHeader extends StatelessWidget {
                         children: <Widget>[
                           Text("Your Cart",
                           style: TextStyle(fontFamily: 'Gilroy',fontSize: 32.0,fontWeight: FontWeight.bold, color: colors.CART_HEADER_COLOR),),
-                          Text("Grand Total",
+                          Text("Grand Total- Rs"+model.sum.toString(),
                           style: TextStyle(fontFamily: 'Gilroy',fontSize: 14.0,fontWeight: FontWeight.w600, color: colors.CART_HEADER_COLOR),),
 
                         ],
