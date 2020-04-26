@@ -19,7 +19,7 @@ class GridList extends StatelessWidget {
         model.getAllProducts();
       },
       builder: (context, model, child) => GridView.builder(
-          itemCount: 10,
+          itemCount: 100,
           shrinkWrap: true,
           controller: _scrollController,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
