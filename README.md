@@ -1,7 +1,7 @@
 # project-raasan
 
 ## Why project-raasan?
-The key idea behind this independent venture is to digitalize ration stores and help forge a connection between the store and the nearest customer. The immediate target of the venture is to deliver the aforementioned items to people at their doorstep so that they do not have to step outside their houses amid a lockdown. The business model is meant to be branded in a manner that attracts customers and creates a customer base at a low budget. For this purpose, a fully functional website was designed within 4 days and helped by Sanjay Kumar Senti. An impediment to the otherwise noble venture is the fact that the delivery guys sometimes decline taking out the orders because of the lockdown.
+The key idea behind this independent venture is to digitalize ration stores and help forge a connection between the store and the nearest customer. The immediate target of the venture is to deliver the aforementioned items to people at their doorstep so that they do not have to step outside their houses amid a lockdown. The business model is meant to be branded in a manner that attracts customers and creates a customer base at a low budget. An impediment to the otherwise noble venture is the fact that the delivery guys sometimes decline taking out the orders because of the lockdown.
 
 ## How to build it on your system
 * Fork the repo and clone it.
