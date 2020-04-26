@@ -29,8 +29,8 @@ class OnBoardingWidget extends StatelessWidget {
                 Padding(
                   padding: EdgeInsets.only(top: 0.021 * constants.screenHeight),
                   child: SizedBox(
-                    width: 203 * (2.550/2.002),
-                    height: 40.0 * (2.550/2.002),
+                    width: 203 * constants.scaleRatio,
+                    height: 40.0 * constants.scaleRatio,
                     child: Text(
                       'The widest selection of home essentials just a few taps away',
                       textAlign: TextAlign.center,
