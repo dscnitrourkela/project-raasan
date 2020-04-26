@@ -16,7 +16,7 @@ import 'package:gogrocy/ui/shared/constants.dart' as constants;
 typedef void CheckoutButtonPressed();
 
 class Cart extends StatelessWidget {
-  ScrollController scrollController=new ScrollController();
+  ScrollController scrollController = new ScrollController();
 
   @override
   Widget build(BuildContext context) {
@@ -29,44 +29,94 @@ class Cart extends StatelessWidget {
           if (model.state == ViewState.Busy)
             return Center(child: CircularProgressIndicator());
           else if (model.state == ViewState.Intermediate) {
-            return ListView(
-              shrinkWrap: true,
-              controller: scrollController,
-              children: <Widget>[
-                CartHeader(model: model.cartList,checkoutButtonPressed: (){scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 500), curve: Curves.easeIn);print("Callback succeeds");},),
-                CartList(model, model.intermediateCartList),
-                CartBill(model.cartList,),
-                CartFooter(model),
-                SizedBox(height: 50,),
+            if (model.cartList.sum == 0) {
+              return ListView(
+                shrinkWrap: true,
+                controller: scrollController,
+                children: <Widget>[
+                  CartHeader(
+                    model: model.cartList,
+                    checkoutButtonPressed: () {
+                      scrollController.animateTo(
+                          scrollController.position.maxScrollExtent,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeIn);
+                      print("Callback succeeds");
+                    },
+                  ),
+                  CartList(model, model.intermediateCartList),
+                  CartBill(
+                    model.cartList,
+                  ),
+                  CartFooter(model),
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
+              );
+            } else return emptyCart();
 
-
-              ],
-            );
-          } else
-            return ListView(
-              shrinkWrap: true,
-              controller: scrollController,
-              children: <Widget>[
-                CartHeader(model:model.cartList,checkoutButtonPressed:(){scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 500), curve: Curves.easeIn);print("Callback succeeds");}),
-                CartList(model, model.cartList),
-                CartBill(model.cartList),
-                CartFooter(model),
-                SizedBox(height: 50,),
-
-              ],
-            );
+          } else {
+            if (model.cartList.sum == 0) {
+              return emptyCart();
+            } else
+              return ListView(
+                shrinkWrap: true,
+                controller: scrollController,
+                children: <Widget>[
+                  CartHeader(
+                      model: model.cartList,
+                      checkoutButtonPressed: () {
+                        scrollController.animateTo(
+                            scrollController.position.maxScrollExtent,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeIn);
+                        print("Callback succeeds");
+                      }),
+                  CartList(model, model.cartList),
+                  CartBill(model.cartList),
+                  CartFooter(model),
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
+              );
+          }
         },
+      ),
+    );
+  }
+
+  Widget emptyCart() {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+              width: 60.0,
+              height: 60.0,
+              child: Image(
+                image: AssetImage("assets/images/empty-cart.png"),
+              )),
+          Text(
+            "Your cart is Empty!",
+            style: TextStyle(
+                fontSize: 24.0,
+                fontFamily: 'Gilroy',
+                fontWeight: FontWeight.w500),
+          )
+        ],
       ),
     );
   }
 }
 
 class CartHeader extends StatelessWidget {
-
   cart_list model;
   CheckoutButtonPressed checkoutButtonPressed;
 
-  CartHeader({this.model,this.checkoutButtonPressed});
+  CartHeader({this.model, this.checkoutButtonPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -92,11 +142,22 @@ class CartHeader extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          Text("Your Cart",
-                            style: TextStyle(fontFamily: 'Gilroy',fontSize: 32.0,fontWeight: FontWeight.bold, color: colors.CART_HEADER_COLOR),),
-                          Text("Grand Total Rs"+model.sum.toString(),
-                            style: TextStyle(fontFamily: 'Gilroy',fontSize: 14.0,fontWeight: FontWeight.w600, color: colors.CART_HEADER_COLOR),),
-
+                          Text(
+                            "Your Cart",
+                            style: TextStyle(
+                                fontFamily: 'Gilroy',
+                                fontSize: 32.0,
+                                fontWeight: FontWeight.bold,
+                                color: colors.CART_HEADER_COLOR),
+                          ),
+                          Text(
+                            "Grand Total Rs" + model.sum.toString(),
+                            style: TextStyle(
+                                fontFamily: 'Gilroy',
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w600,
+                                color: colors.CART_HEADER_COLOR),
+                          ),
                         ],
                       ),
                     )
@@ -105,7 +166,7 @@ class CartHeader extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 28.0,top: 12),
+              padding: const EdgeInsets.only(left: 28.0, top: 12),
               child: RawMaterialButton(
                 elevation: 0.0,
                 focusElevation: 1,
@@ -138,4 +199,3 @@ class CartHeader extends StatelessWidget {
     );
   }
 }
-
