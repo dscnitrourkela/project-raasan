@@ -17,12 +17,23 @@ class BaseView<T extends BaseModel> extends StatefulWidget {
 class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
   T model = locator<T>();
 
+  bool isDisposed = false;
+
   @override
   void initState() {
+    super.initState();
+    if(!isDisposed)
     if (widget.onModelReady != null) {
       widget.onModelReady(model);
     }
-    super.initState();
+  }
+
+
+  @override
+  void dispose() {
+    model.dispose();
+    isDisposed = true;
+    super.dispose();
   }
 
   @override

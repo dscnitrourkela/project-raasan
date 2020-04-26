@@ -8,25 +8,31 @@ class ViewCarousel extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavBarProvider>(context);
-    PageController controller =
-        PageController(initialPage: provider.currentIndex,keepPage: true);
+    /*PageController controller =
+        PageController(initialPage: provider.currentIndex,keepPage: true,);
     Provider.of<BottomNavBarProvider>(context, listen: true);
     provider.addListener(() {
       controller.animateToPage(provider.currentIndex,
           duration: Duration(milliseconds: 300), curve: Curves.easeIn);
-    });
-    return PageView(
-      children: <Widget>[
-        Cart(),
-        Home(),
-        Cart(),
-
-      ],
-      physics: NeverScrollableScrollPhysics(),
-      controller: controller,
-      onPageChanged: (index) {
-        provider.currentIndex = index;
-      },
+    });*/
+    return ChangeNotifierProvider<BottomNavBarProvider>(
+      create: (context) => BottomNavBarProvider(),
+      child: Consumer<BottomNavBarProvider>(
+        builder: (context, model, child){
+          return PageView(
+            children: <Widget>[
+              Cart(),
+              Home(),
+              Cart(),
+            ],
+            physics: NeverScrollableScrollPhysics(),
+            controller: provider.controller,
+            /*onPageChanged: (index) {
+              provider.currentIndex = index;
+            },*/
+          );
+        },
+      ),
     );
   }
 }

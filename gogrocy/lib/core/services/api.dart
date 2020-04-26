@@ -24,8 +24,8 @@ const String signUp = baseUrl + "signup";
 const String verifyUser = baseUrl + "verifyUser";
 const String addAddress = baseUrl + "add_address";
 const String cartList = baseUrl + 'getCartItems';
-const String editCart=baseUrl+ "add_to_cart";
-const String getAddress=baseUrl+"getAddress";
+const String editCart = baseUrl + "add_to_cart";
+const String getAddress = baseUrl + "getAddress";
 
 class Apis {
   final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
@@ -35,6 +35,23 @@ class Apis {
     Map<String, String> body = {"mobile": mobile, "country_code": countryCode};
     return UserStatus.fromJson(
         json.decode((await http.post(userStatus, body: body)).body));
+  }
+
+  Future<bool> addToCart({
+    @required String quantity,
+    @required String productId,
+  }) async {
+    Map<String, String> body = {"quantity": quantity, "product_id": productId};
+    String jwt = await _sharedPrefsService.getJWT();
+    var result = json.decode((await http.post(
+      editCart,
+      body: body,
+      headers: {
+        'Authorization': 'Bearer $jwt',
+      },
+    ))
+        .body);
+    return result["success"];
   }
 
   Future<bool> addAddressApi(
@@ -130,21 +147,19 @@ class Apis {
     }
   }
 
-
   Future<CartEdit> editCartList(
       {@required String product_id, @required String quantity}) async {
-    Map<String,String>body={
-      "product_id":product_id,
-      "quantity":quantity
-    };
-    String jwt=await _sharedPrefsService.getJWT();
+    Map<String, String> body = {"product_id": product_id, "quantity": quantity};
+    String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
     if (connectionState) //TODO: Add a proper else return
     {
-      var response = await client.post(editCart, headers: {
-        'Authorization': 'Bearer $jwt',
-      },body: body);
+      var response = await client.post(editCart,
+          headers: {
+            'Authorization': 'Bearer $jwt',
+          },
+          body: body);
       return CartEdit.fromJson(json.decode(response.body));
     } else
       (print("Network failure"));
@@ -168,12 +183,12 @@ class Apis {
     }
   }
 
-  Future<List<Address>> getAddresses() async{
+  Future<List<Address>> getAddresses() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    String jwt=await _sharedPrefsService.getJWT();
+    String jwt = await _sharedPrefsService.getJWT();
     if (connectionState) //TODO: Add a proper else return
-        {
+    {
       var address = List<Address>();
       var response = await client.post(getAddress, headers: {
         'Content-Type': 'application/json',
@@ -189,11 +204,10 @@ class Apis {
       (print("Network failure"));
   }
 
-
   Future<cart_list> getCartList() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    String jwt=await _sharedPrefsService.getJWT();
+    String jwt = await _sharedPrefsService.getJWT();
     if (connectionState) //TODO: Add a proper else return
     {
       var response = await client.post(cartList, headers: {

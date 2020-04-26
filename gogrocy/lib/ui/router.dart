@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:gogrocy/core/models/product.dart';
 import 'package:gogrocy/core/models/sign_up_arguments.dart';
+import 'package:gogrocy/ui/views/product_detail_view.dart';
 import 'package:gogrocy/ui/views/signup_view.dart';
 import 'package:gogrocy/ui/views/landing_page.dart';
 import 'package:gogrocy/ui/views/login_view.dart';
@@ -40,6 +42,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
           child: child,
         ),
       );
+    case 'product':
+      Product product = settings.arguments;
+      return MaterialPageRoute(builder: (context) => ProductDetailView(product));
     default:
       return MaterialPageRoute(
           builder: (context) => Scaffold(
