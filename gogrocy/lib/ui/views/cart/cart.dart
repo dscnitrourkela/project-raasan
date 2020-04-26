@@ -3,6 +3,7 @@ import 'package:gogrocy/core/enums/viewstate.dart';
 import 'package:gogrocy/core/viewModels/cart_view_model.dart';
 import 'package:gogrocy/ui/views/base_view.dart';
 import 'package:gogrocy/ui/views/cart/cart_bill.dart';
+import 'package:gogrocy/ui/views/cart/cart_footer.dart';
 import 'package:gogrocy/ui/views/cart/cart_list.dart';
 import 'package:flutter/material.dart';
 import 'package:gogrocy/core/enums/viewstate.dart';
@@ -35,7 +36,9 @@ class Cart extends StatelessWidget {
                 CartHeader(model: model.cartList,checkoutButtonPressed: (){scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 500), curve: Curves.easeIn);print("Callback succeeds");},),
                 CartList(model, model.intermediateCartList),
                 CartBill(model.cartList,),
+                CartFooter(model),
                 SizedBox(height: 50,),
+
 
               ],
             );
@@ -47,6 +50,7 @@ class Cart extends StatelessWidget {
                 CartHeader(model:model.cartList,checkoutButtonPressed:(){scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 500), curve: Curves.easeIn);print("Callback succeeds");}),
                 CartList(model, model.cartList),
                 CartBill(model.cartList),
+                CartFooter(model),
                 SizedBox(height: 50,),
 
               ],

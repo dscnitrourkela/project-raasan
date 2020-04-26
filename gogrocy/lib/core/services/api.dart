@@ -2,6 +2,7 @@ import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
 import 'package:gogrocy/core/models/Address.dart';
+import 'package:gogrocy/core/models/Orders.dart';
 import 'package:gogrocy/core/models/cart_edit.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
 import 'package:gogrocy/core/models/product.dart';
@@ -26,6 +27,8 @@ const String addAddress = baseUrl + "add_address";
 const String cartList = baseUrl + 'getCartItems';
 const String editCart=baseUrl+ "add_to_cart";
 const String getAddress=baseUrl+"getAddress";
+const String orderRequest=baseUrl+"placeOrder";
+const String getOrders=baseUrl+"getorders";
 
 class Apis {
   final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
@@ -146,6 +149,24 @@ class Apis {
       (print("Network failure"));
   }
 
+  Future<bool> placeOrder(
+      {@required String address_id}) async {
+    Map<String,String>body={
+      "address_id":address_id,
+    };
+    String jwt=await _sharedPrefsService.getJWT();
+    var client = new http.Client();
+    bool connectionState = await checkStatus();
+    if (connectionState) //TODO: Add a proper else return
+        {
+      var response = await client.post(orderRequest, headers: {
+        'Authorization': 'Bearer $jwt',
+      },body: body);
+      return true;
+    } else
+      return false;
+  }
+
   Future<List<Product>> getAllProducts() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
@@ -184,6 +205,24 @@ class Apis {
     } else
       (print("Network failure"));
   }
+
+  Future<Orders> getOrders() async{
+    var client = new http.Client();
+    bool connectionState = await checkStatus();
+    String jwt=await _sharedPrefsService.getJWT();
+    if (connectionState) //TODO: Add a proper else return
+        {
+      var response = await client.post(getAddress, headers: {
+        'Content-Type': 'application/json',
+        'Accept': 'application/json',
+        'Authorization': 'Bearer $jwt',
+      });
+      return json.decode(response.body);
+    } else
+      (print("Network failure"));
+  }
+
+
 
 
   Future<cart_list> getCartList() async {
