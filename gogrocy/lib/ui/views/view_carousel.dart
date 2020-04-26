@@ -9,7 +9,7 @@ class ViewCarousel extends StatelessWidget {
   Widget build(BuildContext context) {
     var provider = Provider.of<BottomNavBarProvider>(context);
     PageController controller =
-        PageController(initialPage: provider.currentIndex);
+        PageController(initialPage: provider.currentIndex,keepPage: true);
     Provider.of<BottomNavBarProvider>(context, listen: true);
     provider.addListener(() {
       controller.animateToPage(provider.currentIndex,
