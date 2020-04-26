@@ -1,18 +1,19 @@
 import 'package:flutter/material.dart';
 import 'package:gogrocy/core/enums/viewstate.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
+import 'package:gogrocy/core/services/checkout_button_callback.dart';
 import 'package:gogrocy/core/viewModels/cart_view_model.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
+import 'package:gogrocy/core/services/checkout_button_callback.dart' as checkout_callback;
+
 
 class CartHeader extends StatelessWidget {
 
   cart_list model;
+  CheckoutButtonPressed checkoutButtonPressed;
 
-  CartHeader(cart_list m){
-    model=m;
-  }
-
+  CartHeader({this.model,this.checkoutButtonPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -40,7 +41,7 @@ class CartHeader extends StatelessWidget {
                         children: <Widget>[
                           Text("Your Cart",
                           style: TextStyle(fontFamily: 'Gilroy',fontSize: 32.0,fontWeight: FontWeight.bold, color: colors.CART_HEADER_COLOR),),
-                          Text("Grand Total- Rs"+model.sum.toString(),
+                          Text("Grand Total Rs"+model.sum.toString(),
                           style: TextStyle(fontFamily: 'Gilroy',fontSize: 14.0,fontWeight: FontWeight.w600, color: colors.CART_HEADER_COLOR),),
 
                         ],
@@ -54,7 +55,11 @@ class CartHeader extends StatelessWidget {
               padding: const EdgeInsets.only(left: 28.0,top: 12),
               child: RawMaterialButton(
                 elevation: 0.0,
-                onPressed: () {},
+                focusElevation: 1,
+                focusColor: colors.CART_BUTTON_BACKGROUND,
+                onPressed: () {
+                  checkoutButtonPressed;
+                },
                 fillColor: colors.CART_BUTTON_BACKGROUND,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(3),

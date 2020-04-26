@@ -13,17 +13,16 @@ class CartList extends StatelessWidget {
   CartViewModel model;
   cart_list cartList;
 
-  CartList(CartViewModel m, cart_list c){
-    model=m;
-    cartList=c;
+  CartList(CartViewModel m, cart_list c) {
+    model = m;
+    cartList = c;
   }
-
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     cart_list usableCartList;
-   usableCartList=cartList;
+    usableCartList = cartList;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
@@ -31,10 +30,9 @@ class CartList extends StatelessWidget {
           physics: NeverScrollableScrollPhysics(),
           itemCount: usableCartList.cart.length,
           itemBuilder: (context, index) {
-            int eachItemCost =
-            int.parse(usableCartList.cart[index].price);
+            int eachItemCost = int.parse(usableCartList.cart[index].price);
             int quantityOrdered =
-            int.parse(usableCartList.cart[index].quantity_ordered);
+                int.parse(usableCartList.cart[index].quantity_ordered);
             int totalCost = eachItemCost * quantityOrdered;
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -47,7 +45,7 @@ class CartList extends StatelessWidget {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black26),
                           borderRadius:
-                          BorderRadius.all(Radius.circular(10.0))),
+                              BorderRadius.all(Radius.circular(10.0))),
                       width: constants.CartConfig.imageWidth,
                       height: constants.CartConfig.imageHeight,
                       child: Padding(
@@ -70,8 +68,7 @@ class CartList extends StatelessWidget {
                         children: <Widget>[
                           Text(usableCartList.cart[index].name,
                               style: TextStyle(
-                                  fontWeight: FontWeight.w500,
-                                  fontSize: 14.0)),
+                                  fontWeight: FontWeight.w500, fontSize: 14.0)),
                           Text('₹' + usableCartList.cart[index].price,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
@@ -80,8 +77,10 @@ class CartList extends StatelessWidget {
                           Padding(
                             padding: const EdgeInsets.only(top: 20.0),
                             child: CartCounter(
-                              maxQuantity:int.parse(usableCartList.cart[index].quantity) ,
-                              orderedQuantity: int.parse(usableCartList.cart[index].quantity_ordered),
+                              maxQuantity: int.parse(
+                                  usableCartList.cart[index].quantity),
+                              orderedQuantity: int.parse(
+                                  usableCartList.cart[index].quantity_ordered),
                               model: model,
                               index: index,
                             ),
@@ -102,7 +101,7 @@ class CartList extends StatelessWidget {
                               color: colors.PRIMARY_COLOR),
                           textAlign: TextAlign.right,
                         )),
-                  )
+                  ),
                 ],
               ),
             );
