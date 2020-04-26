@@ -11,7 +11,8 @@ import 'package:gogrocy/service_locator.dart';
 import 'package:http/http.dart' as http;
 
 const String baseUrl = "https://gogrocy.in/api/";
-const String TOKEN='eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1ODY5NzYxMjEsImlzcyI6Imh0dHBzOlwvXC9nb2dyb2N5LmluXC8iLCJuYmYiOjE1ODY5NzYxMzEsImRhdGEiOnsidXNlcl9pZCI6Ijg1IiwidXNlcl9yb2xlIjoiMSJ9fQ.3jwji_K1l07ttdUUjn4UJbJfuAbrC0msqk7jeftpSzDR7u2d8RCiGWz3ritX3hQIa0MGUe2fIaidErX-xtTQdA';
+const String TOKEN =
+    'eyJ0eXAiOiJKV1QiLCJhbGciOiJIUzUxMiJ9.eyJpYXQiOjE1ODY5NzYxMjEsImlzcyI6Imh0dHBzOlwvXC9nb2dyb2N5LmluXC8iLCJuYmYiOjE1ODY5NzYxMzEsImRhdGEiOnsidXNlcl9pZCI6Ijg1IiwidXNlcl9yb2xlIjoiMSJ9fQ.3jwji_K1l07ttdUUjn4UJbJfuAbrC0msqk7jeftpSzDR7u2d8RCiGWz3ritX3hQIa0MGUe2fIaidErX-xtTQdA';
 
 const String allProducts = baseUrl + "getProducts";
 const String singleProduct = baseUrl + "getProduct";
@@ -20,7 +21,7 @@ const String login = baseUrl + "login";
 const String signUp = baseUrl + "signup";
 const String verifyUser = baseUrl + "verifyUser";
 const String addAddress = baseUrl + "add_address";
-const String cartList=baseUrl+'getCartItems';
+const String cartList = baseUrl + 'getCartItems';
 
 class Apis {
   final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
@@ -49,6 +50,7 @@ class Apis {
       "country": "India",
     };
     print(body);
+    print("ADDDRESSSSSS     " + jwt);
     http.Response result = await http.post(addAddress,
         headers: {HttpHeaders.authorizationHeader: "Bearer $jwt"}, body: body);
     print(result.body);
@@ -84,6 +86,7 @@ class Apis {
           mobile: mobile, countryCode: countryCode, password: password);
       print("login via sign up success");
       if (user.jwt != null) {
+        print("LOGIN             " + user.jwt);
         await verifyUserApi(user.jwt);
         await addAddressApi(
           name: name,
@@ -122,6 +125,7 @@ class Apis {
       return user;
     }
   }
+
   Future<List<Product>> getAllProducts() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
@@ -144,8 +148,8 @@ class Apis {
     var client = new http.Client();
     bool connectionState = await checkStatus();
     if (connectionState) //TODO: Add a proper else return
-        {
-      var response = await client.post(cartList,headers: {
+    {
+      var response = await client.post(cartList, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
         'Authorization': 'Bearer $TOKEN',
@@ -172,10 +176,10 @@ class Apis {
   Future<bool> verifyUserApi(String jwt) async {
     http.Response result = await http.post(verifyUser,
         headers: {HttpHeaders.authorizationHeader: "Bearer $jwt"});
-    if ((json.decode(result.body))["success"]){
+    if ((json.decode(result.body))["success"]) {
       print("VERIFIED USER");
-      return true;}
-    else
+      return true;
+    } else
       return false;
   }
 }

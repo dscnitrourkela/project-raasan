@@ -2,6 +2,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter/material.dart';
 import 'package:gogrocy/core/enums/viewstate.dart';
+import 'package:gogrocy/core/models/sign_up_arguments.dart';
 import 'package:gogrocy/core/models/user.dart';
 import 'package:gogrocy/core/services/api.dart';
 import 'package:gogrocy/core/services/authentication_service.dart';
@@ -49,10 +50,7 @@ class LoginModel extends BaseModel {
     if (result is bool) {
       if (result) {
         print('login success with phone number');
-        navigationService.navigateTo('awesome', arguments: {
-          "phoneNumber": phoneNumber,
-          "countryCode": countryCode
-        });
+        navigationService.navigateTo('awesome', arguments: SignUpArguments(phoneNumber, countryCode));
       } else {
         print('login unsuccessful with phone number');
       }
@@ -76,10 +74,7 @@ class LoginModel extends BaseModel {
     if (result is bool) {
       if (result) {
         print('login success with otp');
-        navigationService.navigateTo('awesome', arguments: {
-          "phoneNumber": phoneNumber,
-          "countryCode": countryCode
-        });
+        navigationService.navigateTo('awesome', arguments: SignUpArguments(phoneNumber, countryCode));
       } else {
         print('login unsuccessful with otp');
         Scaffold.of(context).showSnackBar(

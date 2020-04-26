@@ -17,16 +17,16 @@ class SharedPrefsService {
   }
 
   Future<bool> hasUser() async {
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getBool("loggedIn")??false;
   }
   setCartPrice(String s) async{
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     prefs.setString("cart", s);
   }
 
   Future<String> getCartPrice() async{
-    final SharedPreferences prefs = await SharedPreferences.getInstance();
+    SharedPreferences prefs = await SharedPreferences.getInstance();
     return prefs.getString('cart');
   }
 

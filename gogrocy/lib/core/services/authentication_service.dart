@@ -1,5 +1,6 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/cupertino.dart';
+import 'package:gogrocy/core/models/sign_up_arguments.dart';
 import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/core/services/shared_prefs.dart';
 import 'package:gogrocy/service_locator.dart';
@@ -17,10 +18,7 @@ class AuthenticationService {
       print('Verification Complete');
       await signInWithNumber(context, credential);
       print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
-      _navigationService.navigateTo('awesome', arguments:{
-        "phoneNumber": phoneNumber,
-        "countryCode": countryCode
-      });
+      _navigationService.navigateTo('awesome', arguments: SignUpArguments(phoneNumber, countryCode));
     };
 
     final PhoneVerificationFailed verificationFailed =
