@@ -25,10 +25,10 @@ const String signUp = baseUrl + "signup";
 const String verifyUser = baseUrl + "verifyUser";
 const String addAddress = baseUrl + "add_address";
 const String cartList = baseUrl + 'getCartItems';
-const String editCart=baseUrl+ "add_to_cart";
-const String getAddress=baseUrl+"getAddress";
-const String orderRequest=baseUrl+"placeOrder";
-const String getOrders=baseUrl+"getorders";
+const String editCart = baseUrl + "add_to_cart";
+const String getAddress = baseUrl + "getAddress";
+const String orderRequest = baseUrl + "placeOrder";
+const String getOrders = baseUrl + "getorders";
 
 class Apis {
   final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
@@ -111,14 +111,19 @@ class Apis {
       print("login via sign up success");
       if (user.jwt != null) {
         print("LOGIN             " + user.jwt);
-        await verifyUserApi(user.jwt);
-        await addAddressApi(
-          name: name,
-          locality: locality,
-          city: city,
-          contact: mobile,
-          pinCode: zip,
-          jwt: user.jwt,
+        Future.delayed(
+          Duration(milliseconds: 10),
+          () async {
+            await verifyUserApi(user.jwt);
+            await addAddressApi(
+              name: name,
+              locality: locality,
+              city: city,
+              contact: mobile,
+              pinCode: zip,
+              jwt: user.jwt,
+            );
+          },
         );
       } else {
         print("JWT FAIL: ACCOUNT NOT VALIDATED");
@@ -168,19 +173,20 @@ class Apis {
       (print("Network failure"));
   }
 
-  Future<bool> placeOrder(
-      {@required String address_id}) async {
-    Map<String,String>body={
-      "address_id":address_id,
+  Future<bool> placeOrder({@required String address_id}) async {
+    Map<String, String> body = {
+      "address_id": address_id,
     };
-    String jwt=await _sharedPrefsService.getJWT();
+    String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
     if (connectionState) //TODO: Add a proper else return
-        {
-      var response = await client.post(orderRequest, headers: {
-        'Authorization': 'Bearer $jwt',
-      },body: body);
+    {
+      var response = await client.post(orderRequest,
+          headers: {
+            'Authorization': 'Bearer $jwt',
+          },
+          body: body);
       return true;
     } else
       return false;
@@ -225,12 +231,12 @@ class Apis {
       (print("Network failure"));
   }
 
-  Future<Orders> getOrders() async{
+  Future<Orders> getOrders() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    String jwt=await _sharedPrefsService.getJWT();
+    String jwt = await _sharedPrefsService.getJWT();
     if (connectionState) //TODO: Add a proper else return
-        {
+    {
       var response = await client.post(getAddress, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -238,10 +244,8 @@ class Apis {
       });
       return json.decode(response.body);
     } else
-      (print("Network failure"));
+      print("Network failure");
   }
-
-
 
   Future<cart_list> getCartList() async {
     var client = new http.Client();
@@ -256,7 +260,7 @@ class Apis {
       });
       return cart_list.fromJson(json.decode(response.body));
     } else
-      (print("Network failure"));
+      print("Network failure");
   }
 
   Future<bool> checkStatus() async {
@@ -279,8 +283,7 @@ class Apis {
     if ((json.decode(result.body))["success"]) {
       print("VERIFIED USER");
       return true;
-    }
-    else
+    } else
       return false;
   }
 }
