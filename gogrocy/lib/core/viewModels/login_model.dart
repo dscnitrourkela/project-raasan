@@ -114,4 +114,8 @@ class LoginModel extends BaseModel {
     }
     return user;
   }
+
+  checkInternetStatus() {
+    return true;
+  }
 }
