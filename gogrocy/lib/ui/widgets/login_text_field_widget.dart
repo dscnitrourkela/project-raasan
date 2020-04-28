@@ -3,6 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
 import 'package:gogrocy/core/viewModels/login_model.dart';
 import 'package:gogrocy/service_locator.dart';
+import 'package:gogrocy/ui/shared/colors.dart';
 import 'package:gogrocy/ui/widgets/otp_field.dart';
 import 'package:gogrocy/ui/widgets/snackbars.dart';
 import 'package:gogrocy/ui/widgets/vertical_spaces.dart';
@@ -115,9 +116,9 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                       visible: phoneFocusNode.hasFocus,
                       child: IconButton(
                         icon: Icon(
-                          Icons.check_circle,
+                          Icons.check_circle_outline,
                           color:
-                              model.hasConnection ? Colors.green : Colors.grey,
+                              model.hasConnection ? primaryColor : Colors.grey,
                           size: 31.404 * constants.scaleRatio,
                         ),
                         onPressed: () async {

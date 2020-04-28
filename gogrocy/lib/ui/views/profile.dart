@@ -72,7 +72,7 @@ class CartHeader extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       width: 20.0,
-                      color: colors.CART_HEADER_COLOR,
+                      color: colors.cartHeaderColor,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
@@ -81,9 +81,9 @@ class CartHeader extends StatelessWidget {
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
                           Text("Your Cart",
-                            style: TextStyle(fontFamily: 'Gilroy',fontSize: 32.0,fontWeight: FontWeight.bold, color: colors.CART_HEADER_COLOR),),
+                            style: TextStyle(fontFamily: 'Gilroy',fontSize: 32.0,fontWeight: FontWeight.bold, color: colors.cartHeaderColor),),
                           Text("Grand Total Rs"+model.sum.toString(),
-                            style: TextStyle(fontFamily: 'Gilroy',fontSize: 14.0,fontWeight: FontWeight.w600, color: colors.CART_HEADER_COLOR),),
+                            style: TextStyle(fontFamily: 'Gilroy',fontSize: 14.0,fontWeight: FontWeight.w600, color: colors.cartHeaderColor),),
 
                         ],
                       ),

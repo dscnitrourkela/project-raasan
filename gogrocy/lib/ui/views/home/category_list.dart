@@ -40,7 +40,7 @@ class CategoryList extends StatelessWidget {
                         child: Container(
                           width: constants.HomePageConfig.categoryBoxWidth,
                           height: constants.HomePageConfig.categoryBoxHeight,
-                          color: colors.CATEGORY_LIST_BOX,
+                          color: colors.categoryListBox,
                         ),
                       ),
                     ),

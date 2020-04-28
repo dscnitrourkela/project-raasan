@@ -73,7 +73,7 @@ class CartList extends StatelessWidget {
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14.0,
-                                  color: colors.PRIMARY_COLOR)),
+                                  color: colors.primaryColor)),
                           Padding(
                             padding: const EdgeInsets.only(top: 20.0),
                             child: CartCounter(
@@ -98,7 +98,7 @@ class CartList extends StatelessWidget {
                           style: TextStyle(
                               fontSize: 17.0,
                               fontWeight: FontWeight.w500,
-                              color: colors.PRIMARY_COLOR),
+                              color: colors.primaryColor),
                           textAlign: TextAlign.right,
                         )),
                   ),

@@ -16,7 +16,7 @@ class GridList extends StatelessWidget {
   Widget build(BuildContext context) {
     return BaseView<AllProductsModel>(
       onModelReady: (model) {
-        model.getAllProducts();
+        if (model.hasConnection) model.getAllProducts();
       },
       builder: (context, model, child) => GridView.builder(
           itemCount: 100,
@@ -27,11 +27,15 @@ class GridList extends StatelessWidget {
           itemBuilder: (context, index) {
             // ignore: missing_return
             if (model.state == ViewState.Busy)
-              return SizedBox(width:20.0,height: 20.0,child: Center(child: CircularProgressIndicator()));
+              return SizedBox(
+                  width: 20.0,
+                  height: 20.0,
+                  child: Center(child: CircularProgressIndicator()));
             else {
               return InkWell(
-                onTap: (){
-                  _navigationService.navigateTo('product', arguments: model.allProducts[index]);
+                onTap: () {
+                  _navigationService.navigateTo('product',
+                      arguments: model.allProducts[index]);
                 },
                 child: Padding(
                   padding: const EdgeInsets.all(8.0),
@@ -44,7 +48,10 @@ class GridList extends StatelessWidget {
                         Flexible(
                             flex: 4,
                             child: SizedBox(
-                              height: constants.HomePageConfig.productGridHeight*4/6,
+                              height:
+                                  constants.HomePageConfig.productGridHeight *
+                                      4 /
+                                      6,
                               child: Image(
                                 image: NetworkImage(
                                     'https://res.cloudinary.com/gogrocy/image/upload/v1/' +
@@ -62,7 +69,8 @@ class GridList extends StatelessWidget {
                                 Flexible(
                                     flex: 8,
                                     child: Padding(
-                                      padding: const EdgeInsets.only(left: 4,top: 4,bottom: 4),
+                                      padding: const EdgeInsets.only(
+                                          left: 4, top: 4, bottom: 4),
                                       child: Text(
                                         model.allProducts[index].name,
                                         style: TextStyle(
@@ -73,7 +81,8 @@ class GridList extends StatelessWidget {
                                     )),
                                 Flexible(
                                   child: Padding(
-                                    padding: const EdgeInsets.only(right: 4,top: 4,bottom: 4),
+                                    padding: const EdgeInsets.only(
+                                        right: 4, top: 4, bottom: 4),
                                     child: Text(
                                       '₹' + model.allProducts[index].price,
                                       style: TextStyle(

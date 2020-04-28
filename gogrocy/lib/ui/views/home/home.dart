@@ -7,12 +7,22 @@ import 'package:gogrocy/ui/shared/constants.dart' as constants;
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
 
 
-class Home extends StatelessWidget {
+class Home extends StatefulWidget {
+  @override
+  _HomeState createState() => _HomeState();
+}
+
+class _HomeState extends State<Home> with AutomaticKeepAliveClientMixin{
   final PageController controller = new PageController();
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return Scaffold(
+      backgroundColor: Colors.white,
       body: ListView(
         children: <Widget>[
           Carousel(controller),
@@ -55,7 +65,7 @@ class Home extends StatelessWidget {
                 RawMaterialButton(
                   elevation: 0.0,
                   onPressed: () {},
-                  fillColor: colors.VIEW_ALL_BUTTON_BACKGROUND,
+                  fillColor: colors.viewAllButtonBackground,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(3),
                   ),
@@ -66,7 +76,7 @@ class Home extends StatelessWidget {
                       child: Text(
                         'View All',
                         style: TextStyle(
-                            color: colors.VIEW_ALL_BUTTON_TEXT,
+                            color: colors.viewAllButtonText,
                             fontSize: 13.0,
                             fontWeight: FontWeight.w500),
                       ),
