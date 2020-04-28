@@ -32,7 +32,9 @@ class ProductDetailView extends StatelessWidget {
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
                         GestureDetector(
-                          onTap: (){Navigator.pop(context);},
+                          onTap: () {
+                            Navigator.pop(context);
+                          },
                           child: Padding(
                             padding: const EdgeInsets.only(right: 8, top: 4),
                             child: Icon(
@@ -50,7 +52,8 @@ class ProductDetailView extends StatelessWidget {
                                   fontWeight: FontWeight.w500, fontSize: 24),
                             ),
                             Text(
-                              ((product.quantity != "2")||(product.quantity!=null)
+                              ((product.quantity != "2") ||
+                                      (product.quantity != null)
                                   ? "In Stock"
                                   : "Not in stock"),
                               style: TextStyle(
@@ -76,28 +79,41 @@ class ProductDetailView extends StatelessWidget {
                   borderRadius: BorderRadius.all(Radius.circular(8)),
                   child: SizedBox(
                     width: constants.screenWidth,
-                    height: constants.screenHeight*0.4,
+                    height: constants.screenHeight * 0.4,
                     child: Image(
                       image: NetworkImage(
-                          'https://res.cloudinary.com/gogrocy/image/upload/v1/' +
-                              product.image,),fit: BoxFit.fitWidth,
+                        'https://res.cloudinary.com/gogrocy/image/upload/v1/' +
+                            product.image,
+                      ),
+                      fit: BoxFit.fitWidth,
                     ),
                   ),
                 ),
                 SizedBox(
                   height: 20,
                 ),
-                Text(product.name,style: TextStyle(fontSize: 20,fontWeight: FontWeight.w500),),
-                Text(product.description,style: TextStyle(),),
-                SizedBox(height: 20.0,),
+                Text(
+                  product.name,
+                  style: TextStyle(fontSize: 20, fontWeight: FontWeight.w500),
+                ),
+                Text(
+                  product.description,
+                  style: TextStyle(),
+                ),
+                SizedBox(
+                  height: 20.0,
+                ),
                 Center(
                   child: FlatButton.icon(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
-                    color:colors.VIEW_ALL_BUTTON_BACKGROUND,
+                    color: colors.VIEW_ALL_BUTTON_BACKGROUND,
                     icon: Padding(
                       padding: const EdgeInsets.all(8.0),
-                      child: Icon(Icons.shopping_cart,color: colors.PRIMARY_COLOR,),
+                      child: Icon(
+                        Icons.shopping_cart,
+                        color: colors.PRIMARY_COLOR,
+                      ),
                     ),
                     label: Padding(
                       padding: const EdgeInsets.all(8.0),
@@ -106,7 +122,7 @@ class ProductDetailView extends StatelessWidget {
                         style: TextStyle(
                             color: colors.PRIMARY_COLOR,
                             fontWeight: FontWeight.bold,
-                        fontSize: 16),
+                            fontSize: 16),
                       ),
                     ),
                     onPressed: () async {
@@ -115,8 +131,9 @@ class ProductDetailView extends StatelessWidget {
                         Flushbar(
                           messageText: Text(
                             "Added to cart",
-                            style:
-                            TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
                           ),
                           duration: Duration(seconds: 2),
                           flushbarStyle: FlushbarStyle.FLOATING,
@@ -140,8 +157,9 @@ class ProductDetailView extends StatelessWidget {
                         Flushbar(
                           messageText: Text(
                             "Unable to add to cart",
-                            style:
-                            TextStyle(color: Colors.black, fontWeight: FontWeight.w500),
+                            style: TextStyle(
+                                color: Colors.black,
+                                fontWeight: FontWeight.w500),
                           ),
                           duration: Duration(seconds: 2),
                           flushbarStyle: FlushbarStyle.FLOATING,
