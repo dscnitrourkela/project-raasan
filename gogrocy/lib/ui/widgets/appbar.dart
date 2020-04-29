@@ -1,11 +1,14 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/core/services/shared_prefs.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
   final SharedPrefsService sharedPrefsService = locator<SharedPrefsService>();
+  final NavigationService _navigationService = locator<NavigationService>();
+
   @override
   Widget build(BuildContext context) {
     constants.mediaQueryData = MediaQuery.of(context);
@@ -70,14 +73,17 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ),
-            Container(
-              width: constants.screenWidth/3,
-              child: Align(
-                alignment: Alignment.centerRight,
-                child: Padding(
-                  padding: EdgeInsets.only(
-                      right: constants.AppBarConfig.searchIconPaddingRight),
-                  child: Icon(Icons.search),
+            GestureDetector(
+              onTap: ()=>_navigationService.navigateTo("search"),
+              child: Container(
+                width: constants.screenWidth/3,
+                child: Align(
+                  alignment: Alignment.centerRight,
+                  child: Padding(
+                    padding: EdgeInsets.only(
+                        right: constants.AppBarConfig.searchIconPaddingRight),
+                    child: Icon(Icons.search),
+                  ),
                 ),
               ),
             ),
