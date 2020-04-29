@@ -52,7 +52,7 @@ class CartList extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Image(
                           image: NetworkImage(
-                              'https://res.cloudinary.com/gogrocy/image/upload/v1/' +
+                              constants.imageBaseUrl +
                                   usableCartList.cart[index].image),
                           fit: BoxFit.fitWidth,
                         ),
