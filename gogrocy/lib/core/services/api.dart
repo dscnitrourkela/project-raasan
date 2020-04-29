@@ -195,7 +195,7 @@ class Apis {
 
   Future<ProductsByCity> getProductsByCity() async {
     Map<String, String> body = {
-      "city": "jeypore",  // TODO: Add city here from SharedPrefs
+      "city": await _sharedPrefsService.getCity(),  // TODO: Add city here from SharedPrefs
     };
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
@@ -214,7 +214,7 @@ class Apis {
 
   Future<ProductsByCity> getProductsByCityCategory(String cat_id) async {
     Map<String, String> body = {
-      "city": "jeypore",  // TODO: Add city here from SharedPrefs
+      "city": await _sharedPrefsService.getCity(),  // TODO: Add city here from SharedPrefs
       "cat_id": cat_id
     };
     String jwt = await _sharedPrefsService.getJWT();
@@ -257,7 +257,7 @@ class Apis {
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
     Map<String, String> body = {
-      "city": "jeypore",  // TODO: Add city here from SharedPrefs
+      "city": await _sharedPrefsService.getCity(),  // TODO: Add city here from SharedPrefs
     };
     if (connectionState) //TODO: Add a proper else return
         {
@@ -275,8 +275,6 @@ class Apis {
       return null;
     }
   }
-
-
   Future<List<Address>> getAddresses() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
