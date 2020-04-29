@@ -94,7 +94,7 @@ class SearchView extends StatelessWidget {
                         child: Container(
                           color: Colors.transparent,
                           child: Material(
-                            elevation: 8,
+                            elevation: 5,
                             child: Theme(
                               data: ThemeData(
                                   primaryColor: Colors.white,
