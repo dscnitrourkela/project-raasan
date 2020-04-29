@@ -22,9 +22,8 @@ class Orders {
 
 class Result {
     List<Bills> bills;
-    List<Address> address;
 
-    Result({this.bills, this.address});
+    Result({this.bills});
 
     Result.fromJson(Map<String, dynamic> json) {
         if (json['bills'] != null) {
@@ -33,21 +32,12 @@ class Result {
                 bills.add(new Bills.fromJson(v));
             });
         }
-        if (json['address'] != null) {
-            address = new List<Address>();
-            json['address'].forEach((v) {
-                address.add(new Address.fromJson(v));
-            });
-        }
     }
 
     Map<String, dynamic> toJson() {
         final Map<String, dynamic> data = new Map<String, dynamic>();
         if (this.bills != null) {
             data['bills'] = this.bills.map((v) => v.toJson()).toList();
-        }
-        if (this.address != null) {
-            data['address'] = this.address.map((v) => v.toJson()).toList();
         }
         return data;
     }
@@ -136,59 +126,6 @@ class Details {
         data['seller_number'] = this.sellerNumber;
         data['seller_name'] = this.sellerName;
         data['order_date'] = this.orderDate;
-        return data;
-    }
-}
-
-class Address {
-    String addressId;
-    String receiver;
-    String userId;
-    String contact;
-    String locality;
-    String city;
-    String state;
-    String zip;
-    String country;
-    String isPrimary;
-
-    Address(
-        {this.addressId,
-            this.receiver,
-            this.userId,
-            this.contact,
-            this.locality,
-            this.city,
-            this.state,
-            this.zip,
-            this.country,
-            this.isPrimary});
-
-    Address.fromJson(Map<String, dynamic> json) {
-        addressId = json['address_id'];
-        receiver = json['receiver'];
-        userId = json['user_id'];
-        contact = json['contact'];
-        locality = json['locality'];
-        city = json['city'];
-        state = json['state'];
-        zip = json['zip'];
-        country = json['country'];
-        isPrimary = json['is_primary'];
-    }
-
-    Map<String, dynamic> toJson() {
-        final Map<String, dynamic> data = new Map<String, dynamic>();
-        data['address_id'] = this.addressId;
-        data['receiver'] = this.receiver;
-        data['user_id'] = this.userId;
-        data['contact'] = this.contact;
-        data['locality'] = this.locality;
-        data['city'] = this.city;
-        data['state'] = this.state;
-        data['zip'] = this.zip;
-        data['country'] = this.country;
-        data['is_primary'] = this.isPrimary;
         return data;
     }
 }

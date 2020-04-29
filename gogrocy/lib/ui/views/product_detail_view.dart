@@ -1,15 +1,19 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:gogrocy/core/models/product.dart';
 import 'package:gogrocy/core/viewModels/product_detail_model.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 import 'package:gogrocy/ui/views/base_view.dart';
 import 'package:gogrocy/ui/widgets/appbar.dart';
+import 'package:gogrocy/ui/widgets/snackbars/custom_snackbar.dart';
 import 'package:gogrocy/ui/widgets/vertical_spaces.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
+import 'package:gogrocy/core/models/ProductsByCity.dart';
 
 class ProductDetailView extends StatelessWidget {
-  final Product product;
+  final Result product;
+
+  Flushbar successSnackbar=infoSnackBar(message: "Added to cart", iconData: Icons.check, iconColor: colors.PRIMARY_COLOR);
+  Flushbar failureSnackbar=infoSnackBar(message: "Could not add to cart", iconData: Icons.error, iconColor: Colors.red);
 
   ProductDetailView(this.product);
 
@@ -128,57 +132,9 @@ class ProductDetailView extends StatelessWidget {
                     onPressed: () async {
                       var success = await model.addToCart(product.id);
                       if (success) {
-                        Flushbar(
-                          messageText: Text(
-                            "Added to cart",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          duration: Duration(seconds: 2),
-                          flushbarStyle: FlushbarStyle.FLOATING,
-                          icon: Icon(
-                            Icons.check,
-                            color: colors.PRIMARY_COLOR,
-                          ),
-                          barBlur: 0.9,
-                          margin: EdgeInsets.all(8.0),
-                          borderRadius: 8.0,
-                          backgroundColor: Colors.white,
-                          boxShadows: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0.0, 0.0),
-                              blurRadius: 5.0,
-                            )
-                          ],
-                        )..show(context);
+                        successSnackbar.show(context);
                       } else {
-                        Flushbar(
-                          messageText: Text(
-                            "Unable to add to cart",
-                            style: TextStyle(
-                                color: Colors.black,
-                                fontWeight: FontWeight.w500),
-                          ),
-                          duration: Duration(seconds: 2),
-                          flushbarStyle: FlushbarStyle.FLOATING,
-                          icon: Icon(
-                            Icons.error,
-                            color: Colors.red,
-                          ),
-                          barBlur: 0.9,
-                          margin: EdgeInsets.all(8.0),
-                          borderRadius: 8.0,
-                          backgroundColor: Colors.white,
-                          boxShadows: [
-                            BoxShadow(
-                              color: Colors.grey,
-                              offset: Offset(0.0, 0.0),
-                              blurRadius: 5.0,
-                            )
-                          ],
-                        )..show(context);
+                        failureSnackbar.show(context);
                       }
                     },
                   ),

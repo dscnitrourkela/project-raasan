@@ -59,6 +59,7 @@ class HomePageConfig {
   static double lookingForPaddingTop = (37 / 823) * screenHeight;
   static double lookingForPaddingBottom = (20 / 823) * screenHeight;
 
+
   static double categoryListHeight = (168 / 823) * screenHeight;
   static double categoryListWidth = (168 / 411) * screenWidth;
   static double categoryBoxHeight = (86 / 823) * screenHeight;
@@ -66,7 +67,7 @@ class HomePageConfig {
   static double categoryImageWidth=(144/411)*screenWidth;
   static double categoryImageHeight=(115/823)*screenHeight;
 
-  static double productGridWidth = (171 / 823) * screenHeight;
+  static double productGridWidth = (180 / 823) * screenHeight;
   static double productGridHeight = (171 / 411) * screenHeight;
 }
 

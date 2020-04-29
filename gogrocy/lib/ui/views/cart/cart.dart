@@ -102,9 +102,9 @@ class Cart extends StatelessWidget {
           Text(
             "Your cart is Empty!",
             style: TextStyle(
-                fontSize: 24.0,
+                fontSize: 18.0,
                 fontFamily: 'Gilroy',
-                fontWeight: FontWeight.w500),
+                fontWeight: FontWeight.bold),
           )
         ],
       ),

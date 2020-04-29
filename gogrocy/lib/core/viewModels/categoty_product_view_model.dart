@@ -1,21 +1,17 @@
 import 'package:gogrocy/core/enums/viewstate.dart';
-import 'package:gogrocy/core/models/Orders.dart';
+import 'package:gogrocy/core/models/ProductsByCity.dart';
 import 'package:gogrocy/core/services/api.dart';
 import 'package:gogrocy/core/viewModels/base_model.dart';
 import 'package:gogrocy/service_locator.dart';
 
-class OrderViewModel extends BaseModel {
-
-  Orders orders;
+class CategoryProductsViewModel extends BaseModel{
   Apis _apis=locator<Apis>();
+  ProductsByCity categoryList;
 
-  Future getOrders()async{
-    print("Model orders");
+  Future getProductsByCategory(String catId) async{
     setState(ViewState.Busy);
-    orders=await _apis.getOrders();
+    categoryList=await _apis.getProductsByCityCategory(catId);
     setState(ViewState.Idle);
   }
-
-
 
 }
