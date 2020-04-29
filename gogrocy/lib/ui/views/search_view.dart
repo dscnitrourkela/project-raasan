@@ -125,6 +125,10 @@ class SearchView extends StatelessWidget {
                                             width: 0,
                                             height: 0,
                                           ),
+                                    prefixIcon: GestureDetector(
+                                      onTap: ()=>Navigator.pop(context),
+                                      child: Icon(Icons.arrow_back,color: Colors.black38,),
+                                    ),
                                     contentPadding: EdgeInsets.all(15),
                                     hintText: "Search"),
                                 onSubmitted: (value) {
