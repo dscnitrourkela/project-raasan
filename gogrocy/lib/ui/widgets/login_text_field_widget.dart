@@ -291,7 +291,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                                 countryCode: countryCodeController.text);
                             SystemChannels.textInput
                                 .invokeMethod('TextInput.hide');
-                            Navigator.of(context).pushNamed('awesome');
+                            //Navigator.of(context).pushNamed('awesome');
                           },
                         ),
                       ),
