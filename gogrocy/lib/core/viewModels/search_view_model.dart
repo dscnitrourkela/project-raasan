@@ -9,12 +9,18 @@ class SearchViewModel extends BaseModel{
   Apis _apis=locator<Apis>();
 
   ProductsByCity searchResults;
+  bool isSearchNull;
 
   Future getAllProducts(String query) async{
-    setState(ViewState.Busy);
-    searchResults=await _apis.searchProductByCity(query);
-    //allProducts.result.shuffle();
-    setState(ViewState.Idle);
+
+    if(query!="") {
+      setState(ViewState.Busy);
+      searchResults = await _apis.searchProductByCity(query);
+      //allProducts.result.shuffle();
+      setState(ViewState.Idle);
+      isSearchNull=false;
+    }
+    else isSearchNull=true;
   }
 
 

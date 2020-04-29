@@ -33,6 +33,8 @@ dependencies:
   smooth_page_indicator: ^0.1.5
   flushbar: 1.9.1
   simple_search_bar: ^0.1.7
+  flappy_search_bar: ^1.7.2
+
 
 
 

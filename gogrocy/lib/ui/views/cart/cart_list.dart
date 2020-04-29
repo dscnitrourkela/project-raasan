@@ -9,7 +9,7 @@ import 'package:gogrocy/ui/widgets/cart_counter.dart';
 
 class CartList extends StatelessWidget {
   final String baseImgUrl =
-      "https://res.cloudinary.com/gogrocy/image/upload/v1/";
+      constants.imageBaseUrl;
   CartViewModel model;
   cart_list cartList;
 
