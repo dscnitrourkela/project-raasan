@@ -6,6 +6,7 @@ import 'package:gogrocy/core/models/sign_up_arguments.dart';
 import 'package:gogrocy/ui/views/all_products_list.dart';
 import 'package:gogrocy/ui/views/category/category_product_view.dart';
 import 'package:gogrocy/ui/views/orders/order_details_view.dart';
+import 'package:gogrocy/ui/views/city_selection.dart';
 import 'package:gogrocy/ui/views/product_detail_view.dart';
 import 'package:gogrocy/ui/views/signup_view.dart';
 import 'package:gogrocy/ui/views/landing_page.dart';
@@ -16,6 +17,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
   switch (settings.name) {
     case '/':
       return MaterialPageRoute(builder: (context) => LoginView());
+    case 'city':
+      return MaterialPageRoute(builder: (context) => CitySelectionView());
     case 'home':
       return MaterialPageRoute(builder: (context) => HomePageView());
     case 'login':

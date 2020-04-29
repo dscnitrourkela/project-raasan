@@ -8,8 +8,10 @@ import 'package:gogrocy/core/viewModels/categoty_product_view_model.dart';
 import 'package:gogrocy/core/viewModels/login_model.dart';
 import 'package:gogrocy/core/viewModels/product_detail_model.dart';
 import 'package:gogrocy/core/viewModels/orderLis_model.dart';
+import 'package:gogrocy/core/viewModels/signup_view_model.dart';
 import 'package:gogrocy/core/viewModels/startup_view_model.dart';
 import 'package:gogrocy/ui/views/category/category_product_view.dart';
+import 'package:gogrocy/ui/views/city_selection.dart';
 import 'package:gogrocy/ui/views/signup_view.dart';
 import 'package:gogrocy/core/services/api.dart';
 import 'package:gogrocy/core/services/bottom_appbar_provider.dart';
@@ -19,6 +21,8 @@ GetIt locator = GetIt.instance;
 
 void setupLocator() {
   locator.registerFactory<SharedPrefsService>(() => SharedPrefsService());
+  //locator.registerFactory(()=>SignUpViewModel());
+  locator.registerLazySingleton(() => CitySelectionModel());
   locator.registerFactory<StartupViewModel>(() => StartupViewModel());
   locator.registerFactory<NavigationService>(() => NavigationService());
   locator.registerFactory<AuthenticationService>(() => AuthenticationService());
