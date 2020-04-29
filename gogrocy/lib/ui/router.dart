@@ -8,6 +8,7 @@ import 'package:gogrocy/ui/views/category/category_product_view.dart';
 import 'package:gogrocy/ui/views/orders/order_details_view.dart';
 import 'package:gogrocy/ui/views/city_selection.dart';
 import 'package:gogrocy/ui/views/product_detail_view.dart';
+import 'package:gogrocy/ui/views/search_view.dart';
 import 'package:gogrocy/ui/views/signup_view.dart';
 import 'package:gogrocy/ui/views/landing_page.dart';
 import 'package:gogrocy/ui/views/login_view.dart';
@@ -62,6 +63,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
     case 'orderDetails':
       OrderDetailsArguments orderDetailsArguments=settings.arguments;
       return MaterialPageRoute(builder: (context)=>OrderDetailsView(orders: orderDetailsArguments.orders,index: orderDetailsArguments.index,));
+    case 'search':
+      return MaterialPageRoute(builder: (context)=>SearchView());
     default:
       return MaterialPageRoute(
           builder: (context) => Scaffold(

@@ -8,6 +8,7 @@ import 'package:gogrocy/core/viewModels/categoty_product_view_model.dart';
 import 'package:gogrocy/core/viewModels/login_model.dart';
 import 'package:gogrocy/core/viewModels/product_detail_model.dart';
 import 'package:gogrocy/core/viewModels/orderLis_model.dart';
+import 'package:gogrocy/core/viewModels/search_view_model.dart';
 import 'package:gogrocy/core/viewModels/signup_view_model.dart';
 import 'package:gogrocy/core/viewModels/startup_view_model.dart';
 import 'package:gogrocy/ui/views/category/category_product_view.dart';
@@ -34,5 +35,6 @@ void setupLocator() {
   locator.registerFactory(()=>OrderViewModel());
   locator.registerFactory<ProductDetailModel>(() => ProductDetailModel());
   locator.registerFactory(() => CartViewModel());
+  locator.registerFactory(()=>SearchViewModel());
   locator.registerFactory(() => BottomNavBarProvider());
 }

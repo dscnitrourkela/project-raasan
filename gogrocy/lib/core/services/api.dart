@@ -30,6 +30,7 @@ const String getOrders = baseUrl + "getorders";
 const String getProductsByCityRequest=baseUrl+ "getProductsByCity";
 const String getCategoriesByCityRequest=baseUrl+"getProductsByCategory";
 const String getOrderRequest=baseUrl+"getorders";
+const String searchByCity=baseUrl+"searchProductsByCity";
 
 class Apis {
   final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
@@ -214,7 +215,7 @@ class Apis {
 
   Future<ProductsByCity> getProductsByCityCategory(String cat_id) async {
     Map<String, String> body = {
-      "city": await _sharedPrefsService.getCity(),  // TODO: Add city here from SharedPrefs
+      "city":await _sharedPrefsService.getCity(),  // TODO: Add city here from SharedPrefs
       "cat_id": cat_id
     };
     String jwt = await _sharedPrefsService.getJWT();
@@ -223,6 +224,26 @@ class Apis {
     if (connectionState) //TODO: Add a proper else return
         {
       var response = await client.post(getCategoriesByCityRequest,
+          headers: {
+            'Authorization': 'Bearer $jwt',
+          },
+          body: body);
+      return ProductsByCity.fromJson(json.decode(response.body));
+    } else
+      return null;
+  }
+
+  Future<ProductsByCity> searchProductByCity(String query) async {
+    Map<String, String> body = {
+      "city":await _sharedPrefsService.getCity(),  // TODO: Add city here from SharedPrefs
+      "query": query
+    };
+    String jwt = await _sharedPrefsService.getJWT();
+    var client = new http.Client();
+    bool connectionState = await checkStatus();
+    if (connectionState) //TODO: Add a proper else return
+        {
+      var response = await client.post(searchByCity,
           headers: {
             'Authorization': 'Bearer $jwt',
           },
@@ -257,7 +278,7 @@ class Apis {
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
     Map<String, String> body = {
-      "city": await _sharedPrefsService.getCity(),  // TODO: Add city here from SharedPrefs
+      "city":await _sharedPrefsService.getCity(),  // TODO: Add city here from SharedPrefs
     };
     if (connectionState) //TODO: Add a proper else return
         {
@@ -275,6 +296,8 @@ class Apis {
       return null;
     }
   }
+
+
   Future<List<Address>> getAddresses() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
