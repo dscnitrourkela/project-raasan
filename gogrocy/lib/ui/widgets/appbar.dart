@@ -73,8 +73,9 @@ class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ),
-            GestureDetector(
+            InkWell(
               onTap: ()=>_navigationService.navigateTo("search"),
+              focusColor: Colors.black12,
               child: Container(
                 width: constants.screenWidth/3,
                 child: Align(
