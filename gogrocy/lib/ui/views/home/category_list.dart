@@ -34,18 +34,18 @@ class _CategoryListState extends State<CategoryList>  with AutomaticKeepAliveCli
   ];
 
   final List<String> assetPaths = [
-    "assets/images/pulses.png",
     "assets/images/grocery.png",
-    "assets/images/packed.png",
+    "assets/images/pizza.png",
+    "assets/images/rice.png",
+    "assets/images/snacks.png",
     "assets/images/toiletries.png",
+    "assets/images/detergent.png",
     "assets/images/pulses.png",
     "assets/images/grocery.png",
+    "assets/images/oil_ghee.png",
     "assets/images/packed.png",
-    "assets/images/toiletries.png",
-    "assets/images/pulses.png",
-    "assets/images/grocery.png",
-    "assets/images/packed.png",
-    "assets/images/toiletries.png"
+    "assets/images/masala.png",
+    "assets/images/healthcare.png"
   ];
 
   final List<String> catId = [
