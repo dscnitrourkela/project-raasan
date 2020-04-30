@@ -139,7 +139,7 @@ class CartHeader extends StatelessWidget {
               height: 137.67 * constants.scaleRatio,
               width: 181.72 * constants.scaleRatio,
               image: AssetImage(
-                'assets/images/shopping_cart_2x.png',
+                'assets/images/shopping_cart.png',
               ),
             )),
         Column(
