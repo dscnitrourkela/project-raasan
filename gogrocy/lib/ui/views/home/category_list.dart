@@ -6,7 +6,16 @@ import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
 
-class CategoryList extends StatelessWidget {
+class CategoryList extends StatefulWidget {
+  @override
+  _CategoryListState createState() => _CategoryListState();
+}
+
+class _CategoryListState extends State<CategoryList>  with AutomaticKeepAliveClientMixin{
+
+  @override
+  bool get wantKeepAlive => true;
+
   final NavigationService _navigationService = locator<NavigationService>();
 
   final List<String> categoryTitle = [
@@ -56,6 +65,7 @@ class CategoryList extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
+    super.build(context);
     return SizedBox(
       height: constants.HomePageConfig.categoryListHeight,
       child: ListView.builder(

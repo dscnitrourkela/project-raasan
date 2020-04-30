@@ -78,6 +78,14 @@ class AuthenticationService {
     }
   }
 
+  Future<FirebaseUser> hasFirebaseUser() async{
+    var user = await firebaseInstance.currentUser();
+    if(user!=null)
+      return user;
+    else
+      return null;
+  }
+
   Future<bool> isUserLoggedIn() async {
     var loggedIn = await _sharedPrefsService.hasUser();
     print(loggedIn);

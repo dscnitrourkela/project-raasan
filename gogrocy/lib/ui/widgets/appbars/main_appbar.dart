@@ -4,7 +4,7 @@ import 'package:gogrocy/core/services/shared_prefs.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
-class TopAppBar extends StatelessWidget implements PreferredSizeWidget {
+class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
   final SharedPrefsService sharedPrefsService = locator<SharedPrefsService>();
   @override
   Widget build(BuildContext context) {

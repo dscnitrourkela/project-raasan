@@ -1,7 +1,7 @@
 import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:gogrocy/core/models/Address.dart';
+import 'package:gogrocy/core/models/address.dart';
 import 'package:gogrocy/core/services/api.dart';
 import 'package:gogrocy/core/viewModels/cart_view_model.dart';
 import 'package:gogrocy/service_locator.dart';
@@ -83,11 +83,11 @@ class _CartFooterState extends State<CartFooter> {
                   height: 20.0,
                 ),
                 orderButton(
-                    address_id: snapshot.data[selectedIndex].address_id,
+                    address_id: snapshot.data[selectedIndex].addressId,
                     callback: () {
                       print("Callback is succeeding");
                       widget.model
-                          .getCartList(product_id: null, quantity: null);
+                          .getCartList(productId: null, quantity: null);
                     }),
               ],
             );
@@ -212,7 +212,7 @@ class _CartFooterState extends State<CartFooter> {
     return FlatButton(
       color: Color.fromRGBO(255, 193, 72, 0.3),
       onPressed: () async {
-        bool orderStatus = await apis.placeOrder(address_id: address_id);
+        bool orderStatus = await apis.placeOrder(addressId: address_id);
         if (orderStatus) {
           Flushbar(
             messageText: Text(
@@ -238,7 +238,7 @@ class _CartFooterState extends State<CartFooter> {
               )
             ],
           )..show(context);
-          widget.model.getCartList(product_id: null, quantity: null);
+          widget.model.getCartList(productId: null, quantity: null);
         } else
           Flushbar(
             messageText: Text(

@@ -1,4 +1,4 @@
-import 'package:gogrocy/core/models/Orders.dart';
+import 'package:gogrocy/core/models/orders.dart';
 
 class OrderDetailsArguments{
   Orders orders;

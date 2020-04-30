@@ -10,18 +10,15 @@ import 'package:gogrocy/ui/widgets/cart_counter.dart';
 class CartList extends StatelessWidget {
   final String baseImgUrl =
       "https://res.cloudinary.com/gogrocy/image/upload/v1/";
-  CartViewModel model;
-  cart_list cartList;
+  final CartViewModel model;
+  final CartDataModel cartList;
 
-  CartList(CartViewModel m, cart_list c) {
-    model = m;
-    cartList = c;
-  }
+  CartList(this.model, this.cartList);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    cart_list usableCartList;
+    CartDataModel usableCartList;
     usableCartList = cartList;
     return Padding(
       padding: const EdgeInsets.all(8.0),
@@ -32,7 +29,7 @@ class CartList extends StatelessWidget {
           itemBuilder: (context, index) {
             int eachItemCost = int.parse(usableCartList.cart[index].price);
             int quantityOrdered =
-                int.parse(usableCartList.cart[index].quantity_ordered);
+                int.parse(usableCartList.cart[index].quantityOrdered);
             int totalCost = eachItemCost * quantityOrdered;
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -80,7 +77,7 @@ class CartList extends StatelessWidget {
                               maxQuantity: int.parse(
                                   usableCartList.cart[index].quantity),
                               orderedQuantity: int.parse(
-                                  usableCartList.cart[index].quantity_ordered),
+                                  usableCartList.cart[index].quantityOrdered),
                               model: model,
                               index: index,
                             ),

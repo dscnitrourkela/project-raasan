@@ -1,8 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:gogrocy/core/models/Orders.dart';
+import 'package:gogrocy/core/models/orders.dart';
 import 'package:gogrocy/ui/views/orders/order_bill.dart';
 import 'package:gogrocy/ui/views/orders/ordered_product_list.dart';
-import 'package:gogrocy/ui/widgets/appbar.dart';
+import 'package:gogrocy/ui/widgets/appbars/main_appbar.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
 
 class OrderDetailsView extends StatelessWidget {
@@ -16,13 +16,15 @@ class OrderDetailsView extends StatelessWidget {
     String time = orders.result.bills[index].details[0].orderDate;
     return SafeArea(
         child: Scaffold(
-      appBar: TopAppBar(),
+      backgroundColor: Colors.white,
+      appBar: MainAppBar(),
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            orderStatus(int.parse(orders.result.bills[index].details[0].status)),
+            orderStatus(
+                int.parse(orders.result.bills[index].details[0].status)),
             Padding(
-              padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 16),
+              padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
               child: Row(
                 mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
@@ -32,8 +34,8 @@ class OrderDetailsView extends StatelessWidget {
                     children: <Widget>[
                       Text(
                         "Order number " + orders.result.bills[index].billId,
-                        style:
-                            TextStyle(fontSize: 16, fontWeight: FontWeight.bold),
+                        style: TextStyle(
+                            fontSize: 16, fontWeight: FontWeight.bold),
                       ),
                       Text("Order placed on " +
                           getDate(time) +
@@ -43,8 +45,9 @@ class OrderDetailsView extends StatelessWidget {
                           getYear(time)),
                       Text("Grand total " +
                           totalCost(orders.result.bills[index].details)),
-                      Text(orders.result.bills[index].details.length.toString() +
-                          "  items")
+                      Text(
+                          orders.result.bills[index].details.length.toString() +
+                              "  items")
                     ],
                   ),
                 ],
@@ -108,10 +111,10 @@ class OrderDetailsView extends StatelessWidget {
     return "₹ " + totalCost.toString();
   }
 
-  Widget orderStatus(int statusCode){
-    if(statusCode==0){
+  Widget orderStatus(int statusCode) {
+    if (statusCode == 0) {
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
         child: (Row(
           children: <Widget>[
             Icon(
@@ -119,14 +122,17 @@ class OrderDetailsView extends StatelessWidget {
               color: Colors.orange,
               size: 50,
             ),
-            Text("   Your order is not approved yet",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)
+            Text(
+              "   Your order is not approved yet",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            )
           ],
         )),
       );
     }
-    if(statusCode==1){
+    if (statusCode == 1) {
       return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
         child: (Row(
           children: <Widget>[
             Icon(
@@ -134,14 +140,17 @@ class OrderDetailsView extends StatelessWidget {
               color: colors.PRIMARY_COLOR,
               size: 50,
             ),
-            Text("   Your order is approved",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)
+            Text(
+              "   Your order is approved",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            )
           ],
         )),
       );
     }
-    if(statusCode==-1){
+    if (statusCode == -1) {
       Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4,horizontal: 16),
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
         child: (Row(
           children: <Widget>[
             Icon(
@@ -149,7 +158,10 @@ class OrderDetailsView extends StatelessWidget {
               color: Colors.red,
               size: 50,
             ),
-            Text("   Your order has been declined",style: TextStyle(fontWeight: FontWeight.bold,fontSize: 18),)
+            Text(
+              "   Your order has been declined",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            )
           ],
         )),
       );

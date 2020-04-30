@@ -31,6 +31,7 @@ class _GoGrocyAppState extends State<GoGrocyApp> {
       debugShowCheckedModeBanner: false,
       title: 'GoGrocy',
       theme: ThemeData(
+        scaffoldBackgroundColor: Colors.white,
         primarySwatch: Colors.green,
       ),
       navigatorKey: NavigationService.navigatorKey,

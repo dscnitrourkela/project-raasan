@@ -4,7 +4,7 @@ import 'package:gogrocy/ui/shared/colors.dart' as colors;
 
 class CartBill extends StatelessWidget {
 
-  cart_list cartList;
+  CartDataModel cartList;
   CartBill(this.cartList);
 
   @override
@@ -36,7 +36,7 @@ class CartBill extends StatelessWidget {
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
                           Text(cartList.cart[index].name),
-                          Text("Rs "+(int.parse(cartList.cart[index].quantity_ordered)*int.parse(cartList.cart[index].price)).toString(),style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text("Rs "+(int.parse(cartList.cart[index].quantityOrdered)*int.parse(cartList.cart[index].price)).toString(),style: TextStyle(fontWeight: FontWeight.bold),),
                         ],
                       );
                     }),

@@ -3,7 +3,7 @@ import 'package:flutter/material.dart';
 import 'package:gogrocy/core/viewModels/product_detail_model.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 import 'package:gogrocy/ui/views/base_view.dart';
-import 'package:gogrocy/ui/widgets/appbar.dart';
+import 'package:gogrocy/ui/widgets/appbars/main_appbar.dart';
 import 'package:gogrocy/ui/widgets/snackbars/custom_snackbar.dart';
 import 'package:gogrocy/ui/widgets/vertical_spaces.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
@@ -23,7 +23,7 @@ class ProductDetailView extends StatelessWidget {
       builder: (context, model, child) => SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
-          appBar: TopAppBar(),
+          appBar: MainAppBar(),
           body: Padding(
             padding: const EdgeInsets.all(8.0),
             child: ListView(
