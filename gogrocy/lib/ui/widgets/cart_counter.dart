@@ -29,7 +29,7 @@ class _CartCounterState extends State<CartCounter> {
   Widget build(BuildContext context) {
 
     Cart cart=widget.model.cartList.cart[widget.index];
-    int orderedQuanitity=int.parse(cart.quantity_ordered);
+    int orderedQuanitity=int.parse(cart.quantityOrdered);
     return Container(
       padding: new EdgeInsets.all(4.0),
       child: new Row(
@@ -42,8 +42,8 @@ class _CartCounterState extends State<CartCounter> {
             child: FlatButton(
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(3.0),
-                  side: BorderSide(color:colors.cartCounterBackground)),
-              color: colors.cartCounterBackground,
+                  side: BorderSide(color:colors.CART_COUNTER_BACKGROUND)),
+              color: colors.CART_COUNTER_BACKGROUND,
               textColor: Colors.black,
               padding: EdgeInsets.all(0.0),
               onPressed: () {
@@ -52,7 +52,7 @@ class _CartCounterState extends State<CartCounter> {
                   if(orderedQuanitity+count>0){
                     count--;
                     print("Decreased by $count");
-                    widget.model.getCartList(product_id: cart.product_id,quantity: count.toString());
+                    widget.model.getCartList(productId: cart.productId,quantity: count.toString());
                     count=0;
                   }
 
@@ -74,15 +74,15 @@ class _CartCounterState extends State<CartCounter> {
             child: FlatButton(
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(3.0),
-                  side: BorderSide(color:colors.cartCounterBackground)),
-              color: colors.cartCounterBackground,
+                  side: BorderSide(color:colors.CART_COUNTER_BACKGROUND)),
+              color: colors.CART_COUNTER_BACKGROUND,
               textColor: Colors.black,
               padding: EdgeInsets.all(2.0),
               onPressed: () {
                 setState(() {
                   if(orderedQuanitity+count<widget.maxQuantity){count++;
                   print("Increased by $count");
-                  widget.model.getCartList(product_id: cart.product_id,quantity: count.toString());
+                  widget.model.getCartList(productId: cart.productId,quantity: count.toString());
                   count=0;
                   }
 

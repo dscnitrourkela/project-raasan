@@ -42,15 +42,16 @@ class LoginModel extends BaseModel {
 
     var finalNumber = countryCode + " " + phoneNumber;
 
-    var result =
-        await authenticationService.verifyPhoneNumber(context, phoneNumber, countryCode);
+    var result = await authenticationService.verifyPhoneNumber(
+        context, phoneNumber, countryCode);
 
     setState(ViewState.Idle);
 
     if (result is bool) {
       if (result) {
         print('login success with phone number');
-        navigationService.navigateTo('awesome', arguments: SignUpArguments(phoneNumber, countryCode));
+        navigationService.navigateTo('awesome',
+            arguments: SignUpArguments(phoneNumber, countryCode));
       } else {
         print('login unsuccessful with phone number');
       }
@@ -74,7 +75,8 @@ class LoginModel extends BaseModel {
     if (result is bool) {
       if (result) {
         print('login success with otp');
-        navigationService.navigateTo('awesome', arguments: SignUpArguments(phoneNumber, countryCode));
+        navigationService.navigateTo('awesome',
+            arguments: SignUpArguments(phoneNumber, countryCode));
       } else {
         print('login unsuccessful with otp');
         Scaffold.of(context).showSnackBar(
@@ -98,6 +100,7 @@ class LoginModel extends BaseModel {
       @required String countryCode,
       @required String password}) async {
     setState(ViewState.Busy);
+    var citySelected = (await _sharedPrefsService.getCity()) != null;
     var user = await _apiService.loginApi(
         mobile: phoneNumber, countryCode: countryCode, password: password);
     setState(ViewState.Idle);
@@ -107,7 +110,9 @@ class LoginModel extends BaseModel {
       FireStoreService.addUser(
           phoneNumber: phoneNumber, countryCode: countryCode);
       print(_sharedPrefsService.setLoggedIn(true));
-      navigationService.navigateTo('home');
+      citySelected
+          ? navigationService.navigateTo('home')
+          : navigationService.navigateTo('city');
     } else {
       print(user.message);
       errorMessage = user.message;

@@ -5,7 +5,7 @@ import 'package:flutter/material.dart';
 import 'package:gogrocy/core/enums/connectivity_status.dart';
 import 'package:gogrocy/core/services/connectivity_service.dart';
 import 'package:gogrocy/core/viewModels/base_model.dart';
-import 'package:gogrocy/ui/widgets/snackbars/no_internet_snackbar.dart';
+import 'package:gogrocy/ui/widgets/snackbars/custom_snackbar.dart';
 import 'package:provider/provider.dart';
 
 import 'package:gogrocy/service_locator.dart';
@@ -49,7 +49,7 @@ class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
           }
           break;
         case ConnectivityStatus.Offline:
-          _offlineFlush.show(context);
+          if (!_offlineFlush.isShowing()) _offlineFlush.show(context);
           break;
       }
     });

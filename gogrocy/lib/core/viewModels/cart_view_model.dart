@@ -8,24 +8,24 @@ import 'package:gogrocy/service_locator.dart';
 class CartViewModel extends BaseModel{
   Apis _apis=locator<Apis>();
 
-  cart_list cartList;
-  cart_list intermediateCartList;
+  CartDataModel cartList;
+  CartDataModel intermediateCartList;
   CartEdit cartEditResponse;
 
-  Future getCartList({String product_id, String quantity}) async{
+  Future getCartList({String productId, String quantity}) async{
 
-    if(product_id==null){
+    if(productId==null){
       print("First time API called");
       setState(ViewState.Busy);
       cartList=await _apis.getCartList();
       setState(ViewState.Idle);
     }
-    if(product_id!=null){
+    if(productId!=null){
       print("Updating API calledUpdating API calledUpdating API calledUpdating API calledUpdating API called");
       intermediateCartList=cartList;
       setState(ViewState.Intermediate);
       print("Updating API calledUpdating API calledUpdating API calledUpdating API calledUpdating API called");
-      cartEditResponse=await _apis.editCartList(product_id: product_id, quantity: quantity);
+      cartEditResponse=await _apis.editCartList(product_id: productId, quantity: quantity);
       cartList=await _apis.getCartList();
       setState(ViewState.Idle);
 

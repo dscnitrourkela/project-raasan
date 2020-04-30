@@ -1,33 +1,33 @@
 import 'package:flutter/material.dart';
+import 'package:gogrocy/core/enums/viewstate.dart';
+import 'package:gogrocy/core/models/orders.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
 import 'package:gogrocy/core/viewModels/cart_view_model.dart';
+import 'package:gogrocy/ui/views/base_view.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
 import 'package:gogrocy/ui/widgets/cart_counter.dart';
 
-class CartList extends StatelessWidget {
+class OrderedProductList extends StatelessWidget {
   final String baseImgUrl =
-      constants.imageBaseUrl;
-  final CartViewModel model;
-  final CartDataModel cartList;
+      "https://res.cloudinary.com/gogrocy/image/upload/v1/";
+  List<Details> model;
 
-  CartList(this.model, this.cartList);
+  OrderedProductList(this.model);
 
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
-    CartDataModel usableCartList;
-    usableCartList = cartList;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
           shrinkWrap: true,
           physics: NeverScrollableScrollPhysics(),
-          itemCount: usableCartList.cart.length,
+          itemCount: model.length,
           itemBuilder: (context, index) {
-            int eachItemCost = int.parse(usableCartList.cart[index].price);
+            int eachItemCost = int.parse(model[index].price);
             int quantityOrdered =
-                int.parse(usableCartList.cart[index].quantityOrdered);
+            int.parse(model[index].orderQty);
             int totalCost = eachItemCost * quantityOrdered;
             return Padding(
               padding: const EdgeInsets.all(8.0),
@@ -40,15 +40,15 @@ class CartList extends StatelessWidget {
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black26),
                           borderRadius:
-                              BorderRadius.all(Radius.circular(10.0))),
+                          BorderRadius.all(Radius.circular(10.0))),
                       width: constants.CartConfig.imageWidth,
                       height: constants.CartConfig.imageHeight,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image(
                           image: NetworkImage(
-                              constants.imageBaseUrl +
-                                  usableCartList.cart[index].image),
+                              'https://res.cloudinary.com/gogrocy/image/upload/v1/' +
+                                  model[index].image),
                           fit: BoxFit.fitWidth,
                         ),
                       ),
@@ -61,24 +61,17 @@ class CartList extends StatelessWidget {
                       child: Column(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
-                          Text(usableCartList.cart[index].name,
+                          Text(model[index].name,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500, fontSize: 14.0)),
-                          Text('₹' + usableCartList.cart[index].price,
+                          Text('₹' + model[index].price,
                               style: TextStyle(
                                   fontWeight: FontWeight.w500,
                                   fontSize: 14.0,
                                   color: colors.PRIMARY_COLOR)),
                           Padding(
                             padding: const EdgeInsets.only(top: 20.0),
-                            child: CartCounter(
-                              maxQuantity: int.parse(
-                                  usableCartList.cart[index].quantity),
-                              orderedQuantity: int.parse(
-                                  usableCartList.cart[index].quantityOrdered),
-                              model: model,
-                              index: index,
-                            ),
+                            child: Text("Qty "+ quantityOrdered.toString()),
                           ),
                         ],
                       ),

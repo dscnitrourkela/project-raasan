@@ -12,13 +12,15 @@ class AuthenticationService {
   final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
   final NavigationService _navigationService = locator<NavigationService>();
 
-  Future verifyPhoneNumber(BuildContext context, String phoneNumber, String countryCode) async {
+  Future verifyPhoneNumber(
+      BuildContext context, String phoneNumber, String countryCode) async {
     final PhoneVerificationCompleted verificationCompleted =
         (AuthCredential credential) async {
       print('Verification Complete');
       await signInWithNumber(context, credential);
       print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
-      _navigationService.navigateTo('awesome', arguments: SignUpArguments(phoneNumber, countryCode));
+      _navigationService.navigateTo('awesome',
+          arguments: SignUpArguments(phoneNumber, countryCode));
     };
 
     final PhoneVerificationFailed verificationFailed =
@@ -54,7 +56,8 @@ class AuthenticationService {
     }
   }
 
-  Future signInWithNumber(BuildContext context, AuthCredential credential) async {
+  Future signInWithNumber(
+      BuildContext context, AuthCredential credential) async {
     try {
       FirebaseUser user =
           (await firebaseInstance.signInWithCredential(credential)).user;
@@ -78,12 +81,20 @@ class AuthenticationService {
     }
   }
 
+  Future<FirebaseUser> hasFirebaseUser() async {
+    var user = await firebaseInstance.currentUser();
+    if (user != null)
+      return user;
+    else
+      return null;
+  }
+
   Future<bool> isUserLoggedIn() async {
     var loggedIn = await _sharedPrefsService.hasUser();
     print(loggedIn);
-    if(loggedIn){
+    if (loggedIn) {
       return true;
-    }else{
+    } else {
       return false;
     }
   }

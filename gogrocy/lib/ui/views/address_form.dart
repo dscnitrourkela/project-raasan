@@ -1,41 +1,36 @@
+import 'dart:ui';
+
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart';
-import 'package:gogrocy/core/services/firestore_service.dart';
-import 'package:gogrocy/core/services/navigation_service.dart';
-import 'package:gogrocy/core/viewModels/signup_view_model.dart';
+import 'package:gogrocy/core/services/api.dart';
+import 'package:gogrocy/core/services/shared_prefs.dart';
+import 'package:gogrocy/core/viewModels/base_model.dart';
 import 'package:gogrocy/service_locator.dart';
-import 'package:gogrocy/ui/widgets/vertical_spaces.dart';
-import 'package:provider/provider.dart';
+import 'package:gogrocy/ui/views/base_view.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
+import 'package:gogrocy/ui/widgets/appbars/secondary_appbar.dart';
+import 'package:gogrocy/ui/widgets/vertical_spaces.dart';
 
-class DetailsForm extends StatefulWidget {
-  final womanScaleController;
-  final mobile;
-  final countryCode;
-
-  DetailsForm(this.womanScaleController, this.mobile, this.countryCode);
-
+class AddressForm extends StatefulWidget {
   @override
-  _DetailsFormState createState() => _DetailsFormState();
+  _AddressFormState createState() => _AddressFormState();
 }
 
-class _DetailsFormState extends State<DetailsForm> {
-  final NavigationService navigationService = locator<NavigationService>();
+GlobalKey<FormState> addressFormKey = GlobalKey<FormState>();
 
+class _AddressFormState extends State<AddressForm> {
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider<SignUpViewModel>(
-      create: (context) => SignUpViewModel(
-          controller: widget.womanScaleController,
-          mobile: widget.mobile,
-          countryCode: widget.countryCode),
-      child: Consumer<SignUpViewModel>(
-        builder: (context, model, child) => FadeTransition(
-          opacity: model.formFadeAnimation,
-          child: Form(
-            key: model.detailsFormKey,
-            child: Column(
-              crossAxisAlignment: CrossAxisAlignment.start,
+    return BaseView<AddressFormModel>(
+      builder: (context, model, child) => SafeArea(
+        child: Scaffold(
+          appBar: SecondaryAppBar("Add an address"),
+          body: Form(
+            key: addressFormKey,
+            child: ListView(
+              padding:
+                  EdgeInsets.symmetric(horizontal: 20.0 * constants.scaleRatio),
+              shrinkWrap: true,
               children: <Widget>[
                 Text('What do we call you?'),
                 VerticalSpaces.small10,
@@ -134,7 +129,7 @@ class _DetailsFormState extends State<DetailsForm> {
                       }
                     },
                     onFieldSubmitted: (value) {
-                      model.passwordNode.requestFocus();
+                      model.phoneNode.requestFocus();
                     },
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
@@ -146,90 +141,60 @@ class _DetailsFormState extends State<DetailsForm> {
                   ),
                 ),
                 VerticalSpaces.small20,
-                Text(
-                  'Create password',
-                  style: TextStyle(fontSize: 14.0 * constants.scaleRatio),
-                ),
-                VerticalSpaces.small10,
                 SizedBox(
                   width: constants.SignUpConfig.textFieldWidth,
                   child: TextFormField(
-                    focusNode: model.passwordNode,
-                    textInputAction: TextInputAction.next,
-                    onFieldSubmitted: (value) {
-                      model.cPasswordNode.requestFocus();
-                    },
-                    validator: (value) {
-                      if (value.length < 8) {
-                        return "Password should be at least 8 characters";
-                      } else {
-                        return null;
-                      }
-                    },
-                    controller: model.passwordController,
-                    obscureText: true,
-                    cursorColor: Colors.green,
-                    decoration: InputDecoration(
-                      border: OutlineInputBorder(
-                        borderSide: BorderSide(color: Colors.grey),
-                        borderRadius: BorderRadius.circular(10.0),
-                      ),
-                      hintText: 'Enter password',
-                    ),
-                  ),
-                ),
-                VerticalSpaces.small20,
-                SizedBox(
-                  width: constants.SignUpConfig.textFieldWidth,
-                  child: TextFormField(
-                    validator: (value) {
-                      if (value.isNotEmpty &&
-                          value != null &&
-                          value != model.passwordController.text) {
-                        model.passwordController.clear();
-                        model.cPasswordController.clear();
-                        return "Password should match in both fields";
-                      } else {
-                        return null;
-                      }
-                    },
-                    focusNode: model.cPasswordNode,
                     textInputAction: TextInputAction.done,
-                    controller: model.cPasswordController,
-                    obscureText: true,
-                    cursorColor: Colors.green,
+                    keyboardType: TextInputType.number,
+                    controller: model.phoneController,
+                    focusNode: model.phoneNode,
+                    validator: (value) {
+                      if (value.isEmpty) {
+                        return "Enter a correct phone number";
+                      } else {
+                        return null;
+                      }
+                    },
+                    onFieldSubmitted: (value) {},
                     decoration: InputDecoration(
                       border: OutlineInputBorder(
                         borderSide: BorderSide(color: Colors.grey),
                         borderRadius: BorderRadius.circular(10.0),
                       ),
-                      hintText: 'Confirm password',
+                      hintText: 'Phone Number',
                     ),
                   ),
                 ),
                 VerticalSpaces.small20,
-                SizedBox(
-                  width: constants.SignUpConfig.raisedButtonWidth,
-                  height: constants.SignUpConfig.raisedButtonHeight,
+                Padding(
+                  padding: EdgeInsets.symmetric(
+                      horizontal: 80 * constants.scaleRatio),
                   child: RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
                     color: Colors.black,
                     child: Text(
-                      'Done',
+                      'ADD',
                       style: TextStyle(
                           color: Colors.white,
                           fontFamily: 'Gilroy',
                           fontWeight: FontWeight.bold),
                     ),
                     onPressed: () async {
-                      assert(model.detailsFormKey.currentState.validate(),
-                          "details form error");
-                      var result = await model.signUpWithApi();
-                      if (result) {
-                        FireStoreService.addUser(
-                            phoneNumber: widget.mobile,
-                            countryCode: widget.countryCode);
+                      if (addressFormKey.currentState.validate()) {
+                        var result = await model.addAddress();
+                        if (result) {
+                          Navigator.of(context).pop();
+                          Flushbar(
+                            message: "Address added successfully.",
+                            duration: Duration(seconds: 1),
+                          ).show(context);
+                        } else
+                          Flushbar(
+                            message:
+                                "Error adding address. Please try again later.",
+                            duration: Duration(seconds: 3),
+                          ).show(context);
                       }
                     },
                   ),
@@ -241,5 +206,47 @@ class _DetailsFormState extends State<DetailsForm> {
         ),
       ),
     );
+  }
+}
+
+class AddressFormModel extends BaseModel {
+  final Apis _apiService = locator<Apis>();
+  final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
+
+  @override
+  void dispose() {
+    pinCodeController.dispose();
+    pinCodeNode.dispose();
+    cityNode.dispose();
+    nameNode.dispose();
+    addressNode.dispose();
+    phoneController.dispose();
+    phoneNode.dispose();
+    cityController.dispose();
+    addressController.dispose();
+    nameController.dispose();
+    super.dispose();
+  }
+
+  TextEditingController pinCodeController = TextEditingController();
+  FocusNode pinCodeNode = FocusNode();
+  TextEditingController cityController = TextEditingController();
+  FocusNode cityNode = FocusNode();
+  FocusNode nameNode = FocusNode();
+  TextEditingController nameController = TextEditingController();
+  TextEditingController addressController = TextEditingController();
+  FocusNode addressNode = FocusNode();
+  TextEditingController phoneController = TextEditingController();
+  FocusNode phoneNode = FocusNode();
+
+  Future<bool> addAddress() async {
+    var jwt = await _sharedPrefsService.getJWT();
+    return await _apiService.addAddressApi(
+        name: nameController.text,
+        locality: addressController.text,
+        city: cityController.text,
+        contact: phoneController.text,
+        pinCode: pinCodeController.text,
+        jwt: jwt);
   }
 }

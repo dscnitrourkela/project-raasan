@@ -1,15 +1,18 @@
 import 'package:flutter/material.dart';
+import 'package:gogrocy/core/models/orders.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
 
-class CartBill extends StatelessWidget {
+class OrderBill extends StatelessWidget {
 
-  CartDataModel cartList;
-  CartBill(this.cartList);
+  List<Details> orders;
+  OrderBill(this.orders);
+  String sumTotal;
+  String delivery;
 
   @override
   Widget build(BuildContext context) {
-    int delivery=cartList.sum>499?0:20;
+    String grandTotal=totalCost(orders);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(
@@ -30,13 +33,13 @@ class CartBill extends StatelessWidget {
                 SizedBox(height: 10,),
                 ListView.builder(
                     shrinkWrap: true,
-                    itemCount: cartList.cart.length,
+                    itemCount: orders.length,
                     itemBuilder: (context,index){
                       return Row(
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-                          Text(cartList.cart[index].name),
-                          Text("Rs "+(int.parse(cartList.cart[index].quantityOrdered)*int.parse(cartList.cart[index].price)).toString(),style: TextStyle(fontWeight: FontWeight.bold),),
+                          Text(orders[index].name),
+                          Text("Rs "+(int.parse(orders[index].orderQty)*int.parse(orders[index].price)).toString(),style: TextStyle(fontWeight: FontWeight.bold),),
                         ],
                       );
                     }),
@@ -47,7 +50,7 @@ class CartBill extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text("Sum total"),
-                        Text("Rs "+ cartList.sum.toString(),style: TextStyle(fontWeight: FontWeight.bold),)
+                        Text("Rs "+ sumTotal,style: TextStyle(fontWeight: FontWeight.bold),)
                       ],
 
                     ),
@@ -63,7 +66,7 @@ class CartBill extends StatelessWidget {
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: <Widget>[
                         Text("Grand Total", ),
-                        Text("Rs "+(cartList.sum+delivery).toString(),style:TextStyle(fontWeight: FontWeight.bold),)
+                        Text("Rs "+(grandTotal).toString(),style:TextStyle(fontWeight: FontWeight.bold),)
                       ],
 
                     )
@@ -76,4 +79,22 @@ class CartBill extends StatelessWidget {
       ),
     );
   }
+
+  String totalCost(List<Details> list) {
+    double totalCost = 0;
+    for (int i = 0; i < list.length; i++) {
+      totalCost += double.parse(list[i].price) * double.parse(list[i].orderQty);
+    }
+    if(totalCost>499){
+      delivery=0.toString();
+      sumTotal=totalCost.toString();
+    }
+    else {
+      totalCost+=20;
+      sumTotal=totalCost.toString();
+      delivery="20";
+    }
+    return "₹ " + totalCost.toString();
+  }
+
 }

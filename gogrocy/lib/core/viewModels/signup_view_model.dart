@@ -81,7 +81,8 @@ class SignUpViewModel extends BaseModel {
           cPassword: cPasswordController.text,
           mobile: mobile, locality: addressController.text, city: cityController.text, zip: pinCodeController.text);
       if (signUp.success) {
-        _navigationService.navigateTo('home');
+        _navigationService.goBack();
+        _navigationService.navigateTo('city');
         return true;
       } else {
         print(signUp.error);

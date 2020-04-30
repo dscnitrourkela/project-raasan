@@ -1,4 +1,4 @@
-import 'package:gogrocy/core/models/Address.dart';
+import 'package:gogrocy/core/models/address.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 
@@ -45,11 +45,14 @@ class SharedPrefsService {
     final SharedPreferences prefs = await SharedPreferences.getInstance();
     String city=prefs.getString("city");
     if(city==null){
-      List<Address> address=await apis.getAddresses();
-      setCity(address[0].city);
-      return address[0].city;
+      //List<Address> address=await apis.getAddresses();
+      //setCity(address[0].city);
+      return null;
     }
-    else return city;
+    else {
+      print(city);
+      return city;
+    }
   }
 
 }

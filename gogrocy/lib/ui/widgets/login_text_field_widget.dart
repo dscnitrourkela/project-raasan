@@ -6,7 +6,6 @@ import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/shared/colors.dart';
 import 'package:gogrocy/ui/widgets/otp_field.dart';
 import 'package:gogrocy/ui/widgets/snackbars.dart';
-import 'package:gogrocy/ui/widgets/vertical_spaces.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
@@ -118,7 +117,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                         icon: Icon(
                           Icons.check_circle_outline,
                           color:
-                              model.hasConnection ? primaryColor : Colors.grey,
+                              model.hasConnection ? PRIMARY_COLOR : Colors.grey,
                           size: 31.404 * constants.scaleRatio,
                         ),
                         onPressed: () async {
@@ -292,7 +291,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                                 countryCode: countryCodeController.text);
                             SystemChannels.textInput
                                 .invokeMethod('TextInput.hide');
-                            Navigator.of(context).pushNamed('awesome');
+                            //Navigator.of(context).pushNamed('awesome');
                           },
                         ),
                       ),
