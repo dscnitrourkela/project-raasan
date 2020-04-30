@@ -15,9 +15,7 @@ class GridList extends StatefulWidget {
 
 class _GridListState extends State<GridList> with AutomaticKeepAliveClientMixin{
   final ScrollController _scrollController = ScrollController();
-
-  final String baseImgUrl =
-      "https://res.cloudinary.com/gogrocy/image/upload/v1/";
+  final String baseImgUrl =constants.imageBaseUrl;
 
   final NavigationService _navigationService = locator<NavigationService>();
 

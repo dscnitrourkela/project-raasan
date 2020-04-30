@@ -6,6 +6,9 @@ double scaleRatio = mediaQueryData.devicePixelRatio/2.002;
 double screenHeight = mediaQueryData.size.height;
 double screenWidth = mediaQueryData.size.width;
 
+final String imageBaseUrl="https://res.cloudinary.com/gogrocy/image/upload/c_scale,w_120/v1/";
+
+
 class LoginConfig {
   static double loginTextFieldWidth = 280 * scaleRatio;
   static double titleTextSize = 22 * scaleRatio;

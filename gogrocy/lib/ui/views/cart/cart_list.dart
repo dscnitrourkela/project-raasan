@@ -9,7 +9,7 @@ import 'package:gogrocy/ui/widgets/cart_counter.dart';
 
 class CartList extends StatelessWidget {
   final String baseImgUrl =
-      "https://res.cloudinary.com/gogrocy/image/upload/v1/";
+      constants.imageBaseUrl;
   final CartViewModel model;
   final CartDataModel cartList;
 
@@ -49,7 +49,7 @@ class CartList extends StatelessWidget {
                         padding: const EdgeInsets.all(8.0),
                         child: Image(
                           image: NetworkImage(
-                              'https://res.cloudinary.com/gogrocy/image/upload/v1/' +
+                              constants.imageBaseUrl +
                                   usableCartList.cart[index].image),
                           fit: BoxFit.fitWidth,
                         ),

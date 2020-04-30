@@ -26,7 +26,7 @@ class Cart extends StatelessWidget {
           if (model.state == ViewState.Busy)
             return Center(child: CircularProgressIndicator());
           else if (model.state == ViewState.Intermediate) {
-            if (model.cartList.sum == 0) {
+            if (model.cartList.sum != 0) {
               return ListView(
                 shrinkWrap: true,
                 controller: scrollController,

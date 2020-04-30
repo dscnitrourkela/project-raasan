@@ -86,8 +86,7 @@ class _CartFooterState extends State<CartFooter> {
                     address_id: snapshot.data[selectedIndex].addressId,
                     callback: () {
                       print("Callback is succeeding");
-                      widget.model
-                          .getCartList(productId: null, quantity: null);
+                      widget.model.getCartList(productId: null, quantity: null);
                     }),
               ],
             );

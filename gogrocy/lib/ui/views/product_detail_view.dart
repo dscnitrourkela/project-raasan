@@ -32,49 +32,60 @@ class ProductDetailView extends StatelessWidget {
                   crossAxisAlignment: CrossAxisAlignment.start,
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: <Widget>[
-                    Row(
-                      crossAxisAlignment: CrossAxisAlignment.start,
-                      children: <Widget>[
-                        GestureDetector(
-                          onTap: () {
-                            Navigator.pop(context);
-                          },
-                          child: Padding(
-                            padding: const EdgeInsets.only(right: 8, top: 4),
-                            child: Icon(
-                              Icons.arrow_back_ios,
-                              size: 14,
+                    Flexible(
+                      flex: 9,
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          GestureDetector(
+                            onTap: () {
+                              Navigator.pop(context);
+                            },
+                            child: Padding(
+                              padding: const EdgeInsets.only(right: 8, top: 4),
+                              child: Icon(
+                                Icons.arrow_back_ios,
+                                size: 14,
+                              ),
                             ),
                           ),
-                        ),
-                        Column(
-                          crossAxisAlignment: CrossAxisAlignment.start,
-                          children: <Widget>[
-                            Text(
-                              product.name,
-                              style: TextStyle(
-                                  fontWeight: FontWeight.w500, fontSize: 24),
+                          Expanded(
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text(
+                                  product.name,
+                                  overflow: TextOverflow.ellipsis,
+                                  maxLines: 2,
+                                  style: TextStyle(
+                                      fontWeight: FontWeight.w500, fontSize: 24),
+                                ),
+                                Text(
+                                  ((product.quantity != "2") ||
+                                          (product.quantity != null)
+                                      ? "In Stock"
+                                      : "Not in stock"),
+                                  style: TextStyle(
+                                      color: colors.PRIMARY_COLOR,
+                                      fontSize: 16,
+                                      fontWeight: FontWeight.bold),
+                                )
+                              ],
                             ),
-                            Text(
-                              ((product.quantity != "2") ||
-                                      (product.quantity != null)
-                                  ? "In Stock"
-                                  : "Not in stock"),
-                              style: TextStyle(
-                                  color: colors.PRIMARY_COLOR,
-                                  fontSize: 16,
-                                  fontWeight: FontWeight.bold),
-                            )
-                          ],
-                        ),
-                      ],
+                          ),
+                        ],
+                      ),
                     ),
-                    Text(
-                      '₹ ' + product.price,
-                      style: TextStyle(
-                          color: colors.PRIMARY_COLOR,
-                          fontSize: 20,
-                          fontWeight: FontWeight.bold),
+                    Flexible(
+                      flex: 2,
+                      child: Text(
+                        '₹ ' + product.price,
+                        style: TextStyle(
+                            color: colors.PRIMARY_COLOR,
+                            fontSize: 20,
+                            fontWeight: FontWeight.bold),
+                      ),
                     )
                   ],
                 ),

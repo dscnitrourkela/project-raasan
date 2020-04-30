@@ -15,7 +15,6 @@ class Home extends StatelessWidget {
   final PageController controller = new PageController();
   final NavigationService _navigationService = locator<NavigationService>();
 
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -88,12 +87,12 @@ class Home extends StatelessWidget {
                   children: <Widget>[
                     CategoryList(),
                     Padding(
-                      padding: EdgeInsets.symmetric(horizontal: 12,vertical: 8),
+                      padding:
+                          EdgeInsets.symmetric(horizontal: 12, vertical: 8),
                       child: Row(
                         mainAxisSize: MainAxisSize.max,
                         mainAxisAlignment: MainAxisAlignment.spaceBetween,
                         children: <Widget>[
-
                           Text(
                             "Featured products",
                             style: TextStyle(
