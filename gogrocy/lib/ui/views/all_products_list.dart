@@ -3,7 +3,7 @@ import 'package:gogrocy/core/enums/viewstate.dart';
 import 'package:gogrocy/core/viewModels/allProducts_model.dart';
 import 'package:gogrocy/ui/views/base_view.dart';
 import 'package:gogrocy/ui/views/category/product_list.dart';
-import 'package:gogrocy/ui/widgets/appbar.dart';
+import 'package:gogrocy/ui/widgets/appbars/main_appbar.dart';
 
 class AllProductsView extends StatelessWidget {
 
@@ -11,7 +11,7 @@ class AllProductsView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: TopAppBar(),
+          appBar: MainAppBar(),
           body: BaseView<AllProductsModel>(
               onModelReady: (model){
                 model.getAllProducts();

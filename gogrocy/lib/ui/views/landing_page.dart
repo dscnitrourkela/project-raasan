@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gogrocy/core/services/bottom_appbar_provider.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 import 'package:gogrocy/ui/views/view_carousel.dart';
-import 'package:gogrocy/ui/widgets/appbar.dart';
+import 'package:gogrocy/ui/widgets/appbars/main_appbar.dart';
 import 'package:gogrocy/ui/widgets/bottom_navbar.dart';
 import 'package:provider/provider.dart';
 
@@ -17,7 +17,7 @@ class HomePageView extends StatelessWidget {
           return SafeArea(
             child: Scaffold(
               backgroundColor: Colors.white,
-              appBar: TopAppBar(),
+              appBar: MainAppBar(),
               body: ViewCarousel(),
               bottomNavigationBar: BottomNavBar(),
             ),

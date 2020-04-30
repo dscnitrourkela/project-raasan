@@ -36,7 +36,7 @@ class BottomNavBarConfig {
 }
 
 class AppBarConfig {
-  static double appBarHeight = 0.1008 * screenHeight;
+  static double appBarHeight = 83.0 * scaleRatio;
   static double appBarWidth = screenWidth;
   static double titleFontSize = 0.0267 * screenHeight;
   static double searchIconSize = 0.5 * appBarHeight;

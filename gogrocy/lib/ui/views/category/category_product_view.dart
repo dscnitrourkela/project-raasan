@@ -4,7 +4,7 @@ import 'package:gogrocy/core/viewModels/categoty_product_view_model.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/views/base_view.dart';
 import 'package:gogrocy/ui/views/category/product_list.dart';
-import 'package:gogrocy/ui/widgets/appbar.dart';
+import 'package:gogrocy/ui/widgets/appbars/main_appbar.dart';
 import 'package:gogrocy/core/services/api.dart';
 
 class ProductCategoryView extends StatelessWidget {
@@ -17,7 +17,7 @@ class ProductCategoryView extends StatelessWidget {
   Widget build(BuildContext context) {
     return SafeArea(
       child: Scaffold(
-          appBar: TopAppBar(),
+          appBar: MainAppBar(),
           body: BaseView<CategoryProductsViewModel>(onModelReady: (model) {
             model.getProductsByCategory(categoryId);
           }, builder: (context, model, child) {

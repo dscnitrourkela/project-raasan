@@ -1,4 +1,4 @@
-import 'package:gogrocy/core/models/Address.dart';
+import 'package:gogrocy/core/models/address.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:shared_preferences/shared_preferences.dart';
 

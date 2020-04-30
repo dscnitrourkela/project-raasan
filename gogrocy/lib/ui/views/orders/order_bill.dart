@@ -1,5 +1,5 @@
 import 'package:flutter/material.dart';
-import 'package:gogrocy/core/models/Orders.dart';
+import 'package:gogrocy/core/models/orders.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
 

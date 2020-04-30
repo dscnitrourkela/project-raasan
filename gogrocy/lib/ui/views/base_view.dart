@@ -49,7 +49,7 @@ class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
           }
           break;
         case ConnectivityStatus.Offline:
-          _offlineFlush.show(context);
+          if (!_offlineFlush.isShowing()) _offlineFlush.show(context);
           break;
       }
     });

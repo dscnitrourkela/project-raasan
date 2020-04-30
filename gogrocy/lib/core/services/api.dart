@@ -1,8 +1,8 @@
 import 'dart:convert';
 import 'dart:io';
 import 'package:flutter/material.dart';
-import 'package:gogrocy/core/models/Address.dart';
-import 'package:gogrocy/core/models/Orders.dart';
+import 'package:gogrocy/core/models/address.dart';
+import 'package:gogrocy/core/models/orders.dart';
 import 'package:gogrocy/core/models/ProductsByCity.dart';
 import 'package:gogrocy/core/models/cart_edit.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
@@ -27,9 +27,9 @@ const String editCart = baseUrl + "add_to_cart";
 const String getAddress = baseUrl + "getAddress";
 const String orderRequest = baseUrl + "placeOrder";
 const String getOrders = baseUrl + "getorders";
-const String getProductsByCityRequest=baseUrl+ "getProductsByCity";
-const String getCategoriesByCityRequest=baseUrl+"getProductsByCategory";
-const String getOrderRequest=baseUrl+"getorders";
+const String getProductsByCityRequest = baseUrl + "getProductsByCity";
+const String getCategoriesByCityRequest = baseUrl + "getProductsByCategory";
+const String getOrderRequest = baseUrl + "getorders";
 
 class Apis {
   final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
@@ -174,9 +174,9 @@ class Apis {
       (print("Network failure"));
   }
 
-  Future<bool> placeOrder({@required String address_id}) async {
+  Future<bool> placeOrder({@required String addressId}) async {
     Map<String, String> body = {
-      "address_id": address_id,
+      "address_id": addressId,
     };
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
@@ -195,13 +195,14 @@ class Apis {
 
   Future<ProductsByCity> getProductsByCity() async {
     Map<String, String> body = {
-      "city": await _sharedPrefsService.getCity(),  // TODO: Add city here from SharedPrefs
+      "city": await _sharedPrefsService.getCity(),
+      // TODO: Add city here from SharedPrefs
     };
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
     if (connectionState) //TODO: Add a proper else return
-        {
+    {
       var response = await client.post(getProductsByCityRequest,
           headers: {
             'Authorization': 'Bearer $jwt',
@@ -214,14 +215,15 @@ class Apis {
 
   Future<ProductsByCity> getProductsByCityCategory(String cat_id) async {
     Map<String, String> body = {
-      "city": await _sharedPrefsService.getCity(),  // TODO: Add city here from SharedPrefs
+      "city": await _sharedPrefsService.getCity(),
+      // TODO: Add city here from SharedPrefs
       "cat_id": cat_id
     };
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
     if (connectionState) //TODO: Add a proper else return
-        {
+    {
       var response = await client.post(getCategoriesByCityRequest,
           headers: {
             'Authorization': 'Bearer $jwt',
@@ -231,8 +233,6 @@ class Apis {
     } else
       return null;
   }
-
-
 
   Future<List<Product>> getAllProducts() async {
     var client = new http.Client();
@@ -257,15 +257,20 @@ class Apis {
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
     Map<String, String> body = {
-      "city": await _sharedPrefsService.getCity(),  // TODO: Add city here from SharedPrefs
+      "city": await _sharedPrefsService.getCity(),
+      // TODO: Add city here from SharedPrefs
     };
     if (connectionState) //TODO: Add a proper else return
-        {
+    {
       var products = List<Product>();
-      var response = await client.post(allProducts,headers: {
-        'Authorization': 'Bearer $jwt',
-      },body: body);
-      var parsed = json.decode(response.body,) as List<dynamic>;
+      var response = await client.post(allProducts,
+          headers: {
+            'Authorization': 'Bearer $jwt',
+          },
+          body: body);
+      var parsed = json.decode(
+        response.body,
+      ) as List<dynamic>;
       for (var product in parsed) {
         products.add(Product.fromJson(product));
       }
@@ -275,6 +280,7 @@ class Apis {
       return null;
     }
   }
+
   Future<List<Address>> getAddresses() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
@@ -292,8 +298,10 @@ class Apis {
         address.add(Address.fromJson(product));
       }
       return address;
-    } else
-      (print("Network failure"));
+    } else {
+      print('Network Failure');
+      return null;
+    }
   }
 
   Future<Orders> getOrders() async {
@@ -308,16 +316,14 @@ class Apis {
         'Authorization': 'Bearer $jwt',
       });
       return Orders.fromJson(json.decode(response.body));
-    } else
-      {
-        print("Network failure");
-        return null;
-      }
-
+    } else {
+      print("Network failure");
+      return null;
+    }
   }
 
-  Future<cart_list> getCartList() async {
-    var client = new http.Client();
+  Future<CartDataModel> getCartList() async {
+    var client = http.Client();
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
     if (connectionState) //TODO: Add a proper else return
@@ -327,9 +333,12 @@ class Apis {
         'Accept': 'application/json',
         'Authorization': 'Bearer $jwt',
       });
-      return cart_list.fromJson(json.decode(response.body));
-    } else
+      return CartDataModel.fromJson(json.decode(response.body));
+    } else{
       print("Network failure");
+      return null;
+    }
+
   }
 
   Future<bool> checkStatus() async {

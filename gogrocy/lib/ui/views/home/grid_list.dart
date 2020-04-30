@@ -4,17 +4,29 @@ import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
-class GridList extends StatelessWidget {
-  List<Result> resultList;
+class GridList extends StatefulWidget {
+  final List<Result> resultList;
 
   GridList(this.resultList);
+
+  @override
+  _GridListState createState() => _GridListState();
+}
+
+class _GridListState extends State<GridList> with AutomaticKeepAliveClientMixin{
   final ScrollController _scrollController = ScrollController();
+
   final String baseImgUrl =
       "https://res.cloudinary.com/gogrocy/image/upload/v1/";
+
   final NavigationService _navigationService = locator<NavigationService>();
 
   @override
+  bool get wantKeepAlive => true;
+
+  @override
   Widget build(BuildContext context) {
+    super.build(context);
     return GridView.builder(
         itemCount: 8,
         shrinkWrap: true,
@@ -24,7 +36,7 @@ class GridList extends StatelessWidget {
         itemBuilder: (context, index) {
           return InkWell(
             onTap: (){
-              _navigationService.navigateTo('product', arguments: resultList[index]);
+              _navigationService.navigateTo('product', arguments: widget.resultList[index]);
             },
             child: Padding(
               padding: const EdgeInsets.all(8.0),
@@ -47,7 +59,7 @@ class GridList extends StatelessWidget {
                               child: Image(
                                 image: NetworkImage(
                                     'https://res.cloudinary.com/gogrocy/image/upload/v1/' +
-                                        resultList[index].image),
+                                        widget.resultList[index].image),
                                 fit: BoxFit.fitWidth,
                               ),
                             ),
@@ -65,7 +77,7 @@ class GridList extends StatelessWidget {
                                 child: Padding(
                                   padding: const EdgeInsets.only(left: 8,top: 4,bottom: 4),
                                   child: Text(
-                                    resultList[index].name,
+                                    widget.resultList[index].name,
                                     style: TextStyle(
                                         fontSize: 14.0,
                                         fontWeight: FontWeight.w500),
@@ -76,7 +88,7 @@ class GridList extends StatelessWidget {
                               child: Padding(
                                 padding: const EdgeInsets.only(right: 8,top: 4,bottom: 4),
                                 child: Text(
-                                  '₹' + resultList[index].price,
+                                  '₹' + widget.resultList[index].price,
                                   style: TextStyle(
                                       fontSize: 18.0,
                                       color: Color(0xff5FD900),

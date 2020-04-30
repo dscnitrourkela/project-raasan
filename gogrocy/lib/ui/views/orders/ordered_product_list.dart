@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:gogrocy/core/enums/viewstate.dart';
-import 'package:gogrocy/core/models/Orders.dart';
+import 'package:gogrocy/core/models/orders.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
 import 'package:gogrocy/core/viewModels/cart_view_model.dart';
 import 'package:gogrocy/ui/views/base_view.dart';

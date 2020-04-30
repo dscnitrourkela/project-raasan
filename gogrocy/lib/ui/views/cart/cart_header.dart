@@ -10,7 +10,7 @@ import 'package:gogrocy/core/services/checkout_button_callback.dart' as checkout
 
 class CartHeader extends StatelessWidget {
 
-  cart_list model;
+  CartDataModel model;
   CheckoutButtonPressed checkoutButtonPressed;
 
   CartHeader({this.model,this.checkoutButtonPressed});
