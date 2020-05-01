@@ -15,7 +15,7 @@ class OrderView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return WillPopScope(
-      onWillPop: () async{
+      onWillPop: () async {
         _navigationService.goBack();
         return false;
       },
@@ -36,7 +36,8 @@ class OrderView extends StatelessWidget {
                   return Text("There are no orders available");
                 else
                   return Padding(
-                    padding: const EdgeInsets.only(left: 16, right: 16, top: 16),
+                    padding:
+                        const EdgeInsets.only(left: 16, right: 16, top: 16),
                     child: Column(
                       children: <Widget>[
                         Padding(
@@ -71,7 +72,8 @@ class OrderView extends StatelessWidget {
                                   child: Row(
                                     mainAxisAlignment:
                                         MainAxisAlignment.spaceBetween,
-                                    crossAxisAlignment: CrossAxisAlignment.start,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
                                     children: <Widget>[
                                       Column(
                                         crossAxisAlignment:
@@ -97,29 +99,34 @@ class OrderView extends StatelessWidget {
                                           Text(model.orders.result.bills[index]
                                                   .details.length
                                                   .toString() +
-                                              "  items")
+                                              "  items"),
+                                          //orderStatus(int.parse(model.orders.result.bills[index].details[0].status)),
                                         ],
                                       ),
                                       RawMaterialButton(
                                         elevation: 0.0,
                                         onPressed: () {
-                                          _navigationService.navigateTo(
-                                              'orderDetails',
-                                              arguments: OrderDetailsArguments(
-                                                  orders: model.orders,
-                                                  index: index));
+                                          if (model.orders.result.bills[index]
+                                                  .details[0].status !=
+                                              '-1')
+                                            _navigationService.navigateTo(
+                                                'orderDetails',
+                                                arguments:
+                                                    OrderDetailsArguments(
+                                                        orders: model.orders,
+                                                        index: index));
                                         },
                                         fillColor:
                                             colors.viewAllButtonBackground,
                                         shape: RoundedRectangleBorder(
-                                          borderRadius: BorderRadius.circular(3),
+                                          borderRadius:
+                                              BorderRadius.circular(3),
                                         ),
                                         child: Center(
                                           child: Text(
                                             'Details',
                                             style: TextStyle(
-                                                color:
-                                                    colors.viewAllButtonText,
+                                                color: colors.viewAllButtonText,
                                                 fontSize: 13.0,
                                                 fontWeight: FontWeight.w500),
                                           ),
@@ -189,5 +196,62 @@ class OrderView extends StatelessWidget {
     }
     totalCost = totalCost > 499 ? totalCost : totalCost + 20;
     return "₹ " + totalCost.toString();
+  }
+
+  Widget orderStatus(int statusCode) {
+    if (statusCode == 0) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+        child: (Row(
+          children: <Widget>[
+            Icon(
+              Icons.access_time,
+              color: Colors.orange,
+              size: 50,
+            ),
+            Text(
+              "   Your order is not approved yet",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            )
+          ],
+        )),
+      );
+    }
+    if (statusCode == 1) {
+      return Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+        child: (Row(
+          children: <Widget>[
+            Icon(
+              Icons.check,
+              color: colors.primaryColor,
+              size: 50,
+            ),
+            Text(
+              "   Your order is approved",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            )
+          ],
+        )),
+      );
+    }
+    if (statusCode == -1) {
+      Padding(
+        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
+        child: (Row(
+          children: <Widget>[
+            Icon(
+              Icons.error,
+              color: Colors.red,
+              size: 50,
+            ),
+            Text(
+              "   Your order has been declined",
+              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
+            )
+          ],
+        )),
+      );
+    }
   }
 }

@@ -1,5 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gogrocy/core/models/ProductsByCity.dart';
 import 'package:gogrocy/core/models/category_product_list_arguments.dart';
 import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/service_locator.dart';
@@ -11,8 +10,8 @@ class CategoryList extends StatefulWidget {
   _CategoryListState createState() => _CategoryListState();
 }
 
-class _CategoryListState extends State<CategoryList>  with AutomaticKeepAliveClientMixin{
-
+class _CategoryListState extends State<CategoryList>
+    with AutomaticKeepAliveClientMixin {
   @override
   bool get wantKeepAlive => true;
 
@@ -22,11 +21,9 @@ class _CategoryListState extends State<CategoryList>  with AutomaticKeepAliveCli
     "Grocery",
     "Food",
     "Rice and its products",
-    "Snacks",
     "Toiletries",
     "Detergents",
     "Pulses and Flour",
-    "Home Essentials",
     "Oil and Ghee",
     "Packed Foods",
     "Masala",
@@ -37,13 +34,11 @@ class _CategoryListState extends State<CategoryList>  with AutomaticKeepAliveCli
     "assets/images/grocery.png",
     "assets/images/pizza.png",
     "assets/images/rice.png",
-    "assets/images/snacks.png",
     "assets/images/toiletries.png",
     "assets/images/detergent.png",
     "assets/images/pulses.png",
-    "assets/images/grocery.png",
     "assets/images/oil_ghee.png",
-    "assets/images/packed.png",
+    "assets/images/snacks.png",
     "assets/images/masala.png",
     "assets/images/healthcare.png"
   ];
@@ -52,11 +47,9 @@ class _CategoryListState extends State<CategoryList>  with AutomaticKeepAliveCli
     "2",
     "6",
     "7",
-    "8",
     "9",
     "10",
     "12",
-    "13",
     "14",
     "15",
     "16",
@@ -76,9 +69,10 @@ class _CategoryListState extends State<CategoryList>  with AutomaticKeepAliveCli
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: GestureDetector(
-                onTap: (){
-                  _navigationService.navigateTo('category', arguments: CategoryProductListArgument(categoryTitle[index],catId[index]));
-
+                onTap: () {
+                  _navigationService.navigateTo('category',
+                      arguments: CategoryProductListArgument(
+                          categoryTitle[index], catId[index]));
                 },
                 child: Container(
                   width: constants.HomePageConfig.categoryListWidth,
@@ -110,7 +104,8 @@ class _CategoryListState extends State<CategoryList>  with AutomaticKeepAliveCli
                       Align(
                           alignment: Alignment(0, -1),
                           child: SizedBox(
-                            height: constants.HomePageConfig.categoryImageHeight,
+                            height:
+                                constants.HomePageConfig.categoryImageHeight,
                             width: constants.HomePageConfig.categoryImageWidth,
                             child: Image(
                               image: AssetImage(assetPaths[index]),

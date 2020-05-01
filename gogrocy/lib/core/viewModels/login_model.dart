@@ -69,12 +69,12 @@ class LoginModel extends BaseModel {
       @required String countryCode}) async {
     setState(ViewState.Busy);
 
-    var result = await authenticationService.signInWithOtp(
+    /*var result = */await authenticationService.signInWithOtp(
         authenticationService.verificationId, otp);
 
     setState(ViewState.Idle);
 
-    if (result is bool) {
+    /*if (result is bool) {
       if (result) {
         print('login success with otp');
         navigationService.goBack();
@@ -95,7 +95,7 @@ class LoginModel extends BaseModel {
           content: Text('Login Unsuccessful'),
         ),
       );
-    }
+    }*/
   }
 
   Future<User> loginWithApi(

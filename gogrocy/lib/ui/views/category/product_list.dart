@@ -6,7 +6,7 @@ import 'package:gogrocy/core/services/navigation_service.dart';
 
 class CategoryProductList extends StatelessWidget {
   final NavigationService _navigationService = locator<NavigationService>();
-  List<Result> productList;
+  final List<Result> productList;
 
   CategoryProductList(this.productList);
 
@@ -36,13 +36,17 @@ class CategoryProductList extends StatelessWidget {
                       Flexible(
                           flex: 4,
                           child: Padding(
-                            padding: const EdgeInsets.only(top: 8,left: 8,right: 8),
+                            padding: const EdgeInsets.only(
+                                top: 8, left: 8, right: 8),
                             child: ClipRRect(
-                              borderRadius: BorderRadius.all(Radius.circular(6.0)),
+                              borderRadius:
+                                  BorderRadius.all(Radius.circular(6.0)),
                               child: Container(
                                 color: Colors.black12,
-                                height: constants.HomePageConfig.productGridHeight *
-                                    4/6,
+                                height:
+                                    constants.HomePageConfig.productGridHeight *
+                                        4 /
+                                        6,
                                 width: double.maxFinite,
                                 child: Image(
                                   image: NetworkImage(

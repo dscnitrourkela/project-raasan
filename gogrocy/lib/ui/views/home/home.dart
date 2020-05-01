@@ -28,36 +28,38 @@ class Home extends StatelessWidget {
                 bottom: constants.HomePageConfig.lookingForPaddingBottom),
             child: Row(
               mainAxisSize: MainAxisSize.max,
-              mainAxisAlignment: MainAxisAlignment.spaceAround,
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
-                Column(
-                  mainAxisAlignment: MainAxisAlignment.start,
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Text(
-                      "What are you looking for?",
-                      style: TextStyle(
-                          fontFamily: 'Gilroy',
-                          fontSize: 18,
-                          fontWeight: FontWeight.bold),
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(top: 5.15),
-                      child: Container(
-                        width: constants.screenWidth * 0.52,
-                        child: Text(
-                          "Choose from the widest selection of local produce",
-                          style: TextStyle(
-                              fontFamily: 'Gilroy',
-                              fontSize: 13,
-                              fontWeight: FontWeight.normal),
-                        ),
+                Padding(
+                  padding: EdgeInsets.only(left: 16.0 * constants.scaleRatio),
+                  child: Column(
+                    mainAxisAlignment: MainAxisAlignment.start,
+                    crossAxisAlignment: CrossAxisAlignment.start,
+                    children: <Widget>[
+                      Text(
+                        "What are you looking for?",
+                        style: TextStyle(
+                            fontFamily: 'Gilroy',
+                            fontSize: 18,
+                            fontWeight: FontWeight.bold),
                       ),
-                    )
-                  ],
+                      Padding(
+                        padding: const EdgeInsets.only(top: 5.15),
+                        child: Container(
+                          width: constants.screenWidth * 0.52,
+                          child: Text(
+                            "Choose from the widest selection of local produce",
+                            style: TextStyle(
+                                fontFamily: 'Gilroy',
+                                fontSize: 13,
+                                fontWeight: FontWeight.normal),
+                          ),
+                        ),
+                      )
+                    ],
+                  ),
                 ),
-                RawMaterialButton(
+                /*RawMaterialButton(
                   elevation: 0.0,
                   onPressed: () {},
                   fillColor: colors.viewAllButtonBackground,
@@ -73,7 +75,7 @@ class Home extends StatelessWidget {
                           fontWeight: FontWeight.w500),
                     ),
                   ),
-                )
+                )*/
               ],
             ),
           ),

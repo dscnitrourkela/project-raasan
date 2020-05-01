@@ -52,7 +52,7 @@ class Account extends StatelessWidget {
                     color: Colors.black,
                   ),
                   title: 'Privacy Policy',
-                  route: 'privacy'),
+                  route: 'web'),
               options(
                 icon: Icon(
                   Icons.exit_to_app,
@@ -83,6 +83,9 @@ class Account extends StatelessWidget {
             _navigationService.goBack();
             _navigationService.navigateTo(route);
           }
+        } else if (route == 'web') {
+          _navigationService.navigateTo(route,
+              arguments: 'https://gogrocy.in/privacy_policy');
         } else {
           _navigationService.navigateTo(route);
         }

@@ -3,7 +3,11 @@ import 'package:gogrocy/ui/widgets/appbars/main_appbar.dart';
 import 'package:gogrocy/ui/widgets/text_widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
-class PrivacyPolicy extends StatelessWidget {
+class CustomWebView extends StatelessWidget {
+
+  final initialUrl;
+
+  CustomWebView(this.initialUrl);
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -19,7 +23,7 @@ class PrivacyPolicy extends StatelessWidget {
               }),
         ),
         body: WebView(
-          initialUrl: 'https://gogrocy.in/privacy_policy',
+          initialUrl: initialUrl,
           javascriptMode: JavascriptMode.unrestricted,
         ),
       ),

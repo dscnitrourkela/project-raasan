@@ -79,8 +79,9 @@ Route<dynamic> generateRoute(RouteSettings settings) {
                 orders: orderDetailsArguments.orders,
                 index: orderDetailsArguments.index,
               ));
-    case 'privacy':
-      return SlideLeftRoute(page: PrivacyPolicy());
+    case 'web':
+      String initialUrl = settings.arguments;
+      return SlideLeftRoute(page: CustomWebView(initialUrl));
     case 'address':
       return SlideLeftRoute(page: AddressView());
     case 'about':

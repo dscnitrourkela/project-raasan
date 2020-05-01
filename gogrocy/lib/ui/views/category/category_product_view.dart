@@ -1,15 +1,13 @@
 import 'package:flutter/material.dart';
 import 'package:gogrocy/core/enums/viewstate.dart';
 import 'package:gogrocy/core/viewModels/categoty_product_view_model.dart';
-import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/views/base_view.dart';
 import 'package:gogrocy/ui/views/category/product_list.dart';
 import 'package:gogrocy/ui/widgets/appbars/main_appbar.dart';
-import 'package:gogrocy/core/services/api.dart';
 
 class ProductCategoryView extends StatelessWidget {
-  String categoryTitle;
-  String categoryId;
+  final String categoryTitle;
+  final String categoryId;
 
   ProductCategoryView({this.categoryId, this.categoryTitle});
 

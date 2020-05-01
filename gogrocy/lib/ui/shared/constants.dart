@@ -2,19 +2,19 @@ import 'package:flutter/material.dart';
 
 bool isLoggedIn = false;
 MediaQueryData mediaQueryData;
-double scaleRatio = mediaQueryData.devicePixelRatio/2.002;
+double scaleRatio = mediaQueryData.devicePixelRatio / 2.002;
 double screenHeight = mediaQueryData.size.height;
 double screenWidth = mediaQueryData.size.width;
 
-final String imageBaseUrl="https://res.cloudinary.com/gogrocy/image/upload/c_scale,w_120/v1/";
-
+final String imageBaseUrl =
+    "https://res.cloudinary.com/gogrocy/image/upload/c_scale,w_120/v1/";
 
 class LoginConfig {
   static double loginTextFieldWidth = 280 * scaleRatio;
   static double titleTextSize = 22 * scaleRatio;
 }
 
-class SignUpConfig{
+class SignUpConfig {
   static double textFieldWidth = 275 * scaleRatio;
   static double raisedButtonWidth = 0.283 * screenWidth;
   static double raisedButtonHeight = 0.095 * screenWidth;
@@ -62,27 +62,24 @@ class HomePageConfig {
   static double lookingForPaddingTop = (37 / 823) * screenHeight;
   static double lookingForPaddingBottom = (20 / 823) * screenHeight;
 
-
   static double categoryListHeight = (168 / 823) * screenHeight;
   static double categoryListWidth = (168 / 411) * screenWidth;
   static double categoryBoxHeight = (86 / 823) * screenHeight;
   static double categoryBoxWidth = (168 / 411) * screenWidth;
-  static double categoryImageWidth=(144/411)*screenWidth;
-  static double categoryImageHeight=(115/823)*screenHeight;
+  static double categoryImageWidth = (144 / 411) * screenWidth;
+  static double categoryImageHeight = (115 / 823) * screenHeight;
 
   static double productGridWidth = (180 / 823) * screenHeight;
   static double productGridHeight = (171 / 411) * screenHeight;
 }
 
 class CartConfig {
+  static double checkoutButtonWidth = 105.17 * scaleRatio;
+  static double checkoutButtonHeight = 27.27 * scaleRatio;
 
-  static double checkoutButtonWidth=(106/411)*screenWidth;
-  static double checkoutButtonHeight=(28/823)*screenHeight;
+  static double imageWidth = (155 / 411) * screenWidth;
+  static double imageHeight = (147 / 823) * screenHeight;
 
-  static double imageWidth=(155/411)*screenWidth;
-  static double imageHeight=(147/823)*screenHeight;
-
-  static double counterHeight=(25.46/823)*screenHeight;
-  static double counterWidth=(91/411)*screenWidth;
-
+  static double counterHeight = (25.46 / 823) * screenHeight;
+  static double counterWidth = (91 / 411) * screenWidth;
 }

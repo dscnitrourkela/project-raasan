@@ -133,7 +133,7 @@ class CartHeader extends StatelessWidget {
           ],
         ),
         Positioned(
-            right: 0.0 * constants.scaleRatio,
+            right: 0.0,
             bottom: 0.0,
             child: Image(
               height: 137.67 * constants.scaleRatio,
@@ -186,7 +186,7 @@ class CartHeader extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 28.0, top: 12),
+              padding: EdgeInsets.only(left: 37.0 * constants.scaleRatio, top: 0.0 * constants.scaleRatio),
               child: RawMaterialButton(
                 elevation: 0.0,
                 focusElevation: 1,
@@ -206,7 +206,7 @@ class CartHeader extends StatelessWidget {
                       'Checkout Now',
                       style: TextStyle(
                           color: colors.cartButtonText,
-                          fontSize: 13.0 * constants.scaleRatio,
+                          fontSize: 12.0 * constants.scaleRatio,
                           fontWeight: FontWeight.bold),
                     ),
                   ),

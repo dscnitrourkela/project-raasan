@@ -31,7 +31,7 @@ class LoginView extends StatelessWidget {
                   Hero(tag: 'GoGrocy', child: TitleText()),
                   OnBoardingWidget(controller),
                   VerticalSpaces.small10,
-                  SmoothPageIndicator(
+                  /*SmoothPageIndicator(
                     controller: controller,
                     count: 3,
                     effect: WormEffect(
@@ -43,7 +43,7 @@ class LoginView extends StatelessWidget {
                       dotWidth: 0.024 * constants.screenWidth,
                       spacing: 0.024 * constants.screenWidth,
                     ),
-                  ),
+                  ),*/
                   VerticalSpaces.extraLarge,
                 ],
               ),

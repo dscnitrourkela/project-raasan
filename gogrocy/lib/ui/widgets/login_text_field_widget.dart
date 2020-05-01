@@ -1,6 +1,9 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gogrocy/core/enums/viewstate.dart';
+import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/core/viewModels/login_model.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/shared/colors.dart';
@@ -28,6 +31,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
   FocusNode phoneFocusNode;
   FocusNode otpFocusNode;
   FocusNode passwordFocusNode;
+  final _navigationService = locator<NavigationService>();
 
   @override
   void initState() {
@@ -90,7 +94,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                       validator: (value) {
                         return value.isNotEmpty ? null : "Enter country code";
                       },
-                      cursorColor: Colors.lightGreen,
+                      cursorColor: primaryColor,
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         hintText: 'Country code',
@@ -113,7 +117,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                     flex: 0,
                     child: Visibility(
                       visible: phoneFocusNode.hasFocus,
-                      child: IconButton(
+                      child: model.state==ViewState.Idle?IconButton(
                         icon: Icon(
                           Icons.check_circle_outline,
                           color:
@@ -161,7 +165,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                             }
                           }
                         },
-                      ),
+                      ):CircularProgressIndicator(),
                     ),
                   ),
                 ],
@@ -189,7 +193,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
             horizontal: 0.047 * constants.screenWidth,
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Text(
@@ -212,9 +216,10 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                           EdgeInsets.only(left: 6.318 * constants.scaleRatio),
                       child: Visibility(
                         visible: passwordFocusNode.hasFocus,
-                        child: IconButton(
+                        child: model.state==ViewState.Idle?IconButton(
                           icon: Icon(
-                            Icons.check_circle,
+                            Icons.check_circle_outline,
+                            color: primaryColor,
                             size: 0.094 * constants.screenWidth,
                           ),
                           onPressed: () async {
@@ -223,7 +228,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                                 countryCode: countryCodeController.text,
                                 password: passwordController.text);
                           },
-                        ),
+                        ):CircularProgressIndicator(),
                       ),
                     ),
                   ),
@@ -232,9 +237,13 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
               model.errorMessage != null
                   ? Text(model.errorMessage)
                   : Container(),
-              Text(
-                'You will receive an OTP for verifying this number',
-              ),
+              FlatButton(
+                child: Text('Forgot password?'),
+                onPressed: () {
+                  _navigationService.navigateTo('web',
+                      arguments: 'https://gogrocy.in/forgot_password');
+                },
+              )
             ],
           ),
         ),
@@ -261,6 +270,9 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
+              SizedBox(
+                height: 1.0,
+              ),
               Text(
                 'Enter OTP',
                 style: TextStyle(
@@ -275,18 +287,18 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                     child: otpTextField,
                   ),
                   Expanded(
-                    flex: 0,
+                    flex: 1,
                     child: Padding(
                       padding:
                           EdgeInsets.only(left: 0.019 * constants.screenWidth),
-                      child: Visibility(
-                        visible: otpFocusNode.hasFocus,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.check_circle,
-                            size: 0.094 * constants.screenWidth,
-                          ),
-                          onPressed: () {
+                      child: model.state==ViewState.Idle?IconButton(
+                        icon: Icon(
+                          Icons.check_circle_outline,
+                          color: primaryColor,
+                          size: 0.094 * constants.screenWidth,
+                        ),
+                        onPressed: () {
+                          if (otpController.text.length == 6) {
                             model.loginWithOtp(
                                 otp: otpController.text,
                                 phoneNumber: phoneController.text,
@@ -294,15 +306,27 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                                 countryCode: countryCodeController.text);
                             SystemChannels.textInput
                                 .invokeMethod('TextInput.hide');
-                            //Navigator.of(context).pushNamed('awesome');
-                          },
-                        ),
-                      ),
+                          } else {
+                            Flushbar(
+                              message: 'OTP must be 6 digits',
+                              duration: Duration(seconds: 2),
+                            ).show(context);
+                          }
+                          //Navigator.of(context).pushNamed('awesome');
+                        },
+                      ):CircularProgressIndicator(),
                     ),
-                  )
+                  ),
                 ],
               ),
-              Text('Retry'),
+              FlatButton(
+                child: Text('Retry'),
+                onPressed: () {
+                  controller.animateToPage(0,
+                      duration: Duration(milliseconds: 250),
+                      curve: Curves.easeOut);
+                },
+              ),
             ],
           ),
         ),
@@ -391,7 +415,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
           }
         }
       },
-      cursorColor: Colors.lightGreen,
+      cursorColor: primaryColor,
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
         hintText: 'Enter your mobile number',

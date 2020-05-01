@@ -1,13 +1,10 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:gogrocy/core/services/connectivity_service.dart';
 import 'package:gogrocy/core/services/navigation_service.dart';
-import 'package:gogrocy/core/services/shared_prefs.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/router.dart';
+import 'package:gogrocy/ui/shared/colors.dart';
 import 'package:gogrocy/ui/views/startup_view.dart';
-import 'package:gogrocy/ui/widgets/navbar/bottom_navbar.dart';
-import 'package:provider/provider.dart';
 
 void main() {
   setupLocator();
@@ -20,19 +17,36 @@ class GoGrocyApp extends StatefulWidget {
 }
 
 class _GoGrocyAppState extends State<GoGrocyApp> {
-  int _page = 0;
-  GlobalKey _bottomNavigationKey = GlobalKey();
+  //int _page = 0;
+  //GlobalKey _bottomNavigationKey = GlobalKey();
+
+  @override
+  void initState() {
+    super.initState();
+    SystemChrome.setEnabledSystemUIOverlays(
+        [SystemUiOverlay.bottom, SystemUiOverlay.top]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown]);
+  }
+
+  @override
+  void dispose() {
+    super.dispose();
+    SystemChrome.setPreferredOrientations([
+      DeviceOrientation.landscapeRight,
+      DeviceOrientation.landscapeLeft,
+      DeviceOrientation.portraitUp,
+      DeviceOrientation.portraitDown,
+    ]);
+  }
 
   @override
   Widget build(BuildContext context) {
-    SystemChrome.setEnabledSystemUIOverlays(
-        [SystemUiOverlay.bottom, SystemUiOverlay.top]);
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'GoGrocy',
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
-        primarySwatch: Colors.green,
+        primarySwatch: primaryColor,
       ),
       navigatorKey: NavigationService.navigatorKey,
       home: StartupView(),
