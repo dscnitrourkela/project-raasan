@@ -38,7 +38,7 @@ class CartHeader extends StatelessWidget {
                         children: <Widget>[
                           Text("Your Cart",
                           style: TextStyle(fontFamily: 'Gilroy',fontSize: 32.0,fontWeight: FontWeight.bold, color: colors.cartHeaderColor),),
-                          Text("Grand Total Rs"+model.sum.toString(),
+                          Text("Grand Total Rs"+ ((model.sum>499)?model.sum.toString().toString():(model.sum+20).toString()),
                           style: TextStyle(fontFamily: 'Gilroy',fontSize: 14.0,fontWeight: FontWeight.w600, color: colors.cartHeaderColor),),
 
                         ],
