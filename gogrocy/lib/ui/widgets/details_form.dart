@@ -229,6 +229,7 @@ class _DetailsFormState extends State<DetailsForm> {
                                 "details form error");
                             var result = await model.signUpWithApi();
                             if (result) {
+                              await
                               FireStoreService.addUser(
                                   phoneNumber: widget.mobile,
                                   countryCode: widget.countryCode);

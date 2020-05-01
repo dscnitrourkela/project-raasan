@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
+import 'package:gogrocy/ui/widgets/appbars/secondary_appbar.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 final String aboutText =
-    "Developer Student Clubs (DSC) is a Google Developers powered program for university students to learn mobile and web development skills. The clubs will be open to any student interested to learn, ranging from novice developers who are just starting, to advanced developers who want to further their skills. The clubs are intended as a space for students to try out new ideas and collaborate to solve mobile and web development problems.\n\n"
-    "DSC NIT Rourkela (DSC NITR) is a student chapter of DSC India with a motive to nurture developers within the community and solve real-life problems in the community through technology.";
+    "GoGrocy is an online grocery and essentials providing service operating in cities of Odisha, India (began at Jeypore, Koraput). This idea was executed amidst the outrageous pandemic caused by COVID-19 that has forced lives and livelihood to a standstill. While India has taken to a state-enforced lockdown, it has increasingly become difficult for people to avail necessary daily supplements from home. In this backdrop, GoGrocy provides home delivery to customers.\n\nWe are built to scale up and if you are a vendor or someone who can help us scale up to your region, contact us.\nMobile: +91 7978877258\nEmail: gogrocy33@gmail.com\nGSTIN: 21AHHPC7274N1Z7\nLegal Name: KIRANKUMAR SUBUDHI CHINNAR\nAddress: BIDYADHAR MARKET, BIDYADHAR MARKET, M.G.ROAD, JEYPORE, Koraput, Odisha, 764001";
 
 class AboutView extends StatelessWidget {
   @override
@@ -16,31 +16,10 @@ class AboutView extends StatelessWidget {
       child: SafeArea(
         child: Scaffold(
           backgroundColor: Colors.white,
-          appBar: AppBar(
-              backgroundColor: Color.fromRGBO(25, 39, 45, 1),
-              title: Text(
-                "Developer Info",
-                style:
-                    TextStyle(color: Colors.white, fontWeight: FontWeight.w600),
-              )),
+          appBar: SecondaryAppBar('About'),
           body: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Padding(
-                  padding: const EdgeInsets.only(top: 30, bottom: 10),
-                  child: Center(
-                    child: Text(
-                      "ABOUT",
-                      textAlign: TextAlign.center,
-                      style: TextStyle(
-                        fontSize: 24,
-                        fontWeight: FontWeight.w500,
-                        fontFamily: 'PfDin',
-                        color: Color.fromRGBO(74, 232, 190, 1),
-                      ),
-                    ),
-                  ),
-                ),
                 Image.asset(
                   'assets/dsc_logo.png',
                   fit: BoxFit.scaleDown,
@@ -63,13 +42,12 @@ class AboutView extends StatelessWidget {
                   padding: const EdgeInsets.only(top: 10, bottom: 10),
                   child: Center(
                     child: Text(
-                      "DEVELOPERS",
+                      "The Team",
                       textAlign: TextAlign.center,
                       style: TextStyle(
                         fontSize: 24,
                         fontWeight: FontWeight.w500,
-                        fontFamily: 'PfDin',
-                        color: Color.fromRGBO(74, 232, 190, 1),
+                        color: Colors.black,
                       ),
                     ),
                   ),
@@ -77,14 +55,23 @@ class AboutView extends StatelessWidget {
                 Column(
                   mainAxisAlignment: MainAxisAlignment.spaceEvenly,
                   children: <Widget>[
-                    contactCard(context, "Abel Mathew | DSC NITR Lead",
+                    contactCard(context, "V Girish | Founder", ""),
+                    contactCard(context, "Abel Mathew | App Developer",
                         "https://github.com/DesignrKnight"),
-                    contactCard(context, "Chinmay Kabi",
+                    contactCard(context, "Chinmay Kabi | App Developer",
                         "https://github.com/Chinmay-KB"),
-                    contactCard(
-                        context, "Smarak Das", "https://github.com/Thesmader"),
+                    contactCard(context, "Smarak Das | App Developer",
+                        "https://github.com/Thesmader"),
                     contactCard(context, "Reuben Abraham | Designer",
                         "http://reubenabraham.com/"),
+                    contactCard(context, "Saumyaa Suneja | Designer",
+                        "http://saumyaasuneja.com/"),
+                    contactCard(context, "Harish | Web Developer",
+                        "https://www.linkedin.com/in/harish-r-76272221/"),
+                    contactCard(context, "Vishal Rana | Web Developer",
+                        "https://www.linkedin.com/in/vishal36"),
+                    contactCard(context, "Sanjay Sanapathi | Web Developer",
+                        "https://www.linkedin.com/in/sanjay-kumar-sanapathi-a818a5151/")
                   ],
                 )
               ],

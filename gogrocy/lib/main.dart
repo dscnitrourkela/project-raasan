@@ -1,5 +1,6 @@
 import 'dart:ui';
 
+//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -13,6 +14,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 void main() {
+  //Crashlytics.instance.enableInDevMode = true;
+  //FlutterError.onError = Crashlytics.instance.recordFlutterError;
   setupLocator();
   runApp(GoGrocyApp());
 }
@@ -36,7 +39,7 @@ class _GoGrocyAppState extends State<GoGrocyApp> {
     }
     SystemChrome.setEnabledSystemUIOverlays(
         [SystemUiOverlay.bottom, SystemUiOverlay.top]);
-    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitDown]);
+    SystemChrome.setPreferredOrientations([DeviceOrientation.portraitUp]);
   }
 
   @override
@@ -100,7 +103,7 @@ class _GoGrocyAppState extends State<GoGrocyApp> {
     }
   }
 
-  _showVersionDialog(context, URL_PLAYSTORE) async {
+  _showVersionDialog(context, playStoreUrl) async {
     await showDialog<String>(
       context: context,
       barrierDismissible: false,
@@ -118,7 +121,7 @@ class _GoGrocyAppState extends State<GoGrocyApp> {
             actions: <Widget>[
               FlatButton(
                 child: Text(btnLabel),
-                onPressed: () => _launchURL(URL_PLAYSTORE),
+                onPressed: () => _launchURL(playStoreUrl),
               ),
               FlatButton(
                 child: Text(btnLabelCancel),

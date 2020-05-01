@@ -23,8 +23,6 @@ class BaseView<T extends BaseModel> extends StatefulWidget {
 class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
   T model = locator<T>();
 
-  bool isDisposed = false;
-
   StreamController<ConnectivityStatus> _connectivityStatusController =
       ConnectivityService().connectionStatusController;
 
@@ -53,17 +51,9 @@ class _BaseViewState<T extends BaseModel> extends State<BaseView<T>> {
           break;
       }
     });
-    if (!isDisposed) if (widget.onModelReady != null) {
+    if (widget.onModelReady != null) {
       widget.onModelReady(model);
     }
-  }
-
-  @override
-  void dispose() {
-    _connectivityStatusController.close();
-    model.dispose();
-    isDisposed = true;
-    super.dispose();
   }
 
   @override
