@@ -13,9 +13,10 @@ class StartupViewModel extends BaseModel {
     Future.delayed(Duration(seconds: 3), () {
       if (hasLoggedInUser) {
         //navigationService.goBack();
+        navigationService.goBack();
         navigationService.navigateTo('home');
       } else {
-        //navigationService.goBack();
+        navigationService.goBack();
         navigationService.navigateTo('login');
       }
     });

@@ -19,6 +19,7 @@ class AuthenticationService {
       print('Verification Complete');
       await signInWithNumber(context, credential);
       print("FFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFFF");
+      _navigationService.goBack();
       _navigationService.navigateTo('awesome',
           arguments: SignUpArguments(phoneNumber, countryCode));
     };

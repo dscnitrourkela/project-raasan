@@ -22,6 +22,7 @@ class LoginModel extends BaseModel {
 
   GlobalKey<ScaffoldState> loginScaffoldKey = GlobalKey<ScaffoldState>();
   GlobalKey<FormState> loginFormKey = GlobalKey<FormState>();
+  GlobalKey<FormState> phoneFormKey = GlobalKey<FormState>();
 
   String errorMessage;
 
@@ -40,7 +41,7 @@ class LoginModel extends BaseModel {
     //var internetStatus = await checkInternetStatus();
     setState(ViewState.Busy);
 
-    var finalNumber = countryCode + " " + phoneNumber;
+    //var finalNumber = countryCode + " " + phoneNumber;
 
     var result = await authenticationService.verifyPhoneNumber(
         context, phoneNumber, countryCode);
@@ -50,6 +51,7 @@ class LoginModel extends BaseModel {
     if (result is bool) {
       if (result) {
         print('login success with phone number');
+        navigationService.goBack();
         navigationService.navigateTo('awesome',
             arguments: SignUpArguments(phoneNumber, countryCode));
       } else {
@@ -75,6 +77,7 @@ class LoginModel extends BaseModel {
     if (result is bool) {
       if (result) {
         print('login success with otp');
+        navigationService.goBack();
         navigationService.navigateTo('awesome',
             arguments: SignUpArguments(phoneNumber, countryCode));
       } else {
@@ -110,9 +113,13 @@ class LoginModel extends BaseModel {
       FireStoreService.addUser(
           phoneNumber: phoneNumber, countryCode: countryCode);
       print(_sharedPrefsService.setLoggedIn(true));
-      citySelected
-          ? navigationService.navigateTo('home')
-          : navigationService.navigateTo('city');
+      if (citySelected) {
+        navigationService.goBack();
+        navigationService.navigateTo('home');
+      } else {
+        navigationService.goBack();
+        navigationService.navigateTo('city');
+      }
     } else {
       print(user.message);
       errorMessage = user.message;

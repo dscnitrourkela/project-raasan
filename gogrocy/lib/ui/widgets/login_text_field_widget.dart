@@ -121,41 +121,44 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                           size: 31.404 * constants.scaleRatio,
                         ),
                         onPressed: () async {
-                          if (await model.checkInternetStatus()) {
-                            var status = await model.getUserStatus(
-                                phoneController.text,
-                                countryCodeController.text);
-                            print(status);
-                            switch (status) {
-                              case '0':
-                                controller.animateToPage(1,
-                                    duration: Duration(milliseconds: 250),
-                                    curve: Curves.easeOut);
-                                model.loginWithPhone(
-                                    context: context,
-                                    phoneNumber: phoneController.text,
-                                    countryCode: countryCodeController.text);
-                                break;
-                              case '1':
-                                controller.animateToPage(1,
-                                    duration: Duration(milliseconds: 250),
-                                    curve: Curves.easeOut);
-                                model.loginWithPhone(
-                                    context: context,
-                                    phoneNumber: phoneController.text,
-                                    countryCode: countryCodeController.text);
-                                break;
-                              case '2':
-                                setState(() {
-                                  userSignedUp = true;
-                                });
-                                controller.animateToPage(1,
-                                    duration: Duration(milliseconds: 250),
-                                    curve: Curves.easeOut);
+                          if (model.loginFormKey.currentState.validate()) {
+                            if (model.hasConnection) {
+                              var status = await model.getUserStatus(
+                                  phoneController.text,
+                                  countryCodeController.text);
+                              print(status);
+                              switch (status) {
+                                case '0':
+                                  controller.animateToPage(1,
+                                      duration: Duration(milliseconds: 250),
+                                      curve: Curves.easeOut);
+                                  model.loginWithPhone(
+                                      context: context,
+                                      phoneNumber: phoneController.text,
+                                      countryCode: countryCodeController.text);
+
+                                  break;
+                                case '1':
+                                  controller.animateToPage(1,
+                                      duration: Duration(milliseconds: 250),
+                                      curve: Curves.easeOut);
+                                  model.loginWithPhone(
+                                      context: context,
+                                      phoneNumber: phoneController.text,
+                                      countryCode: countryCodeController.text);
+                                  break;
+                                case '2':
+                                  setState(() {
+                                    userSignedUp = true;
+                                  });
+                                  controller.animateToPage(1,
+                                      duration: Duration(milliseconds: 250),
+                                      curve: Curves.easeOut);
+                              }
+                            } else {
+                              model.loginScaffoldKey.currentState
+                                  .showSnackBar(SnackBars.noInternetSnackBar);
                             }
-                          } else {
-                            model.loginScaffoldKey.currentState
-                                .showSnackBar(SnackBars.noInternetSnackBar);
                           }
                         },
                       ),
@@ -330,16 +333,28 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
 
   TextFormField mobileTextField(LoginModel model) {
     return TextFormField(
+      enableInteractiveSelection: false,
+      key: model.phoneFormKey,
       focusNode: phoneFocusNode,
       textAlign: TextAlign.center,
       controller: phoneController,
       textInputAction: TextInputAction.next,
       validator: (value) {
-        return value.length < 4 ? "Enter a correct mobile number" : null;
+        if (value.length > 3 && value.length < 13) {
+          String pattern = "[0-9]+\$";
+          RegExp regExp = RegExp(pattern);
+          if (regExp.hasMatch(value)) {
+            return null;
+          } else {
+            return "Enter a correct phone number";
+          }
+        } else {
+          return "Enter correct phone number";
+        }
       },
       onFieldSubmitted: (value) async {
         if (model.loginFormKey.currentState.validate()) {
-          if (await model.checkInternetStatus()) {
+          if (model.hasConnection) {
             var status = await model.getUserStatus(
                 phoneController.text, countryCodeController.text);
             print(status);
