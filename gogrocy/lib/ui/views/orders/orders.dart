@@ -8,6 +8,7 @@ import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/views/base_view.dart';
 import 'package:gogrocy/ui/widgets/appbars/main_appbar.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
+import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 class OrderView extends StatelessWidget {
   final NavigationService _navigationService = locator<NavigationService>();
@@ -33,7 +34,7 @@ class OrderView extends StatelessWidget {
                 );
               else {
                 if (model.orders.empty)
-                  return Text("There are no orders available");
+                  return emptyOrders();
                 else
                   return Padding(
                     padding:
@@ -253,5 +254,30 @@ class OrderView extends StatelessWidget {
         )),
       );
     }
+  }
+
+  Widget emptyOrders() {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+              width: 60.0 * constants.scaleRatio,
+              height: 60.0 * constants.scaleRatio,
+              child: Image(
+                image: AssetImage("assets/images/no_products.png"),
+              )),
+          Text(
+            "You don't have any orders",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 18.0,
+                fontFamily: 'Gilroy',
+                fontWeight: FontWeight.bold),
+          )
+        ],
+      ),
+    );
   }
 }

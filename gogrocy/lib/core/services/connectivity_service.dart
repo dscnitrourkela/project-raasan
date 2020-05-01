@@ -31,7 +31,7 @@ class ConnectivityService {
     }
   }
 
-  void disposeStream(){
+  void disposeStream() {
     _connectionStatusController.close();
   }
 }

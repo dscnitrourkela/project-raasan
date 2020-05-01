@@ -33,18 +33,17 @@ class SignUpViewModel extends BaseModel {
 
   final Apis _apiService = locator<Apis>();
   final NavigationService _navigationService = locator<NavigationService>();
-  final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
 
   final GlobalKey<FormState> detailsFormKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> signUpScaffoldKey = GlobalKey<ScaffoldState>();
 
   static SignUpView awesomeAnimationView = locator<SignUpView>();
 
-  SignUpViewModel({
-    @required this.controller,
-    @required this.mobile,
-    @required this.countryCode
-  })  : womanScaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
+  SignUpViewModel(
+      {@required this.controller,
+      @required this.mobile,
+      @required this.countryCode})
+      : womanScaleAnimation = Tween<double>(begin: 0.0, end: 1.0).animate(
           CurvedAnimation(
             parent: controller,
             curve: Interval(0.0, 0.3, curve: Curves.easeOut),
@@ -74,21 +73,24 @@ class SignUpViewModel extends BaseModel {
         );
 
   Future<bool> signUpWithApi() async {
-      var signUp = await _apiService.signUpApi(
-          name: nameController.text,
-          countryCode: countryCode,
-          password: passwordController.text,
-          cPassword: cPasswordController.text,
-          mobile: mobile, locality: addressController.text, city: cityController.text, zip: pinCodeController.text);
-      if (signUp.success) {
-        _navigationService.goBack();
-        _navigationService.navigateTo('city');
-        return true;
-      } else {
-        print(signUp.error);
-        signUpScaffoldKey.currentState
-            .showSnackBar(SnackBar(content: Text("error")));
-        return false;
-      }
+    var signUp = await _apiService.signUpApi(
+        name: nameController.text,
+        countryCode: countryCode,
+        password: passwordController.text,
+        cPassword: cPasswordController.text,
+        mobile: mobile,
+        locality: addressController.text,
+        city: cityController.text,
+        zip: pinCodeController.text);
+    if (signUp.success) {
+      _navigationService.goBack();
+      _navigationService.navigateTo('city');
+      return true;
+    } else {
+      print(signUp.error);
+      signUpScaffoldKey.currentState
+          .showSnackBar(SnackBar(content: Text("error")));
+      return false;
+    }
   }
 }

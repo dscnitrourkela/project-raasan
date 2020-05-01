@@ -8,6 +8,8 @@ double screenWidth = mediaQueryData.size.width;
 
 final String imageBaseUrl =
     "https://res.cloudinary.com/gogrocy/image/upload/c_scale,w_120/v1/";
+final String playStoreUrl =
+    "https://play.google.com/store/apps/details?id=in.gogrocy.gogrocy";
 
 class LoginConfig {
   static double loginTextFieldWidth = 280 * scaleRatio;
@@ -39,7 +41,7 @@ class BottomNavBarConfig {
 }
 
 class AppBarConfig {
-  static double appBarHeight = 83.0 * scaleRatio;
+  static double appBarHeight = 63.0 * scaleRatio;
   static double appBarWidth = screenWidth;
   static double titleFontSize = 0.0267 * screenHeight;
   static double searchIconSize = 0.5 * appBarHeight;

@@ -1,10 +1,8 @@
 import 'package:gogrocy/core/models/orders.dart';
 
-class OrderDetailsArguments{
+class OrderDetailsArguments {
   Orders orders;
   int index;
 
-  OrderDetailsArguments({this.orders,this.index});
-
-
+  OrderDetailsArguments({this.orders, this.index});
 }

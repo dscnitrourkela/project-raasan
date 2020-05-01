@@ -1,6 +1,4 @@
 import 'package:flutter/material.dart';
-import 'package:gogrocy/core/services/authentication_service.dart';
-import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/shared/colors.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;

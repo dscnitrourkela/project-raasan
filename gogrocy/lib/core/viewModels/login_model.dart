@@ -69,7 +69,8 @@ class LoginModel extends BaseModel {
       @required String countryCode}) async {
     setState(ViewState.Busy);
 
-    /*var result = */await authenticationService.signInWithOtp(
+    /*var result = */
+    await authenticationService.signInWithOtp(
         authenticationService.verificationId, otp);
 
     setState(ViewState.Idle);

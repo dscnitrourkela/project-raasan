@@ -50,9 +50,9 @@ Widget onlineSnackBar() => Flushbar(
     );
 
 Widget infoSnackBar(
-        {@required String message,
-        @required IconData iconData,
-        @required iconColor}) {
+    {@required String message,
+    @required IconData iconData,
+    @required iconColor}) {
   return Flushbar(
     messageText: Text(
       message,

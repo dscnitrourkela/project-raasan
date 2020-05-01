@@ -86,10 +86,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return SlideLeftRoute(page: AddressView());
     case 'about':
       return SlideLeftRoute(page: AboutView());
-      OrderDetailsArguments orderDetailsArguments=settings.arguments;
-      return MaterialPageRoute(builder: (context)=>OrderDetailsView(orders: orderDetailsArguments.orders,index: orderDetailsArguments.index,));
     case 'search':
-      return MaterialPageRoute(builder: (context)=>SearchView());
+      return MaterialPageRoute(builder: (context) => SearchView());
     default:
       return MaterialPageRoute(
           builder: (context) => Scaffold(

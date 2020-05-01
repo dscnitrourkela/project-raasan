@@ -7,8 +7,6 @@ import 'package:gogrocy/ui/shared/colors.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 import 'package:gogrocy/ui/views/address_form.dart';
 import 'package:gogrocy/ui/views/base_view.dart';
-import 'package:gogrocy/ui/views/orders/orders.dart';
-import 'package:gogrocy/ui/views/privacy_policy.dart';
 import 'package:gogrocy/ui/widgets/appbars/secondary_appbar.dart';
 
 class AddressView extends StatefulWidget {

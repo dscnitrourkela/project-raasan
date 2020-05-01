@@ -99,6 +99,7 @@ class Cart extends StatelessWidget {
               )),
           Text(
             "Your cart is Empty!",
+            textAlign: TextAlign.center,
             style: TextStyle(
                 fontSize: 18.0,
                 fontFamily: 'Gilroy',
@@ -171,7 +172,10 @@ class CartHeader extends StatelessWidget {
                                 color: colors.cartHeaderColor),
                           ),
                           Text(
-                            "Grand Total ₹" + model.sum.toString(),
+                            "Grand Total ₹" +
+                                ((model.sum > 499)
+                                    ? model.sum.toString().toString()
+                                    : (model.sum + 20).toString()),
                             style: TextStyle(
                                 fontFamily: 'Gilroy',
                                 fontSize: 12.0 * constants.scaleRatio,
@@ -186,7 +190,9 @@ class CartHeader extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: EdgeInsets.only(left: 37.0 * constants.scaleRatio, top: 0.0 * constants.scaleRatio),
+              padding: EdgeInsets.only(
+                  left: 37.0 * constants.scaleRatio,
+                  top: 0.0 * constants.scaleRatio),
               child: RawMaterialButton(
                 elevation: 0.0,
                 focusElevation: 1,

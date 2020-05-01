@@ -23,7 +23,10 @@ class CitySelectionView extends StatelessWidget {
             children: <Widget>[
               VerticalSpaces.small20,
               Center(
-                child: Text('Select City', style: TextStyle(fontSize: 20.0 * constants.scaleRatio),),
+                child: Text(
+                  'Select City',
+                  style: TextStyle(fontSize: 20.0 * constants.scaleRatio),
+                ),
               ),
               RadioListTile(
                 title: Text("Jeypore"),
@@ -46,7 +49,9 @@ class CitySelectionView extends StatelessWidget {
                 value: 2,
               ),
               Padding(
-                padding: EdgeInsets.symmetric(horizontal: 100.0 * constants.scaleRatio,vertical: 50.0 * constants.scaleRatio),
+                padding: EdgeInsets.symmetric(
+                    horizontal: 100.0 * constants.scaleRatio,
+                    vertical: 50.0 * constants.scaleRatio),
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0)),

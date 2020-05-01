@@ -1,8 +1,8 @@
 import 'package:gogrocy/core/models/ProductsByCity.dart';
 
-class CategoryProductListArgument{
+class CategoryProductListArgument {
   String categoryTitle;
   String categoryId;
 
-  CategoryProductListArgument(this.categoryTitle,this.categoryId);
+  CategoryProductListArgument(this.categoryTitle, this.categoryId);
 }

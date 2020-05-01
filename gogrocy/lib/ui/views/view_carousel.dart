@@ -19,7 +19,7 @@ class ViewCarousel extends StatelessWidget {
     return ChangeNotifierProvider<BottomNavBarProvider>(
       create: (context) => BottomNavBarProvider(),
       child: Consumer<BottomNavBarProvider>(
-        builder: (context, model, child){
+        builder: (context, model, child) {
           return PageView(
             children: <Widget>[
               Cart(),
@@ -33,6 +33,7 @@ class ViewCarousel extends StatelessWidget {
             },*/
           );
         },
-      ),);
-    }
+      ),
+    );
   }
+}

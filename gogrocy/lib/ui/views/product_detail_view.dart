@@ -12,8 +12,14 @@ import 'package:gogrocy/core/models/ProductsByCity.dart';
 class ProductDetailView extends StatelessWidget {
   final Result product;
 
-  Flushbar successSnackbar=infoSnackBar(message: "Added to cart", iconData: Icons.check, iconColor: colors.primaryColor);
-  Flushbar failureSnackbar=infoSnackBar(message: "Could not add to cart", iconData: Icons.error, iconColor: Colors.red);
+  Flushbar successSnackbar = infoSnackBar(
+      message: "Added to cart",
+      iconData: Icons.check,
+      iconColor: colors.primaryColor);
+  Flushbar failureSnackbar = infoSnackBar(
+      message: "Could not add to cart",
+      iconData: Icons.error,
+      iconColor: Colors.red);
 
   ProductDetailView(this.product);
 
@@ -59,7 +65,8 @@ class ProductDetailView extends StatelessWidget {
                                   overflow: TextOverflow.ellipsis,
                                   maxLines: 2,
                                   style: TextStyle(
-                                      fontWeight: FontWeight.w500, fontSize: 24),
+                                      fontWeight: FontWeight.w500,
+                                      fontSize: 24),
                                 ),
                                 Text(
                                   ((product.quantity != "2") ||

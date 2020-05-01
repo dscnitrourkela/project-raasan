@@ -1,5 +1,3 @@
-import 'package:flutter/cupertino.dart';
-import 'package:flutter/material.dart';
 import 'package:gogrocy/core/enums/viewstate.dart';
 import 'package:gogrocy/core/models/address.dart';
 import 'package:gogrocy/core/services/api.dart';

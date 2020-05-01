@@ -1,14 +1,11 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'package:gogrocy/core/models/cart_list.dart';
 import 'package:gogrocy/core/services/authentication_service.dart';
 import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/core/services/shared_prefs.dart';
 import 'package:gogrocy/core/viewModels/cart_view_model.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/views/base_view.dart';
-import 'package:gogrocy/ui/views/cart/cart.dart';
-import 'package:gogrocy/ui/shared/colors.dart' as colors;
 
 class Account extends StatelessWidget {
   final _navigationService = locator<NavigationService>();
@@ -43,7 +40,10 @@ class Account extends StatelessWidget {
                   title: "Addresses",
                   route: 'address'),
               options(
-                  icon: Image.asset('assets/images/orders.png'),
+                  icon: Icon(
+                    Icons.credit_card,
+                    color: Colors.black,
+                  ),
                   title: "Orders",
                   route: 'orders'),
               options(

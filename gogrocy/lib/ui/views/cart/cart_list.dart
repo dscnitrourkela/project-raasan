@@ -6,8 +6,7 @@ import 'package:gogrocy/ui/shared/colors.dart' as colors;
 import 'package:gogrocy/ui/widgets/cart_counter.dart';
 
 class CartList extends StatelessWidget {
-  final String baseImgUrl =
-      constants.imageBaseUrl;
+  final String baseImgUrl = constants.imageBaseUrl;
   final CartViewModel model;
   final CartDataModel cartList;
 
@@ -33,6 +32,7 @@ class CartList extends StatelessWidget {
               padding: const EdgeInsets.all(8.0),
               child: Row(
                 crossAxisAlignment: CrossAxisAlignment.start,
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 children: <Widget>[
                   Flexible(
                     flex: 3,
@@ -46,9 +46,8 @@ class CartList extends StatelessWidget {
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
                         child: Image(
-                          image: NetworkImage(
-                              constants.imageBaseUrl +
-                                  usableCartList.cart[index].image),
+                          image: NetworkImage(constants.imageBaseUrl +
+                              usableCartList.cart[index].image),
                           fit: BoxFit.fitWidth,
                         ),
                       ),

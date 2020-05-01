@@ -1,13 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:gogrocy/ui/widgets/appbars/main_appbar.dart';
-import 'package:gogrocy/ui/widgets/text_widgets.dart';
 import 'package:webview_flutter/webview_flutter.dart';
 
 class CustomWebView extends StatelessWidget {
-
   final initialUrl;
 
   CustomWebView(this.initialUrl);
+
   @override
   Widget build(BuildContext context) {
     return SafeArea(
@@ -16,7 +14,7 @@ class CustomWebView extends StatelessWidget {
           elevation: 0,
           backgroundColor: Colors.white,
           leading: IconButton(
-            color: Colors.black,
+              color: Colors.black,
               icon: Icon(Icons.arrow_back_ios),
               onPressed: () {
                 Navigator.of(context).pop();

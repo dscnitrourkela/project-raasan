@@ -21,7 +21,7 @@ class FireStoreService {
       } else {
         docReference.setData(data);
       }
-    }else{
+    } else {
       docReference.setData(data);
     }
   }

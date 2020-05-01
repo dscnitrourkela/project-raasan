@@ -8,7 +8,6 @@ import 'package:gogrocy/ui/widgets/onboarding_widget.dart';
 import 'package:gogrocy/ui/widgets/text_widgets.dart';
 import 'package:gogrocy/ui/widgets/vertical_spaces.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class LoginView extends StatelessWidget {
   final controller = PageController();

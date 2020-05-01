@@ -6,8 +6,8 @@ import 'package:gogrocy/ui/widgets/appbars/main_appbar.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
 
 class OrderDetailsView extends StatelessWidget {
-  Orders orders;
-  int index;
+  final Orders orders;
+  final int index;
 
   OrderDetailsView({this.orders, this.index});
 

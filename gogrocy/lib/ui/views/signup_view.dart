@@ -3,7 +3,6 @@ import 'package:flutter/material.dart';
 import 'package:gogrocy/core/viewModels/signup_view_model.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
-import 'package:gogrocy/ui/views/base_view.dart';
 import 'package:gogrocy/ui/widgets/details_form.dart';
 import 'package:provider/provider.dart';
 
