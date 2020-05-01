@@ -53,6 +53,7 @@ class ProductCategoryView extends StatelessWidget {
                               fontSize: 18.0,
                               fontFamily: 'Gilroy',
                               fontWeight: FontWeight.bold),
+                          textAlign: TextAlign.center,
                         ),
                       )
                     ],

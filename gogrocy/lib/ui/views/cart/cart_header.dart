@@ -49,7 +49,7 @@ class CartHeader extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 28.0,top: 12),
+              padding: const EdgeInsets.only(left:28.0,top: 12),
               child: RawMaterialButton(
                 elevation: 0.0,
                 focusElevation: 1,
@@ -61,17 +61,13 @@ class CartHeader extends StatelessWidget {
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(3),
                 ),
-                child: SizedBox(
-                  width: constants.CartConfig.checkoutButtonWidth,
-                  height: constants.CartConfig.checkoutButtonHeight,
-                  child: Center(
-                    child: Text(
-                      'Checkout Now',
-                      style: TextStyle(
-                          color: colors.cartButtonText,
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.bold),
-                    ),
+                child: Center(
+                  child: Text(
+                    'Checkout',
+                    style: TextStyle(
+                        color: colors.cartButtonText,
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),

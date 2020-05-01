@@ -3,6 +3,7 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:gogrocy/core/models/address.dart';
 import 'package:gogrocy/core/services/api.dart';
+import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/core/viewModels/cart_view_model.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
@@ -40,7 +41,7 @@ class _CartFooterState extends State<CartFooter> {
                   color: Color.fromRGBO(255, 248, 211, 0.3),
                   child: Padding(
                     padding: const EdgeInsets.symmetric(
-                        horizontal: 22, vertical: 22),
+                        horizontal: 28, vertical: 22),
                     child: Column(
                       crossAxisAlignment: CrossAxisAlignment.start,
                       children: <Widget>[
@@ -57,7 +58,7 @@ class _CartFooterState extends State<CartFooter> {
                           style: TextStyle(fontWeight: FontWeight.bold),
                         ),
                         Text(
-                            "Order will be received in 4 hours \n Payment has to be made to the delivery executive"),
+                            "Order will be received in 4 hours \nPayment has to be made to the delivery executive"),
                         SizedBox(
                           height: 10.0,
                         ),
@@ -207,6 +208,8 @@ class _CartFooterState extends State<CartFooter> {
   }
 
   Widget orderButton({OrderButtonPressed callback, String addressId}) {
+    final NavigationService _navigationService = locator<NavigationService>();
+
     return FlatButton(
       color: Color.fromRGBO(255, 193, 72, 0.3),
       onPressed: () async {
@@ -236,6 +239,7 @@ class _CartFooterState extends State<CartFooter> {
               )
             ],
           )..show(context);
+          _navigationService.navigateTo('orders');
           widget.model.getCartList(productId: null, quantity: null);
         } else
           Flushbar(

@@ -10,6 +10,7 @@ import 'package:gogrocy/core/viewModels/product_detail_model.dart';
 import 'package:gogrocy/core/viewModels/order_list_model.dart';
 import 'package:gogrocy/core/viewModels/search_view_model.dart';
 import 'package:gogrocy/core/viewModels/startup_view_model.dart';
+import 'package:gogrocy/ui/views/about.dart';
 import 'package:gogrocy/ui/views/address_form.dart';
 import 'package:gogrocy/ui/views/city_selection.dart';
 import 'package:gogrocy/ui/views/signup_view.dart';

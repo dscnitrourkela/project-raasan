@@ -25,6 +25,7 @@ class _GridListState extends State<GridList> with AutomaticKeepAliveClientMixin{
   @override
   Widget build(BuildContext context) {
     super.build(context);
+    if(widget.resultList.length!=0)
     return GridView.builder(
         itemCount: 8,
         shrinkWrap: true,
@@ -106,6 +107,37 @@ class _GridListState extends State<GridList> with AutomaticKeepAliveClientMixin{
           );
 
         });
+    else{
+    return emptyProducts();
+    }
 
+  }
+
+  Widget emptyProducts() {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+              width: 60.0 * constants.scaleRatio,
+              height: 60.0 * constants.scaleRatio,
+              child: Image(
+                image: AssetImage("assets/images/no_products.png"),
+              )),
+          Text(
+            "You don't have any orders",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 18.0,
+                fontFamily: 'Gilroy',
+                fontWeight: FontWeight.bold),
+          ),
+          Container(
+            height: 80,
+          )
+        ],
+      ),
+    );
   }
 }
