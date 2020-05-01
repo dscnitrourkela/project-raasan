@@ -5,8 +5,8 @@ import 'package:gogrocy/core/services/firebase_messaging_service.dart';
 class FireStoreService {
   static void addUser(
       {@required String phoneNumber, @required String countryCode}) async {
-    print("Firestore Fired!!!!!!!!!!!!!!!!!!!!!!!");
     var token = await FirebaseMessagingService.fcmInstance.getToken();
+    await FirebaseMessagingService.fcmInstance.subscribeToTopic('GoGrocy');
     String documentName = countryCode + "_" + phoneNumber;
     Map<String, dynamic> data = {"token": token};
     var docReference =
@@ -21,7 +21,7 @@ class FireStoreService {
       } else {
         docReference.setData(data);
       }
-    }else{
+    } else {
       docReference.setData(data);
     }
   }

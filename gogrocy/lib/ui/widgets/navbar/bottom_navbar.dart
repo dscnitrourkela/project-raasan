@@ -26,11 +26,11 @@ class CurvedNavigationBar extends StatefulWidget {
     this.animationCurve = Curves.easeOut,
     this.animationDuration = const Duration(milliseconds: 600),
     this.height,
-  })
-      : assert(items != null),
+  })  : assert(items != null),
         assert(items.length >= 1),
         assert(0 <= index && index < items.length),
-        assert(0 <= height && height <= constants.BottomNavBarConfig.customNavBarMaxHeight),
+        assert(0 <= height &&
+            height <= constants.BottomNavBarConfig.customNavBarMaxHeight),
         super(key: key);
 
   @override
@@ -90,9 +90,7 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
   @override
   Widget build(BuildContext context) {
     constants.mediaQueryData = MediaQuery.of(context);
-    Size size = MediaQuery
-        .of(context)
-        .size;
+    Size size = MediaQuery.of(context).size;
     return Container(
       color: Colors.transparent,
       height: widget.height,
@@ -101,7 +99,8 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
         alignment: Alignment.bottomCenter,
         children: <Widget>[
           Positioned(
-            bottom: widget.height - constants.BottomNavBarConfig.bottomPositioningValue,
+            bottom: widget.height -
+                constants.BottomNavBarConfig.bottomPositioningValue,
             left: Directionality.of(context) == TextDirection.rtl
                 ? null
                 : _pos * size.width,
@@ -113,14 +112,18 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
               child: Transform.translate(
                 offset: Offset(
                   0,
-                  -(1 - _buttonHide) * constants.BottomNavBarConfig.buttonOffsetMultiplier,
+                  -(1 - _buttonHide) *
+                      constants.BottomNavBarConfig.buttonOffsetMultiplier,
                 ),
                 child: Material(
                   color: widget.buttonBackgroundColor ?? widget.color,
                   type: MaterialType.circle,
                   child: Padding(
-                    padding: EdgeInsets.all(constants.BottomNavBarConfig.buttonPadding),
-                    child: Center(child: _icon,),
+                    padding: EdgeInsets.all(
+                        constants.BottomNavBarConfig.buttonPadding),
+                    child: Center(
+                      child: _icon,
+                    ),
                   ),
                 ),
               ),
@@ -129,7 +132,8 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
           Positioned(
             left: 0,
             right: 0,
-            bottom: widget.height-constants.BottomNavBarConfig.customPaintBottomPositionValue,
+            bottom: widget.height -
+                constants.BottomNavBarConfig.customPaintBottomPositionValue,
             child: CustomPaint(
               painter: NavCustomPainter(
                   _pos, _length, widget.color, Directionality.of(context)),
@@ -147,14 +151,14 @@ class CurvedNavigationBarState extends State<CurvedNavigationBar>
                 height: 75.0,
                 child: Row(
                     children: widget.items.map((item) {
-                      return NavButton(
-                        onTap: _buttonTap,
-                        position: _pos,
-                        length: _length,
-                        index: widget.items.indexOf(item),
-                        child: item,
-                      );
-                    }).toList())),
+                  return NavButton(
+                    onTap: _buttonTap,
+                    position: _pos,
+                    length: _length,
+                    index: widget.items.indexOf(item),
+                    child: item,
+                  );
+                }).toList())),
           ),
         ],
       ),

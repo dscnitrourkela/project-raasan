@@ -65,7 +65,9 @@ class _SignUpViewState extends State<SignUpView>
   Widget build(BuildContext context) {
     return ChangeNotifierProvider<SignUpViewModel>(
       create: (context) => SignUpViewModel(
-          controller: _womanScaleController, mobile: widget.mobile, countryCode: widget.countryCode),
+          controller: _womanScaleController,
+          mobile: widget.mobile,
+          countryCode: widget.countryCode),
       child: Consumer<SignUpViewModel>(
         builder: (context, model, child) => Scaffold(
           backgroundColor: Colors.white,
@@ -171,8 +173,8 @@ class _SignUpViewState extends State<SignUpView>
                           Padding(
                             padding: EdgeInsets.only(
                                 left: 0.047 * constants.screenWidth),
-                            child: DetailsForm(
-                                _womanScaleController, widget.mobile, widget.countryCode),
+                            child: DetailsForm(_womanScaleController,
+                                widget.mobile, widget.countryCode),
                           ),
                         ],
                       ),

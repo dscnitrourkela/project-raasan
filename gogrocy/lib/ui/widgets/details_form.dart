@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gogrocy/core/enums/viewstate.dart';
 import 'package:gogrocy/core/services/firestore_service.dart';
 import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/core/viewModels/signup_view_model.dart';
@@ -211,29 +212,31 @@ class _DetailsFormState extends State<DetailsForm> {
                 SizedBox(
                   width: constants.SignUpConfig.raisedButtonWidth,
                   height: constants.SignUpConfig.raisedButtonHeight,
-                  child: RaisedButton(
-                    shape: RoundedRectangleBorder(
-                        borderRadius: BorderRadius.circular(10.0)),
-                    color: Colors.black,
-                    child: Text(
-                      'Done',
-                      style: TextStyle(
-                          color: Colors.white,
-                          fontFamily: 'Gilroy',
-                          fontWeight: FontWeight.bold),
-                    ),
-                    onPressed: () async {
-                      assert(model.detailsFormKey.currentState.validate(),
-                          "details form error");
-                      var result = await model.signUpWithApi();
-                      if (result)
-                        {
-                          FireStoreService.addUser(
-                              phoneNumber: widget.mobile,
-                              countryCode: widget.countryCode);
-                        }
-                    },
-                  ),
+                  child: model.state == ViewState.Idle
+                      ? RaisedButton(
+                          shape: RoundedRectangleBorder(
+                              borderRadius: BorderRadius.circular(10.0)),
+                          color: Colors.black,
+                          child: Text(
+                            'Done',
+                            style: TextStyle(
+                                color: Colors.white,
+                                fontFamily: 'Gilroy',
+                                fontWeight: FontWeight.bold),
+                          ),
+                          onPressed: () async {
+                            assert(model.detailsFormKey.currentState.validate(),
+                                "details form error");
+                            var result = await model.signUpWithApi();
+                            if (result) {
+                              await
+                              FireStoreService.addUser(
+                                  phoneNumber: widget.mobile,
+                                  countryCode: widget.countryCode);
+                            }
+                          },
+                        )
+                      : CircularProgressIndicator(),
                 ),
                 VerticalSpaces.small10,
               ],

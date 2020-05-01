@@ -12,14 +12,14 @@ class OnBoardingWidget extends StatelessWidget {
       child: PageView.builder(
         physics: BouncingScrollPhysics(),
         controller: controller,
-        itemCount: 3,
+        itemCount: 1,
         itemBuilder: (context, position) {
           return Container(
             child: Column(
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Align(
-                  alignment: Alignment(-2.0, 0.0),
+                  alignment: Alignment(-1.3 * constants.scaleRatio, 0.0),
                   child: Image.asset(
                     'assets/images/woman.png',
                     width: constants.OnBoardingConfig.illustrationWidth,

@@ -1,4 +1,4 @@
-class SignUpArguments{
+class SignUpArguments {
   String mobile;
   String countryCode;
 

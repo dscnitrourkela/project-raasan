@@ -5,86 +5,157 @@ import 'package:gogrocy/ui/views/base_view.dart';
 import 'package:gogrocy/ui/views/cart/cart_bill.dart';
 import 'package:gogrocy/ui/views/cart/cart_footer.dart';
 import 'package:gogrocy/ui/views/cart/cart_list.dart';
-import 'package:flutter/material.dart';
-import 'package:gogrocy/core/enums/viewstate.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
-import 'package:gogrocy/core/services/checkout_button_callback.dart';
-import 'package:gogrocy/core/viewModels/cart_view_model.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
+import 'package:gogrocy/ui/widgets/vertical_spaces.dart';
 
 typedef void CheckoutButtonPressed();
 
 class Cart extends StatelessWidget {
-  ScrollController scrollController=new ScrollController();
+  final ScrollController scrollController = new ScrollController();
 
   @override
   Widget build(BuildContext context) {
     return Scaffold(
       body: BaseView<CartViewModel>(
         onModelReady: (model) {
-          model.getCartList(product_id: null, quantity: null);
+          model.getCartList(productId: null, quantity: null);
         },
         builder: (context, model, child) {
           if (model.state == ViewState.Busy)
             return Center(child: CircularProgressIndicator());
           else if (model.state == ViewState.Intermediate) {
-            return ListView(
-              shrinkWrap: true,
-              controller: scrollController,
-              children: <Widget>[
-                CartHeader(model: model.cartList,checkoutButtonPressed: (){scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 500), curve: Curves.easeIn);print("Callback succeeds");},),
-                CartList(model, model.intermediateCartList),
-                CartBill(model.cartList,),
-                CartFooter(model),
-                SizedBox(height: 50,),
-
-
-              ],
-            );
-          } else
-            return ListView(
-              shrinkWrap: true,
-              controller: scrollController,
-              children: <Widget>[
-                CartHeader(model:model.cartList,checkoutButtonPressed:(){scrollController.animateTo(scrollController.position.maxScrollExtent, duration: Duration(milliseconds: 500), curve: Curves.easeIn);print("Callback succeeds");}),
-                CartList(model, model.cartList),
-                CartBill(model.cartList),
-                CartFooter(model),
-                SizedBox(height: 50,),
-
-              ],
-            );
+            if (model.cartList.sum != 0) {
+              return ListView(
+                shrinkWrap: true,
+                controller: scrollController,
+                children: <Widget>[
+                  CartHeader(
+                    model: model.cartList,
+                    checkoutButtonPressed: () {
+                      scrollController.animateTo(
+                          scrollController.position.maxScrollExtent,
+                          duration: Duration(milliseconds: 500),
+                          curve: Curves.easeIn);
+                      print("Callback succeeds");
+                    },
+                  ),
+                  CartList(model, model.intermediateCartList),
+                  CartBill(
+                    model.cartList,
+                  ),
+                  CartFooter(model),
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
+              );
+            } else
+              return emptyCart();
+          } else {
+            if (model.cartList.sum == 0) {
+              return emptyCart();
+            } else
+              return ListView(
+                shrinkWrap: true,
+                controller: scrollController,
+                children: <Widget>[
+                  CartHeader(
+                      model: model.cartList,
+                      checkoutButtonPressed: () {
+                        scrollController.animateTo(
+                            scrollController.position.maxScrollExtent,
+                            duration: Duration(milliseconds: 500),
+                            curve: Curves.easeIn);
+                        print("Callback succeeds");
+                      }),
+                  VerticalSpaces.small20,
+                  CartList(model, model.cartList),
+                  CartBill(model.cartList),
+                  CartFooter(model),
+                  SizedBox(
+                    height: 50,
+                  ),
+                ],
+              );
+          }
         },
+      ),
+    );
+  }
+
+  Widget emptyCart() {
+    return Center(
+      child: Column(
+        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.center,
+        children: <Widget>[
+          SizedBox(
+              width: 60.0 * constants.scaleRatio,
+              height: 60.0 * constants.scaleRatio,
+              child: Image(
+                image: AssetImage("assets/images/empty-cart.png"),
+              )),
+          Text(
+            "Your cart is Empty!",
+            textAlign: TextAlign.center,
+            style: TextStyle(
+                fontSize: 18.0,
+                fontFamily: 'Gilroy',
+                fontWeight: FontWeight.bold),
+          )
+        ],
       ),
     );
   }
 }
 
 class CartHeader extends StatelessWidget {
+  final CartDataModel model;
+  final CheckoutButtonPressed checkoutButtonPressed;
 
-  cart_list model;
-  CheckoutButtonPressed checkoutButtonPressed;
-
-  CartHeader({this.model,this.checkoutButtonPressed});
+  CartHeader({this.model, this.checkoutButtonPressed});
 
   @override
   Widget build(BuildContext context) {
     return Stack(
       children: <Widget>[
-        Image(image: AssetImage('assets/images/cart_background.png')),
         Column(
+          children: <Widget>[
+            Container(
+              height: 120 * constants.scaleRatio,
+              color: colors.cartHeaderContainer,
+            ),
+            Container(
+              height: 33.0 * constants.scaleRatio,
+              color: Colors.white,
+            )
+          ],
+        ),
+        Positioned(
+            right: 0.0,
+            bottom: 0.0,
+            child: Image(
+              height: 137.67 * constants.scaleRatio,
+              width: 181.72 * constants.scaleRatio,
+              image: AssetImage(
+                'assets/images/shopping_cart.png',
+              ),
+            )),
+        Column(
+          mainAxisSize: MainAxisSize.max,
           crossAxisAlignment: CrossAxisAlignment.start,
           children: <Widget>[
             IntrinsicHeight(
               child: Padding(
-                padding: const EdgeInsets.only(top: 8.0),
+                padding: EdgeInsets.only(top: 13.43 * constants.scaleRatio),
                 child: Row(
                   crossAxisAlignment: CrossAxisAlignment.start,
                   children: <Widget>[
                     Container(
-                      width: 20.0,
-                      color: colors.CART_HEADER_COLOR,
+                      width: 18.93 * constants.scaleRatio,
+                      color: colors.cartHeaderColor,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
@@ -92,11 +163,25 @@ class CartHeader extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          Text("Your Cart",
-                            style: TextStyle(fontFamily: 'Gilroy',fontSize: 32.0,fontWeight: FontWeight.bold, color: colors.CART_HEADER_COLOR),),
-                          Text("Grand Total Rs"+model.sum.toString(),
-                            style: TextStyle(fontFamily: 'Gilroy',fontSize: 14.0,fontWeight: FontWeight.w600, color: colors.CART_HEADER_COLOR),),
-
+                          Text(
+                            "Your Cart",
+                            style: TextStyle(
+                                fontFamily: 'Gilroy',
+                                fontSize: 32.0 * constants.scaleRatio,
+                                fontWeight: FontWeight.bold,
+                                color: colors.cartHeaderColor),
+                          ),
+                          Text(
+                            "Grand Total ₹" +
+                                ((model.sum > 499)
+                                    ? model.sum.toString().toString()
+                                    : (model.sum + 20).toString()),
+                            style: TextStyle(
+                                fontFamily: 'Gilroy',
+                                fontSize: 12.0 * constants.scaleRatio,
+                                fontWeight: FontWeight.w600,
+                                color: colors.cartHeaderColor),
+                          ),
                         ],
                       ),
                     )
@@ -105,15 +190,17 @@ class CartHeader extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 28.0,top: 12),
+              padding: EdgeInsets.only(
+                  left: 37.0 * constants.scaleRatio,
+                  top: 0.0 * constants.scaleRatio),
               child: RawMaterialButton(
                 elevation: 0.0,
                 focusElevation: 1,
-                focusColor: colors.CART_BUTTON_BACKGROUND,
+                focusColor: colors.cartButtonBackground,
                 onPressed: () {
                   checkoutButtonPressed();
                 },
-                fillColor: colors.CART_BUTTON_BACKGROUND,
+                fillColor: colors.cartButtonBackground,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(3),
                 ),
@@ -124,8 +211,8 @@ class CartHeader extends StatelessWidget {
                     child: Text(
                       'Checkout Now',
                       style: TextStyle(
-                          color: colors.CART_BUTTON_TEXT,
-                          fontSize: 13.0,
+                          color: colors.cartButtonText,
+                          fontSize: 12.0 * constants.scaleRatio,
                           fontWeight: FontWeight.bold),
                     ),
                   ),
@@ -133,9 +220,8 @@ class CartHeader extends StatelessWidget {
               ),
             )
           ],
-        )
+        ),
       ],
     );
   }
 }
-

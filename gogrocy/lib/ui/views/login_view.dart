@@ -8,7 +8,6 @@ import 'package:gogrocy/ui/widgets/onboarding_widget.dart';
 import 'package:gogrocy/ui/widgets/text_widgets.dart';
 import 'package:gogrocy/ui/widgets/vertical_spaces.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
-import 'package:smooth_page_indicator/smooth_page_indicator.dart';
 
 class LoginView extends StatelessWidget {
   final controller = PageController();
@@ -31,7 +30,7 @@ class LoginView extends StatelessWidget {
                   Hero(tag: 'GoGrocy', child: TitleText()),
                   OnBoardingWidget(controller),
                   VerticalSpaces.small10,
-                  SmoothPageIndicator(
+                  /*SmoothPageIndicator(
                     controller: controller,
                     count: 3,
                     effect: WormEffect(
@@ -43,7 +42,7 @@ class LoginView extends StatelessWidget {
                       dotWidth: 0.024 * constants.screenWidth,
                       spacing: 0.024 * constants.screenWidth,
                     ),
-                  ),
+                  ),*/
                   VerticalSpaces.extraLarge,
                 ],
               ),

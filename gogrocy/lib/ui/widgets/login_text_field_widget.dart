@@ -1,11 +1,14 @@
+import 'package:flushbar/flushbar.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gogrocy/core/enums/viewstate.dart';
+import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/core/viewModels/login_model.dart';
 import 'package:gogrocy/service_locator.dart';
+import 'package:gogrocy/ui/shared/colors.dart';
 import 'package:gogrocy/ui/widgets/otp_field.dart';
 import 'package:gogrocy/ui/widgets/snackbars.dart';
-import 'package:gogrocy/ui/widgets/vertical_spaces.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
@@ -28,6 +31,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
   FocusNode phoneFocusNode;
   FocusNode otpFocusNode;
   FocusNode passwordFocusNode;
+  final _navigationService = locator<NavigationService>();
 
   @override
   void initState() {
@@ -90,7 +94,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                       validator: (value) {
                         return value.isNotEmpty ? null : "Enter country code";
                       },
-                      cursorColor: Colors.lightGreen,
+                      cursorColor: primaryColor,
                       keyboardType: TextInputType.phone,
                       decoration: InputDecoration(
                         hintText: 'Country code',
@@ -113,50 +117,65 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                     flex: 0,
                     child: Visibility(
                       visible: phoneFocusNode.hasFocus,
-                      child: IconButton(
-                        icon: Icon(
-                          Icons.check_circle,
-                          size: 31.404 * constants.scaleRatio,
-                        ),
-                        onPressed: () async {
-                          if (await model.checkInternetStatus()) {
-                            var status = await model.getUserStatus(
-                                phoneController.text,
-                                countryCodeController.text);
-                            print(status);
-                            switch (status) {
-                              case '0':
-                                controller.animateToPage(1,
-                                    duration: Duration(milliseconds: 250),
-                                    curve: Curves.easeOut);
-                                model.loginWithPhone(
-                                    context: context,
-                                    phoneNumber: phoneController.text,
-                                    countryCode: countryCodeController.text);
-                                break;
-                              case '1':
-                                controller.animateToPage(1,
-                                    duration: Duration(milliseconds: 250),
-                                    curve: Curves.easeOut);
-                                model.loginWithPhone(
-                                    context: context,
-                                    phoneNumber: phoneController.text,
-                                    countryCode: countryCodeController.text);
-                                break;
-                              case '2':
-                                setState(() {
-                                  userSignedUp = true;
-                                });
-                                controller.animateToPage(1,
-                                    duration: Duration(milliseconds: 250),
-                                    curve: Curves.easeOut);
-                            }
-                          } else {
-                            model.loginScaffoldKey.currentState
-                                .showSnackBar(SnackBars.noInternetSnackBar);
-                          }
-                        },
-                      ),
+                      child: model.state == ViewState.Idle
+                          ? IconButton(
+                              icon: Icon(
+                                Icons.check_circle_outline,
+                                color: model.hasConnection
+                                    ? primaryColor
+                                    : Colors.grey,
+                                size: 31.404 * constants.scaleRatio,
+                              ),
+                              onPressed: () async {
+                                if (model.loginFormKey.currentState
+                                    .validate()) {
+                                  if (model.hasConnection) {
+                                    var status = await model.getUserStatus(
+                                        phoneController.text,
+                                        countryCodeController.text);
+                                    print(status);
+                                    switch (status) {
+                                      case '0':
+                                        controller.animateToPage(1,
+                                            duration:
+                                                Duration(milliseconds: 250),
+                                            curve: Curves.easeOut);
+                                        model.loginWithPhone(
+                                            context: context,
+                                            phoneNumber: phoneController.text,
+                                            countryCode:
+                                                countryCodeController.text);
+
+                                        break;
+                                      case '1':
+                                        controller.animateToPage(1,
+                                            duration:
+                                                Duration(milliseconds: 250),
+                                            curve: Curves.easeOut);
+                                        model.loginWithPhone(
+                                            context: context,
+                                            phoneNumber: phoneController.text,
+                                            countryCode:
+                                                countryCodeController.text);
+                                        break;
+                                      case '2':
+                                        setState(() {
+                                          userSignedUp = true;
+                                        });
+                                        controller.animateToPage(1,
+                                            duration:
+                                                Duration(milliseconds: 250),
+                                            curve: Curves.easeOut);
+                                    }
+                                  } else {
+                                    model.loginScaffoldKey.currentState
+                                        .showSnackBar(
+                                            SnackBars.noInternetSnackBar);
+                                  }
+                                }
+                              },
+                            )
+                          : CircularProgressIndicator(),
                     ),
                   ),
                 ],
@@ -184,7 +203,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
             horizontal: 0.047 * constants.screenWidth,
           ),
           child: Column(
-            mainAxisAlignment: MainAxisAlignment.spaceAround,
+            mainAxisAlignment: MainAxisAlignment.spaceEvenly,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Text(
@@ -207,18 +226,21 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                           EdgeInsets.only(left: 6.318 * constants.scaleRatio),
                       child: Visibility(
                         visible: passwordFocusNode.hasFocus,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.check_circle,
-                            size: 0.094 * constants.screenWidth,
-                          ),
-                          onPressed: () async {
-                            model.loginWithApi(
-                                phoneNumber: phoneController.text,
-                                countryCode: countryCodeController.text,
-                                password: passwordController.text);
-                          },
-                        ),
+                        child: model.state == ViewState.Idle
+                            ? IconButton(
+                                icon: Icon(
+                                  Icons.check_circle_outline,
+                                  color: primaryColor,
+                                  size: 0.094 * constants.screenWidth,
+                                ),
+                                onPressed: () async {
+                                  model.loginWithApi(
+                                      phoneNumber: phoneController.text,
+                                      countryCode: countryCodeController.text,
+                                      password: passwordController.text);
+                                },
+                              )
+                            : CircularProgressIndicator(),
                       ),
                     ),
                   ),
@@ -227,9 +249,13 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
               model.errorMessage != null
                   ? Text(model.errorMessage)
                   : Container(),
-              Text(
-                'You will receive an OTP for verifying this number',
-              ),
+              FlatButton(
+                child: Text('Forgot password?'),
+                onPressed: () {
+                  _navigationService.navigateTo('web',
+                      arguments: 'https://gogrocy.in/forgot_password');
+                },
+              )
             ],
           ),
         ),
@@ -256,6 +282,9 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
+              SizedBox(
+                height: 1.0,
+              ),
               Text(
                 'Enter OTP',
                 style: TextStyle(
@@ -270,34 +299,48 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                     child: otpTextField,
                   ),
                   Expanded(
-                    flex: 0,
+                    flex: 1,
                     child: Padding(
                       padding:
                           EdgeInsets.only(left: 0.019 * constants.screenWidth),
-                      child: Visibility(
-                        visible: otpFocusNode.hasFocus,
-                        child: IconButton(
-                          icon: Icon(
-                            Icons.check_circle,
-                            size: 0.094 * constants.screenWidth,
-                          ),
-                          onPressed: () {
-                            model.loginWithOtp(
-                                otp: otpController.text,
-                                phoneNumber: phoneController.text,
-                                context: context,
-                                countryCode: countryCodeController.text);
-                            SystemChannels.textInput
-                                .invokeMethod('TextInput.hide');
-                            Navigator.of(context).pushNamed('awesome');
-                          },
-                        ),
-                      ),
+                      child: model.state == ViewState.Idle
+                          ? IconButton(
+                              icon: Icon(
+                                Icons.check_circle_outline,
+                                color: primaryColor,
+                                size: 0.094 * constants.screenWidth,
+                              ),
+                              onPressed: () {
+                                if (otpController.text.length == 6) {
+                                  model.loginWithOtp(
+                                      otp: otpController.text,
+                                      phoneNumber: phoneController.text,
+                                      context: context,
+                                      countryCode: countryCodeController.text);
+                                  SystemChannels.textInput
+                                      .invokeMethod('TextInput.hide');
+                                } else {
+                                  Flushbar(
+                                    message: 'OTP must be 6 digits',
+                                    duration: Duration(seconds: 2),
+                                  ).show(context);
+                                }
+                                //Navigator.of(context).pushNamed('awesome');
+                              },
+                            )
+                          : CircularProgressIndicator(),
                     ),
-                  )
+                  ),
                 ],
               ),
-              Text('Retry'),
+              FlatButton(
+                child: Text('Retry'),
+                onPressed: () {
+                  controller.animateToPage(0,
+                      duration: Duration(milliseconds: 250),
+                      curve: Curves.easeOut);
+                },
+              ),
             ],
           ),
         ),
@@ -328,16 +371,28 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
 
   TextFormField mobileTextField(LoginModel model) {
     return TextFormField(
+      enableInteractiveSelection: false,
+      key: model.phoneFormKey,
       focusNode: phoneFocusNode,
       textAlign: TextAlign.center,
       controller: phoneController,
       textInputAction: TextInputAction.next,
       validator: (value) {
-        return value.length < 4 ? "Enter a correct mobile number" : null;
+        if (value.length > 3 && value.length < 13) {
+          String pattern = "[0-9]+\$";
+          RegExp regExp = RegExp(pattern);
+          if (regExp.hasMatch(value)) {
+            return null;
+          } else {
+            return "Enter a correct phone number";
+          }
+        } else {
+          return "Enter correct phone number";
+        }
       },
       onFieldSubmitted: (value) async {
         if (model.loginFormKey.currentState.validate()) {
-          if (await model.checkInternetStatus()) {
+          if (model.hasConnection) {
             var status = await model.getUserStatus(
                 phoneController.text, countryCodeController.text);
             print(status);
@@ -374,7 +429,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
           }
         }
       },
-      cursorColor: Colors.lightGreen,
+      cursorColor: primaryColor,
       keyboardType: TextInputType.phone,
       decoration: InputDecoration(
         hintText: 'Enter your mobile number',

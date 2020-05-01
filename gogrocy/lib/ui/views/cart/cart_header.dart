@@ -1,19 +1,13 @@
 import 'package:flutter/material.dart';
-import 'package:gogrocy/core/enums/viewstate.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
 import 'package:gogrocy/core/services/checkout_button_callback.dart';
-import 'package:gogrocy/core/viewModels/cart_view_model.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
-import 'package:gogrocy/ui/shared/constants.dart' as constants;
-import 'package:gogrocy/core/services/checkout_button_callback.dart' as checkout_callback;
-
 
 class CartHeader extends StatelessWidget {
+  final CartDataModel model;
+  final CheckoutButtonPressed checkoutButtonPressed;
 
-  cart_list model;
-  CheckoutButtonPressed checkoutButtonPressed;
-
-  CartHeader({this.model,this.checkoutButtonPressed});
+  CartHeader({this.model, this.checkoutButtonPressed});
 
   @override
   Widget build(BuildContext context) {
@@ -31,7 +25,7 @@ class CartHeader extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       width: 20.0,
-                        color: colors.CART_HEADER_COLOR,
+                      color: colors.cartHeaderColor,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
@@ -39,11 +33,25 @@ class CartHeader extends StatelessWidget {
                         crossAxisAlignment: CrossAxisAlignment.start,
                         mainAxisSize: MainAxisSize.min,
                         children: <Widget>[
-                          Text("Your Cart",
-                          style: TextStyle(fontFamily: 'Gilroy',fontSize: 32.0,fontWeight: FontWeight.bold, color: colors.CART_HEADER_COLOR),),
-                          Text("Grand Total Rs"+model.sum.toString(),
-                          style: TextStyle(fontFamily: 'Gilroy',fontSize: 14.0,fontWeight: FontWeight.w600, color: colors.CART_HEADER_COLOR),),
-
+                          Text(
+                            "Your Cart",
+                            style: TextStyle(
+                                fontFamily: 'Gilroy',
+                                fontSize: 32.0,
+                                fontWeight: FontWeight.bold,
+                                color: colors.cartHeaderColor),
+                          ),
+                          Text(
+                            "Grand Total Rs" +
+                                ((model.sum > 499)
+                                    ? model.sum.toString().toString()
+                                    : (model.sum + 20).toString()),
+                            style: TextStyle(
+                                fontFamily: 'Gilroy',
+                                fontSize: 14.0,
+                                fontWeight: FontWeight.w600,
+                                color: colors.cartHeaderColor),
+                          ),
                         ],
                       ),
                     )
@@ -52,29 +60,25 @@ class CartHeader extends StatelessWidget {
               ),
             ),
             Padding(
-              padding: const EdgeInsets.only(left: 28.0,top: 12),
+              padding: const EdgeInsets.only(left: 28.0, top: 12),
               child: RawMaterialButton(
                 elevation: 0.0,
                 focusElevation: 1,
-                focusColor: colors.CART_BUTTON_BACKGROUND,
+                focusColor: colors.cartButtonBackground,
                 onPressed: () {
                   checkoutButtonPressed;
                 },
-                fillColor: colors.CART_BUTTON_BACKGROUND,
+                fillColor: colors.cartButtonBackground,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(3),
                 ),
-                child: SizedBox(
-                  width: constants.CartConfig.checkoutButtonWidth,
-                  height: constants.CartConfig.checkoutButtonHeight,
-                  child: Center(
-                    child: Text(
-                      'Checkout Now',
-                      style: TextStyle(
-                          color: colors.CART_BUTTON_TEXT,
-                          fontSize: 13.0,
-                          fontWeight: FontWeight.bold),
-                    ),
+                child: Center(
+                  child: Text(
+                    'Checkout',
+                    style: TextStyle(
+                        color: colors.cartButtonText,
+                        fontSize: 13.0,
+                        fontWeight: FontWeight.bold),
                   ),
                 ),
               ),
