@@ -13,6 +13,7 @@ class OrderedProductList extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
+    print(model.length);
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ListView.builder(
@@ -26,10 +27,11 @@ class OrderedProductList extends StatelessWidget {
             return Padding(
               padding: const EdgeInsets.all(8.0),
               child: Row(
+                mainAxisAlignment: MainAxisAlignment.spaceBetween,
                 crossAxisAlignment: CrossAxisAlignment.start,
                 children: <Widget>[
                   Flexible(
-                    flex: 3,
+                    flex: 4,
                     child: Container(
                       decoration: BoxDecoration(
                           border: Border.all(color: Colors.black26),
@@ -39,17 +41,20 @@ class OrderedProductList extends StatelessWidget {
                       height: constants.CartConfig.imageHeight,
                       child: Padding(
                         padding: const EdgeInsets.all(8.0),
-                        child: Image(
-                          image: NetworkImage(
-                              'https://res.cloudinary.com/gogrocy/image/upload/v1/' +
-                                  model[index].image),
-                          fit: BoxFit.fitWidth,
+                        child: ClipRRect(
+                          borderRadius: BorderRadius.all(Radius.circular(8)),
+                          child: Image(
+                            image: NetworkImage(
+                                'https://res.cloudinary.com/gogrocy/image/upload/v1/' +
+                                    model[index].image),
+                            fit: BoxFit.fitWidth,
+                          ),
                         ),
                       ),
                     ),
                   ),
-                  Flexible(
-                    flex: 3,
+                  Expanded(
+                    flex: 5,
                     child: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Column(
@@ -67,21 +72,26 @@ class OrderedProductList extends StatelessWidget {
                             padding: const EdgeInsets.only(top: 20.0),
                             child: Text("Qty " + quantityOrdered.toString()),
                           ),
+                          orderStatus(int.parse(model[index].status))
                         ],
                       ),
                     ),
                   ),
                   Flexible(
-                    flex: 3,
+                    flex: 2,
                     child: Align(
                         alignment: Alignment.topRight,
-                        child: Text(
-                          '₹ $totalCost',
-                          style: TextStyle(
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.w500,
-                              color: colors.primaryColor),
-                          textAlign: TextAlign.right,
+                        child: Column(
+                          children: <Widget>[
+                            Text(
+                              '₹ $totalCost',
+                              style: TextStyle(
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.w500,
+                                  color: colors.primaryColor),
+                              textAlign: TextAlign.right,
+                            ),
+                          ],
                         )),
                   ),
                 ],
@@ -89,5 +99,29 @@ class OrderedProductList extends StatelessWidget {
             );
           }),
     );
+  }
+
+  Widget orderStatus(int statusCode) {
+    if (statusCode == 0) {
+      return Text(
+        "Approval pending",
+        style: TextStyle(
+            fontWeight: FontWeight.bold, fontSize: 14, color: Colors.orange),
+      );
+    } else if (statusCode == 1) {
+      return Text(
+        "Order approved",
+        style: TextStyle(
+            fontWeight: FontWeight.bold,
+            fontSize: 14,
+            color: colors.primaryColor),
+      );
+    } else {
+      return Text(
+        "Order declined",
+        style: TextStyle(
+            fontWeight: FontWeight.bold, fontSize: 14, color: Colors.red),
+      );
+    }
   }
 }

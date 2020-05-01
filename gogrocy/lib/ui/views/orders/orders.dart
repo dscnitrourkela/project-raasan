@@ -107,15 +107,14 @@ class OrderView extends StatelessWidget {
                                       RawMaterialButton(
                                         elevation: 0.0,
                                         onPressed: () {
-                                          if (model.orders.result.bills[index]
+                                          /*if (model.orders.result.bills[index]
                                                   .details[0].status !=
-                                              '-1')
-                                            _navigationService.navigateTo(
-                                                'orderDetails',
-                                                arguments:
-                                                    OrderDetailsArguments(
-                                                        orders: model.orders,
-                                                        index: index));
+                                              '-1')*/
+                                          _navigationService.navigateTo(
+                                              'orderDetails',
+                                              arguments: OrderDetailsArguments(
+                                                  orders: model.orders,
+                                                  index: index));
                                         },
                                         fillColor:
                                             colors.viewAllButtonBackground,
@@ -158,29 +157,29 @@ class OrderView extends StatelessWidget {
     print(monthNo);
     switch (monthNo) {
       case "01":
-        return "January";
+        return "Jan";
       case "02":
-        return "February";
+        return "Feb";
       case "03":
-        return "March";
+        return "Mar";
       case "04":
-        return "April";
+        return "Apr";
       case "05":
         return "May";
       case "06":
-        return "June";
+        return "Jun";
       case "07":
-        return "July";
+        return "Jul";
       case "08":
-        return "August";
+        return "Aug";
       case "09":
-        return "September";
+        return "Sept";
       case "10":
-        return "October";
+        return "Oct";
       case "11":
-        return "November";
+        return "Nov";
       case "12":
-        return "December";
+        return "Dec";
       default:
         return "Invalid month";
     }
@@ -197,63 +196,6 @@ class OrderView extends StatelessWidget {
     }
     totalCost = totalCost > 499 ? totalCost : totalCost + 20;
     return "₹ " + totalCost.toString();
-  }
-
-  Widget orderStatus(int statusCode) {
-    if (statusCode == 0) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-        child: (Row(
-          children: <Widget>[
-            Icon(
-              Icons.access_time,
-              color: Colors.orange,
-              size: 50,
-            ),
-            Text(
-              "   Your order is not approved yet",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            )
-          ],
-        )),
-      );
-    }
-    if (statusCode == 1) {
-      return Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-        child: (Row(
-          children: <Widget>[
-            Icon(
-              Icons.check,
-              color: colors.primaryColor,
-              size: 50,
-            ),
-            Text(
-              "   Your order is approved",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            )
-          ],
-        )),
-      );
-    }
-    if (statusCode == -1) {
-      Padding(
-        padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
-        child: (Row(
-          children: <Widget>[
-            Icon(
-              Icons.error,
-              color: Colors.red,
-              size: 50,
-            ),
-            Text(
-              "   Your order has been declined",
-              style: TextStyle(fontWeight: FontWeight.bold, fontSize: 18),
-            )
-          ],
-        )),
-      );
-    }
   }
 
   Widget emptyOrders() {

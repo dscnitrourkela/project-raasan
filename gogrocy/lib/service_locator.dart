@@ -22,7 +22,7 @@ GetIt locator = GetIt.instance;
 void setupLocator() {
   locator.registerFactory<SharedPrefsService>(() => SharedPrefsService());
   //locator.registerFactory(()=>SignUpViewModel());
-  locator.registerLazySingleton(() => CitySelectionModel());
+  locator.registerFactory(() => CitySelectionModel());
   locator.registerFactory<StartupViewModel>(() => StartupViewModel());
   locator.registerFactory<NavigationService>(() => NavigationService());
   locator.registerFactory<AuthenticationService>(() => AuthenticationService());

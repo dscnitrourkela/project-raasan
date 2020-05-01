@@ -21,8 +21,7 @@ class OrderDetailsView extends StatelessWidget {
       body: SingleChildScrollView(
         child: Column(
           children: <Widget>[
-            orderStatus(
-                int.parse(orders.result.bills[index].details[0].status)),
+            //orderStatus(int.parse(orders.result.bills[index].details[0].status)),
             Padding(
               padding: const EdgeInsets.symmetric(vertical: 4, horizontal: 16),
               child: Row(
