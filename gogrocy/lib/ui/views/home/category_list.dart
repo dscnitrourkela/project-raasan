@@ -92,7 +92,7 @@ class _CategoryListState extends State<CategoryList>  with AutomaticKeepAliveCli
                           child: Container(
                             width: constants.HomePageConfig.categoryBoxWidth,
                             height: constants.HomePageConfig.categoryBoxHeight,
-                            color: colors.CATEGORY_LIST_BOX,
+                            color: colors.categoryListBox,
                           ),
                         ),
                       ),

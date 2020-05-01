@@ -117,7 +117,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                         icon: Icon(
                           Icons.check_circle_outline,
                           color:
-                              model.hasConnection ? PRIMARY_COLOR : Colors.grey,
+                              model.hasConnection ? primaryColor : Colors.grey,
                           size: 31.404 * constants.scaleRatio,
                         ),
                         onPressed: () async {

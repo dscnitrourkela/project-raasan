@@ -95,7 +95,7 @@ class SearchView extends StatelessWidget {
                                 textInputAction: TextInputAction.search,
                                 focusNode: focusNode,
                                 controller: _textEditingController,
-                                cursorColor: colors.PRIMARY_COLOR,
+                                cursorColor: colors.primaryColor,
                                 decoration: new InputDecoration(
                                     border: InputBorder.none,
                                     focusedBorder: InputBorder.none,

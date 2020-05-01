@@ -12,7 +12,7 @@ import 'package:gogrocy/core/models/ProductsByCity.dart';
 class ProductDetailView extends StatelessWidget {
   final Result product;
 
-  Flushbar successSnackbar=infoSnackBar(message: "Added to cart", iconData: Icons.check, iconColor: colors.PRIMARY_COLOR);
+  Flushbar successSnackbar=infoSnackBar(message: "Added to cart", iconData: Icons.check, iconColor: colors.primaryColor);
   Flushbar failureSnackbar=infoSnackBar(message: "Could not add to cart", iconData: Icons.error, iconColor: Colors.red);
 
   ProductDetailView(this.product);
@@ -67,7 +67,7 @@ class ProductDetailView extends StatelessWidget {
                                       ? "In Stock"
                                       : "Not in stock"),
                                   style: TextStyle(
-                                      color: colors.PRIMARY_COLOR,
+                                      color: colors.primaryColor,
                                       fontSize: 16,
                                       fontWeight: FontWeight.bold),
                                 )
@@ -82,7 +82,7 @@ class ProductDetailView extends StatelessWidget {
                       child: Text(
                         '₹ ' + product.price,
                         style: TextStyle(
-                            color: colors.PRIMARY_COLOR,
+                            color: colors.primaryColor,
                             fontSize: 20,
                             fontWeight: FontWeight.bold),
                       ),
@@ -122,12 +122,12 @@ class ProductDetailView extends StatelessWidget {
                   child: FlatButton.icon(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),
-                    color: colors.VIEW_ALL_BUTTON_BACKGROUND,
+                    color: colors.viewAllButtonBackground,
                     icon: Padding(
                       padding: const EdgeInsets.all(8.0),
                       child: Icon(
                         Icons.shopping_cart,
-                        color: colors.PRIMARY_COLOR,
+                        color: colors.primaryColor,
                       ),
                     ),
                     label: Padding(
@@ -135,7 +135,7 @@ class ProductDetailView extends StatelessWidget {
                       child: Text(
                         'Add to Cart',
                         style: TextStyle(
-                            color: colors.PRIMARY_COLOR,
+                            color: colors.primaryColor,
                             fontWeight: FontWeight.bold,
                             fontSize: 16),
                       ),

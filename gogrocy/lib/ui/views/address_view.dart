@@ -45,7 +45,7 @@ class _AddressViewState extends State<AddressView> {
                       closedShape: RoundedRectangleBorder(
                           borderRadius:
                               BorderRadius.all(Radius.circular(25.0))),
-                      closedColor: PRIMARY_COLOR,
+                      closedColor: primaryColor,
                       closedElevation: 6.0,
                       closedBuilder: (context, action) {
                         return SizedBox(
@@ -74,7 +74,7 @@ class _AddressViewState extends State<AddressView> {
                               leading: model.addressList[index].isPrimary != '0'
                                   ? Icon(
                                       Icons.star,
-                                      color: PRIMARY_COLOR,
+                                      color: primaryColor,
                                     )
                                   : null,
                               title: Text(model.addressList[index].locality),

@@ -110,7 +110,7 @@ class OrderView extends StatelessWidget {
                                                   index: index));
                                         },
                                         fillColor:
-                                            colors.VIEW_ALL_BUTTON_BACKGROUND,
+                                            colors.viewAllButtonBackground,
                                         shape: RoundedRectangleBorder(
                                           borderRadius: BorderRadius.circular(3),
                                         ),
@@ -119,7 +119,7 @@ class OrderView extends StatelessWidget {
                                             'Details',
                                             style: TextStyle(
                                                 color:
-                                                    colors.VIEW_ALL_BUTTON_TEXT,
+                                                    colors.viewAllButtonText,
                                                 fontSize: 13.0,
                                                 fontWeight: FontWeight.w500),
                                           ),

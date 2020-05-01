@@ -18,7 +18,7 @@ class OrderBill extends StatelessWidget {
       child: ClipRRect(
         borderRadius: BorderRadius.all(Radius.circular(8)),
         child: Container(
-          color: colors.CART_COUNTER_BACKGROUND,
+          color: colors.cartCounterBackground,
           child: Padding(
             padding: const EdgeInsets.symmetric(horizontal: 22,vertical: 22,),
             child: Column(

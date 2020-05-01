@@ -119,7 +119,7 @@ class _CartFooterState extends State<CartFooter> {
             });
       },
       focusElevation: 0,
-      focusColor: colors.VIEW_ALL_BUTTON_BACKGROUND,
+      focusColor: colors.viewAllButtonBackground,
       fillColor: Colors.transparent,
       shape: RoundedRectangleBorder(
         borderRadius: BorderRadius.circular(3),
@@ -131,7 +131,7 @@ class _CartFooterState extends State<CartFooter> {
           child: Text(
             'Change',
             style: TextStyle(
-                color: colors.PRIMARY_COLOR,
+                color: colors.primaryColor,
                 fontSize: 13.0,
                 fontWeight: FontWeight.w500),
           ),
@@ -222,7 +222,7 @@ class _CartFooterState extends State<CartFooter> {
             flushbarStyle: FlushbarStyle.FLOATING,
             icon: Icon(
               Icons.check,
-              color: colors.PRIMARY_COLOR,
+              color: colors.primaryColor,
             ),
             barBlur: 0.9,
             margin: EdgeInsets.all(8.0),

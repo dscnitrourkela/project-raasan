@@ -154,7 +154,7 @@ class CartHeader extends StatelessWidget {
                   children: <Widget>[
                     Container(
                       width: 18.93 * constants.scaleRatio,
-                      color: colors.CART_HEADER_COLOR,
+                      color: colors.cartHeaderColor,
                     ),
                     Padding(
                       padding: const EdgeInsets.only(left: 8.0),
@@ -168,7 +168,7 @@ class CartHeader extends StatelessWidget {
                                 fontFamily: 'Gilroy',
                                 fontSize: 32.0 * constants.scaleRatio,
                                 fontWeight: FontWeight.bold,
-                                color: colors.CART_HEADER_COLOR),
+                                color: colors.cartHeaderColor),
                           ),
                           Text(
                             "Grand Total ₹" + model.sum.toString(),
@@ -176,7 +176,7 @@ class CartHeader extends StatelessWidget {
                                 fontFamily: 'Gilroy',
                                 fontSize: 12.0 * constants.scaleRatio,
                                 fontWeight: FontWeight.w600,
-                                color: colors.CART_HEADER_COLOR),
+                                color: colors.cartHeaderColor),
                           ),
                         ],
                       ),
@@ -190,11 +190,11 @@ class CartHeader extends StatelessWidget {
               child: RawMaterialButton(
                 elevation: 0.0,
                 focusElevation: 1,
-                focusColor: colors.CART_BUTTON_BACKGROUND,
+                focusColor: colors.cartButtonBackground,
                 onPressed: () {
                   checkoutButtonPressed();
                 },
-                fillColor: colors.CART_BUTTON_BACKGROUND,
+                fillColor: colors.cartButtonBackground,
                 shape: RoundedRectangleBorder(
                   borderRadius: BorderRadius.circular(3),
                 ),
@@ -205,7 +205,7 @@ class CartHeader extends StatelessWidget {
                     child: Text(
                       'Checkout Now',
                       style: TextStyle(
-                          color: colors.CART_BUTTON_TEXT,
+                          color: colors.cartButtonText,
                           fontSize: 13.0 * constants.scaleRatio,
                           fontWeight: FontWeight.bold),
                     ),

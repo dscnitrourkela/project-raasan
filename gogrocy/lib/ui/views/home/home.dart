@@ -60,7 +60,7 @@ class Home extends StatelessWidget {
                 RawMaterialButton(
                   elevation: 0.0,
                   onPressed: () {},
-                  fillColor: colors.VIEW_ALL_BUTTON_BACKGROUND,
+                  fillColor: colors.viewAllButtonBackground,
                   shape: RoundedRectangleBorder(
                     borderRadius: BorderRadius.circular(3),
                   ),
@@ -68,7 +68,7 @@ class Home extends StatelessWidget {
                     child: Text(
                       'View All',
                       style: TextStyle(
-                          color: colors.VIEW_ALL_BUTTON_TEXT,
+                          color: colors.viewAllButtonText,
                           fontSize: 13.0,
                           fontWeight: FontWeight.w500),
                     ),
@@ -105,7 +105,7 @@ class Home extends StatelessWidget {
                             onPressed: () {
                               _navigationService.navigateTo('allProducts');
                             },
-                            fillColor: colors.VIEW_ALL_BUTTON_BACKGROUND,
+                            fillColor: colors.viewAllButtonBackground,
                             shape: RoundedRectangleBorder(
                               borderRadius: BorderRadius.circular(3),
                             ),
@@ -113,7 +113,7 @@ class Home extends StatelessWidget {
                               child: Text(
                                 'View All',
                                 style: TextStyle(
-                                    color: colors.VIEW_ALL_BUTTON_TEXT,
+                                    color: colors.viewAllButtonText,
                                     fontSize: 13.0,
                                     fontWeight: FontWeight.w500),
                               ),

@@ -42,8 +42,8 @@ class _CartCounterState extends State<CartCounter> {
             child: FlatButton(
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(3.0),
-                  side: BorderSide(color:colors.CART_COUNTER_BACKGROUND)),
-              color: colors.CART_COUNTER_BACKGROUND,
+                  side: BorderSide(color:colors.cartCounterBackground)),
+              color: colors.cartCounterBackground,
               textColor: Colors.black,
               padding: EdgeInsets.all(0.0),
               onPressed: () {
@@ -74,8 +74,8 @@ class _CartCounterState extends State<CartCounter> {
             child: FlatButton(
               shape: new RoundedRectangleBorder(
                   borderRadius: new BorderRadius.circular(3.0),
-                  side: BorderSide(color:colors.CART_COUNTER_BACKGROUND)),
-              color: colors.CART_COUNTER_BACKGROUND,
+                  side: BorderSide(color:colors.cartCounterBackground)),
+              color: colors.cartCounterBackground,
               textColor: Colors.black,
               padding: EdgeInsets.all(2.0),
               onPressed: () {

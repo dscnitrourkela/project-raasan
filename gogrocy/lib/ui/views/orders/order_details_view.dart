@@ -137,7 +137,7 @@ class OrderDetailsView extends StatelessWidget {
           children: <Widget>[
             Icon(
               Icons.check,
-              color: colors.PRIMARY_COLOR,
+              color: colors.primaryColor,
               size: 50,
             ),
             Text(

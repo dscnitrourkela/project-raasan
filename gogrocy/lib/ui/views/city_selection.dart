@@ -28,7 +28,7 @@ class CitySelectionView extends StatelessWidget {
               RadioListTile(
                 title: Text("Jeypore"),
                 subtitle: Text("Odisha"),
-                activeColor: PRIMARY_COLOR,
+                activeColor: primaryColor,
                 onChanged: (value) {
                   model.setSelectedCityTile(value);
                 },
@@ -38,7 +38,7 @@ class CitySelectionView extends StatelessWidget {
               RadioListTile(
                 title: Text("Sunabeda"),
                 subtitle: Text("Odisha"),
-                activeColor: PRIMARY_COLOR,
+                activeColor: primaryColor,
                 onChanged: (value) {
                   model.setSelectedCityTile(value);
                 },
