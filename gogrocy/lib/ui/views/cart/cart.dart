@@ -126,6 +126,84 @@ class CartHeader extends StatelessWidget {
             Container(
               height: 120 * constants.scaleRatio,
               color: colors.cartHeaderContainer,
+              child: Column(
+                mainAxisSize: MainAxisSize.max,
+                crossAxisAlignment: CrossAxisAlignment.start,
+                children: <Widget>[
+                  IntrinsicHeight(
+                    child: Padding(
+                      padding: EdgeInsets.only(top: 13.43 * constants.scaleRatio),
+                      child: Row(
+                        crossAxisAlignment: CrossAxisAlignment.start,
+                        children: <Widget>[
+                          Container(
+                            width: 18.93 * constants.scaleRatio,
+                            color: colors.cartHeaderColor,
+                          ),
+                          Padding(
+                            padding: const EdgeInsets.only(left: 8.0),
+                            child: Column(
+                              crossAxisAlignment: CrossAxisAlignment.start,
+                              mainAxisSize: MainAxisSize.min,
+                              children: <Widget>[
+                                Text(
+                                  "Your Cart",
+                                  style: TextStyle(
+                                      fontFamily: 'Gilroy',
+                                      fontSize: 32.0 * constants.scaleRatio,
+                                      fontWeight: FontWeight.bold,
+                                      color: colors.cartHeaderColor),
+                                ),
+                                Text(
+                                  "Grand Total ₹" +
+                                      ((model.sum > 499)
+                                          ? model.sum.toString().toString()
+                                          : (model.sum + 20).toString()),
+                                  style: TextStyle(
+                                      fontFamily: 'Gilroy',
+                                      fontSize: 12.0 * constants.scaleRatio,
+                                      fontWeight: FontWeight.w600,
+                                      color: colors.cartHeaderColor),
+                                ),
+                              ],
+                            ),
+                          )
+                        ],
+                      ),
+                    ),
+                  ),
+                  Padding(
+                    padding: EdgeInsets.only(
+                        left: 37.0 * constants.scaleRatio,
+                        top: 0.0 * constants.scaleRatio),
+                    child: RawMaterialButton(
+                      elevation: 0.0,
+                      focusElevation: 1,
+                      focusColor: colors.cartButtonBackground,
+                      onPressed: () {
+                        checkoutButtonPressed();
+                      },
+                      fillColor: colors.cartButtonBackground,
+                      shape: RoundedRectangleBorder(
+                        borderRadius: BorderRadius.circular(3),
+                      ),
+                      child: SizedBox(
+                        width: constants.CartConfig.checkoutButtonWidth,
+                        height: constants.CartConfig.checkoutButtonHeight,
+                        child: Center(
+                          child: Text(
+                            'Checkout Now',
+                            style: TextStyle(
+                                color: colors.cartButtonText,
+                                fontSize: 12.0 * constants.scaleRatio,
+                                fontWeight: FontWeight.bold),
+                          ),
+                        ),
+                      ),
+                    ),
+                  )
+                ],
+              ),
             ),
             Container(
               height: 33.0 * constants.scaleRatio,
@@ -138,89 +216,11 @@ class CartHeader extends StatelessWidget {
             bottom: 0.0,
             child: Image(
               height: 137.67 * constants.scaleRatio,
-              width: 181.72 * constants.scaleRatio,
+              width: 172 * constants.scaleRatio,
               image: AssetImage(
                 'assets/images/shopping_cart.png',
               ),
             )),
-        Column(
-          mainAxisSize: MainAxisSize.max,
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: <Widget>[
-            IntrinsicHeight(
-              child: Padding(
-                padding: EdgeInsets.only(top: 13.43 * constants.scaleRatio),
-                child: Row(
-                  crossAxisAlignment: CrossAxisAlignment.start,
-                  children: <Widget>[
-                    Container(
-                      width: 18.93 * constants.scaleRatio,
-                      color: colors.cartHeaderColor,
-                    ),
-                    Padding(
-                      padding: const EdgeInsets.only(left: 8.0),
-                      child: Column(
-                        crossAxisAlignment: CrossAxisAlignment.start,
-                        mainAxisSize: MainAxisSize.min,
-                        children: <Widget>[
-                          Text(
-                            "Your Cart",
-                            style: TextStyle(
-                                fontFamily: 'Gilroy',
-                                fontSize: 32.0 * constants.scaleRatio,
-                                fontWeight: FontWeight.bold,
-                                color: colors.cartHeaderColor),
-                          ),
-                          Text(
-                            "Grand Total ₹" +
-                                ((model.sum > 499)
-                                    ? model.sum.toString().toString()
-                                    : (model.sum + 20).toString()),
-                            style: TextStyle(
-                                fontFamily: 'Gilroy',
-                                fontSize: 12.0 * constants.scaleRatio,
-                                fontWeight: FontWeight.w600,
-                                color: colors.cartHeaderColor),
-                          ),
-                        ],
-                      ),
-                    )
-                  ],
-                ),
-              ),
-            ),
-            Padding(
-              padding: EdgeInsets.only(
-                  left: 37.0 * constants.scaleRatio,
-                  top: 0.0 * constants.scaleRatio),
-              child: RawMaterialButton(
-                elevation: 0.0,
-                focusElevation: 1,
-                focusColor: colors.cartButtonBackground,
-                onPressed: () {
-                  checkoutButtonPressed();
-                },
-                fillColor: colors.cartButtonBackground,
-                shape: RoundedRectangleBorder(
-                  borderRadius: BorderRadius.circular(3),
-                ),
-                child: SizedBox(
-                  width: constants.CartConfig.checkoutButtonWidth,
-                  height: constants.CartConfig.checkoutButtonHeight,
-                  child: Center(
-                    child: Text(
-                      'Checkout Now',
-                      style: TextStyle(
-                          color: colors.cartButtonText,
-                          fontSize: 12.0 * constants.scaleRatio,
-                          fontWeight: FontWeight.bold),
-                    ),
-                  ),
-                ),
-              ),
-            )
-          ],
-        ),
       ],
     );
   }

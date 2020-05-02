@@ -158,8 +158,8 @@ class Apis {
   }
 
   Future<CartEdit> editCartList(
-      {@required String product_id, @required String quantity}) async {
-    Map<String, String> body = {"product_id": product_id, "quantity": quantity};
+      {@required String productId, @required String quantity}) async {
+    Map<String, String> body = {"product_id": productId, "quantity": quantity};
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
@@ -170,9 +170,10 @@ class Apis {
             'Authorization': 'Bearer $jwt',
           },
           body: body);
+      print(response.body);
       return CartEdit.fromJson(json.decode(response.body));
     } else
-      (print("Network failure"));
+      print("Network failure");
   }
 
   Future<bool> placeOrder({@required String addressId}) async {
