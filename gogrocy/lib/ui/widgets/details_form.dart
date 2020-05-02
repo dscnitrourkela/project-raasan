@@ -225,11 +225,8 @@ class _DetailsFormState extends State<DetailsForm> {
                                 fontWeight: FontWeight.bold),
                           ),
                           onPressed: () async {
-                            assert(model.detailsFormKey.currentState.validate(),
-                                "details form error");
                             var result = await model.signUpWithApi();
                             if (result) {
-                              await
                               FireStoreService.addUser(
                                   phoneNumber: widget.mobile,
                                   countryCode: widget.countryCode);

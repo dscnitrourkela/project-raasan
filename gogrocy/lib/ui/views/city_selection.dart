@@ -94,6 +94,7 @@ class CitySelectionView extends StatelessWidget {
                       String city =
                           model.selectedCityTile == 1 ? "Jeypore" : "Sunabeda";
                       await _sharedPrefsService.setCity(city);
+                      _navigationService.goBack();
                       _navigationService.navigateTo('home');
                     }
                   },

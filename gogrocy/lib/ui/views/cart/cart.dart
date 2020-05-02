@@ -124,7 +124,7 @@ class CartHeader extends StatelessWidget {
         Column(
           children: <Widget>[
             Container(
-              height: 120 * constants.scaleRatio,
+              height: 0.195 * constants.screenHeight,
               color: colors.cartHeaderContainer,
               child: Column(
                 mainAxisSize: MainAxisSize.max,
@@ -132,12 +132,12 @@ class CartHeader extends StatelessWidget {
                 children: <Widget>[
                   IntrinsicHeight(
                     child: Padding(
-                      padding: EdgeInsets.only(top: 13.43 * constants.scaleRatio),
+                      padding: EdgeInsets.only(top: 0.020 * constants.screenHeight),
                       child: Row(
                         crossAxisAlignment: CrossAxisAlignment.start,
                         children: <Widget>[
                           Container(
-                            width: 18.93 * constants.scaleRatio,
+                            width: 0.046 * constants.screenWidth,
                             color: colors.cartHeaderColor,
                           ),
                           Padding(
@@ -150,7 +150,7 @@ class CartHeader extends StatelessWidget {
                                   "Your Cart",
                                   style: TextStyle(
                                       fontFamily: 'Gilroy',
-                                      fontSize: 32.0 * constants.scaleRatio,
+                                      fontSize: 0.077 * constants.screenWidth,
                                       fontWeight: FontWeight.bold,
                                       color: colors.cartHeaderColor),
                                 ),
@@ -161,7 +161,7 @@ class CartHeader extends StatelessWidget {
                                           : (model.sum + 20).toString()),
                                   style: TextStyle(
                                       fontFamily: 'Gilroy',
-                                      fontSize: 12.0 * constants.scaleRatio,
+                                      fontSize: 0.032 * constants.screenWidth,
                                       fontWeight: FontWeight.w600,
                                       color: colors.cartHeaderColor),
                                 ),
@@ -174,8 +174,8 @@ class CartHeader extends StatelessWidget {
                   ),
                   Padding(
                     padding: EdgeInsets.only(
-                        left: 37.0 * constants.scaleRatio,
-                        top: 0.0 * constants.scaleRatio),
+                        left: 0.075 * constants.screenWidth,
+                        top: 0.012 * constants.screenHeight),
                     child: RawMaterialButton(
                       elevation: 0.0,
                       focusElevation: 1,
@@ -195,7 +195,7 @@ class CartHeader extends StatelessWidget {
                             'Checkout Now',
                             style: TextStyle(
                                 color: colors.cartButtonText,
-                                fontSize: 12.0 * constants.scaleRatio,
+                                fontSize: 0.031 * constants.screenWidth,
                                 fontWeight: FontWeight.bold),
                           ),
                         ),
@@ -206,17 +206,19 @@ class CartHeader extends StatelessWidget {
               ),
             ),
             Container(
-              height: 33.0 * constants.scaleRatio,
+              height: 0.035 * constants.screenHeight,
               color: Colors.white,
             )
           ],
         ),
         Positioned(
             right: 0.0,
-            bottom: 0.0,
+            top: 0.0597 * constants.screenHeight,
+            //bottom: 0.0,
+            //top: 10.0,
             child: Image(
-              height: 137.67 * constants.scaleRatio,
-              width: 172 * constants.scaleRatio,
+              height: 0.180 * constants.screenHeight,
+              width: 0.450 * constants.screenWidth,
               image: AssetImage(
                 'assets/images/shopping_cart.png',
               ),

@@ -12,20 +12,19 @@ final String playStoreUrl =
     "https://play.google.com/store/apps/details?id=in.gogrocy.gogrocy";
 
 class LoginConfig {
-  static double loginTextFieldWidth = 280 * scaleRatio;
-  static double titleTextSize = 22 * scaleRatio;
+  static double titleTextSize = 0.053 * screenWidth;
 }
 
 class SignUpConfig {
-  static double textFieldWidth = 275 * scaleRatio;
+  static double textFieldWidth = 0.783 * screenWidth;
   static double raisedButtonWidth = 0.283 * screenWidth;
   static double raisedButtonHeight = 0.095 * screenWidth;
 }
 
 class OnBoardingConfig {
-  static double illustrationWidth = 316.21 * scaleRatio;
-  static double illustrationHeight = 280 * scaleRatio;
-  static double footerTextSize = 14 * scaleRatio;
+  static double illustrationWidth = 0.769 * screenWidth;
+  static double illustrationHeight = 0.478 * screenHeight;
+  static double footerTextSize = 0.034 * screenWidth;
 }
 
 class BottomNavBarConfig {
@@ -41,7 +40,7 @@ class BottomNavBarConfig {
 }
 
 class AppBarConfig {
-  static double appBarHeight = 63.0 * scaleRatio;
+  static double appBarHeight = 0.100 * screenHeight;
   static double appBarWidth = screenWidth;
   static double titleFontSize = 0.0267 * screenHeight;
   static double searchIconSize = 0.5 * appBarHeight;
@@ -76,12 +75,15 @@ class HomePageConfig {
 }
 
 class CartConfig {
-  static double checkoutButtonWidth = 105.17 * scaleRatio;
-  static double checkoutButtonHeight = 27.27 * scaleRatio;
+  static double checkoutButtonWidth = 0.255 * screenWidth;
+  static double checkoutButtonHeight = 0.033 * screenHeight;
 
   static double imageWidth = (155 / 411) * screenWidth;
   static double imageHeight = (147 / 823) * screenHeight;
 
   static double counterHeight = (25.46 / 823) * screenHeight;
   static double counterWidth = (91 / 411) * screenWidth;
+
+  static double shoppingCartWidth = 0.442 * screenWidth;
+  static double shoppingCartHeight = 0.170 * screenHeight;
 }

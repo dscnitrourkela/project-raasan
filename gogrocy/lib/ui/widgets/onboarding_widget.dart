@@ -19,7 +19,7 @@ class OnBoardingWidget extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.center,
               children: <Widget>[
                 Align(
-                  alignment: Alignment(-1.3 * constants.scaleRatio, 0.0),
+                  alignment: Alignment(-0.500, 0.0),
                   child: Image.asset(
                     'assets/images/woman.png',
                     width: constants.OnBoardingConfig.illustrationWidth,

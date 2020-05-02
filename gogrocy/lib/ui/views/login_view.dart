@@ -43,7 +43,7 @@ class LoginView extends StatelessWidget {
                       spacing: 0.024 * constants.screenWidth,
                     ),
                   ),*/
-                  VerticalSpaces.extraLarge,
+                  //VerticalSpaces.extraLarge,
                 ],
               ),
               IgnorePointer(

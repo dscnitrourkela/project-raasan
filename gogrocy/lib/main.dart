@@ -1,6 +1,6 @@
 import 'dart:ui';
 
-//import 'package:firebase_crashlytics/firebase_crashlytics.dart';
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -14,8 +14,8 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 void main() {
-  //Crashlytics.instance.enableInDevMode = true;
-  //FlutterError.onError = Crashlytics.instance.recordFlutterError;
+  Crashlytics.instance.enableInDevMode = true;
+  FlutterError.onError = Crashlytics.instance.recordFlutterError;
   setupLocator();
   runApp(GoGrocyApp());
 }
