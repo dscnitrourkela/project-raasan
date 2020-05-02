@@ -55,13 +55,21 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                                       ),
                                     ));
                               else
-                                return Text(
-                                  snapshot.data,
-                                  style: TextStyle(
-                                      fontSize: constants
-                                          .AppBarConfig.addressFontSize,
-                                      color: Colors.black,
-                                      fontWeight: FontWeight.w500),
+                                return Row(
+                                  crossAxisAlignment: CrossAxisAlignment.center,
+                                  mainAxisSize: MainAxisSize.min,
+                                  mainAxisAlignment:MainAxisAlignment.start,
+                                  children: <Widget>[
+                                    Icon(Icons.location_on,color: Colors.green,size: 14,),
+                                    Text(
+                                      snapshot.data,
+                                      style: TextStyle(
+                                          fontSize: constants
+                                              .AppBarConfig.addressFontSize,
+                                          color: Colors.black,
+                                          fontWeight: FontWeight.w500),
+                                    ),
+                                  ],
                                 );
                             },
                           )
