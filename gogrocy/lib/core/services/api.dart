@@ -6,6 +6,7 @@ import 'package:gogrocy/core/models/orders.dart';
 import 'package:gogrocy/core/models/ProductsByCity.dart';
 import 'package:gogrocy/core/models/cart_edit.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
+import 'package:gogrocy/core/models/place_order.dart';
 import 'package:gogrocy/core/models/product.dart';
 import 'package:gogrocy/core/models/signup_model.dart';
 import 'package:gogrocy/core/models/user.dart';
@@ -184,12 +185,21 @@ class Apis {
     bool connectionState = await checkStatus();
     if (connectionState) //TODO: Add a proper else return
     {
-      var response = await client.post(orderRequest,
-          headers: {
-            'Authorization': 'Bearer $jwt',
-          },
-          body: body);
-      return true;
+      try{
+        var response = await client.post(orderRequest,
+            headers: {
+              'Authorization': 'Bearer $jwt',
+            },
+            body: body);
+        if(PlaceOrder.fromJson(json.decode(response.body)).success)
+          return true;
+        else return false;
+      }
+      catch(e)
+      {
+        print(e);
+        return false;
+      }
     } else
       return false;
   }

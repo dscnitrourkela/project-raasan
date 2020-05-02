@@ -28,7 +28,7 @@ class _GridListState extends State<GridList>
     super.build(context);
     if (widget.resultList.length != 0)
       return GridView.builder(
-          itemCount: 8,
+          itemCount: (widget.resultList.length>=8)?8:widget.resultList.length,
           shrinkWrap: true,
           controller: _scrollController,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
