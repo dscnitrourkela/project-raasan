@@ -2,7 +2,6 @@ import 'package:flutter/material.dart';
 
 bool isLoggedIn = false;
 MediaQueryData mediaQueryData;
-double scaleRatio = mediaQueryData.devicePixelRatio / 2.002;
 double screenHeight = mediaQueryData.size.height;
 double screenWidth = mediaQueryData.size.width;
 

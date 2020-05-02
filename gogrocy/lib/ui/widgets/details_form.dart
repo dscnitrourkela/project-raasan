@@ -149,7 +149,7 @@ class _DetailsFormState extends State<DetailsForm> {
                 VerticalSpaces.small20,
                 Text(
                   'Create password',
-                  style: TextStyle(fontSize: 14.0 * constants.scaleRatio),
+                  style: TextStyle(fontSize: 0.034 * constants.screenWidth),
                 ),
                 VerticalSpaces.small10,
                 SizedBox(

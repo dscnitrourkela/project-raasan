@@ -92,8 +92,8 @@ class Cart extends StatelessWidget {
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(
-              width: 60.0 * constants.scaleRatio,
-              height: 60.0 * constants.scaleRatio,
+              width: 0.146 * constants.screenWidth,
+              height: 0.146 * constants.screenWidth,
               child: Image(
                 image: AssetImage("assets/images/empty-cart.png"),
               )),

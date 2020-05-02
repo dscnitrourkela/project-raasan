@@ -60,8 +60,8 @@ class _AddressViewState extends State<AddressView> {
                     itemCount: model.addressList.length,
                     itemBuilder: (BuildContext context, int index) => Padding(
                       padding: EdgeInsets.symmetric(
-                          horizontal: 10.0 * constants.scaleRatio,
-                          vertical: 10.0 * constants.scaleRatio),
+                          horizontal: 0.024 * constants.screenWidth,
+                          vertical: 0.024 * constants.screenWidth),
                       child: Card(
                         elevation: 4.0,
                         color: Colors.white,
