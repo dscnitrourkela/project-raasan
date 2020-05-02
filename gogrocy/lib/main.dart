@@ -4,6 +4,7 @@ import 'dart:ui';
 import 'package:firebase_remote_config/firebase_remote_config.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
+import 'package:gogrocy/core/services/analytics_service.dart';
 import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/router.dart';
@@ -12,6 +13,7 @@ import 'package:gogrocy/ui/views/startup_view.dart';
 import 'package:package_info/package_info.dart';
 import 'package:url_launcher/url_launcher.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
+import 'package:firebase_messaging/firebase_messaging.dart';
 
 void main() {
   //Crashlytics.instance.enableInDevMode = true;
@@ -58,6 +60,10 @@ class _GoGrocyAppState extends State<GoGrocyApp> {
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       title: 'GoGrocy',
+      navigatorObservers: [
+        locator<AnalyticsService>().getAnalyticsObserver(),
+
+      ],
       theme: ThemeData(
         scaffoldBackgroundColor: Colors.white,
         primarySwatch: primaryColor,
