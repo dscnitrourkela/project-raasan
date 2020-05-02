@@ -20,40 +20,40 @@ class _CategoryListState extends State<CategoryList>
   final List<String> categoryTitle = [
     "Grocery",
     "Food",
+    "Healthcare",
     "Rice and its products",
     "Toiletries",
     "Detergents",
     "Pulses and Flour",
     "Oil and Ghee",
     "Packed Foods",
-    "Masala",
-    "Healthcare"
+    "Masala"
   ];
 
   final List<String> assetPaths = [
     "assets/images/grocery.png",
     "assets/images/pizza.png",
+    "assets/images/healthcare.png",
     "assets/images/rice.png",
     "assets/images/toiletries.png",
     "assets/images/detergent.png",
     "assets/images/pulses.png",
     "assets/images/oil_ghee.png",
     "assets/images/snacks.png",
-    "assets/images/masala.png",
-    "assets/images/healthcare.png"
+    "assets/images/masala.png"
   ];
 
   final List<String> catId = [
     "2",
     "6",
+    "18",
     "7",
     "9",
     "10",
     "12",
     "14",
     "15",
-    "16",
-    "18"
+    "16"
   ];
 
   @override

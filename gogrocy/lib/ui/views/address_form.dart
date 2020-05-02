@@ -29,7 +29,7 @@ class _AddressFormState extends State<AddressForm> {
             key: addressFormKey,
             child: ListView(
               padding:
-                  EdgeInsets.symmetric(horizontal: 20.0 * constants.scaleRatio),
+                  EdgeInsets.symmetric(horizontal: 0.049 * constants.screenWidth),
               shrinkWrap: true,
               children: <Widget>[
                 Text('What do we call you?'),
@@ -168,7 +168,7 @@ class _AddressFormState extends State<AddressForm> {
                 VerticalSpaces.small20,
                 Padding(
                   padding: EdgeInsets.symmetric(
-                      horizontal: 80 * constants.scaleRatio),
+                      horizontal: 0.195 * constants.screenWidth),
                   child: RaisedButton(
                     shape: RoundedRectangleBorder(
                         borderRadius: BorderRadius.circular(10.0)),

@@ -164,7 +164,7 @@ class Apis {
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var response = await client.post(editCart,
           headers: {
@@ -184,7 +184,7 @@ class Apis {
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       try{
         var response = await client.post(orderRequest,
@@ -208,12 +208,11 @@ class Apis {
   Future<ProductsByCity> getProductsByCity() async {
     Map<String, String> body = {
       "city": await _sharedPrefsService.getCity(),
-      // TODO: Add city here from SharedPrefs
     };
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var response = await client.post(getProductsByCityRequest,
           headers: {
@@ -228,13 +227,12 @@ class Apis {
   Future<ProductsByCity> getProductsByCityCategory(String cat_id) async {
     Map<String, String> body = {
       "city": await _sharedPrefsService.getCity(),
-      // TODO: Add city here from SharedPrefs
       "cat_id": cat_id
     };
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var response = await client.post(getCategoriesByCityRequest,
           headers: {
@@ -249,13 +247,12 @@ class Apis {
   Future<ProductsByCity> searchProductByCity(String query) async {
     Map<String, String> body = {
       "city": await _sharedPrefsService.getCity(),
-      // TODO: Add city here from SharedPrefs
       "query": query
     };
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var response = await client.post(searchByCity,
           headers: {
@@ -270,7 +267,7 @@ class Apis {
   Future<List<Product>> getAllProducts() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var products = List<Product>();
       var response = await client.post(allProducts);
@@ -291,9 +288,8 @@ class Apis {
     String jwt = await _sharedPrefsService.getJWT();
     Map<String, String> body = {
       "city": await _sharedPrefsService.getCity(),
-      // TODO: Add city here from SharedPrefs
     };
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var products = List<Product>();
       var response = await client.post(allProducts,
@@ -318,7 +314,7 @@ class Apis {
     var client = new http.Client();
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var address = List<Address>();
       var response = await client.post(getAddress, headers: {
@@ -341,7 +337,7 @@ class Apis {
     var client = new http.Client();
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var response = await client.post(getOrderRequest, headers: {
         'Content-Type': 'application/json',
@@ -359,7 +355,7 @@ class Apis {
     var client = http.Client();
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var response = await client.post(cartList, headers: {
         'Content-Type': 'application/json',
