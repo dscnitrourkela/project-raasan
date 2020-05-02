@@ -14,7 +14,7 @@ import 'package:url_launcher/url_launcher.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 void main() {
-  Crashlytics.instance.enableInDevMode = true;
+//  Crashlytics.instance.enableInDevMode = true;
   FlutterError.onError = Crashlytics.instance.recordFlutterError;
   setupLocator();
   runApp(GoGrocyApp());
