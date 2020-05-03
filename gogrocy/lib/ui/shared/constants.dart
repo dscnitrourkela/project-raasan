@@ -22,7 +22,7 @@ class SignUpConfig {
 
 class OnBoardingConfig {
   static double illustrationWidth = 0.769 * screenWidth;
-  static double illustrationHeight = 0.478 * screenHeight;
+  static double illustrationHeight = 0.468 * screenHeight;
   static double footerTextSize = 0.034 * screenWidth;
 }
 

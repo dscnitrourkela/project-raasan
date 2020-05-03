@@ -225,17 +225,18 @@ class _DetailsFormState extends State<DetailsForm> {
                                 fontWeight: FontWeight.bold),
                           ),
                           onPressed: () async {
-                            var result = await model.signUpWithApi();
-                            if (result) {
-                              FireStoreService.addUser(
-                                  phoneNumber: widget.mobile,
-                                  countryCode: widget.countryCode);
+                            if (model.detailsFormKey.currentState.validate()) {
+                              var result = await model.signUpWithApi();
+                              if (result) {
+                                FireStoreService.addUser(
+                                    phoneNumber: widget.mobile,
+                                    countryCode: widget.countryCode);
+                              }
                             }
                           },
                         )
                       : Center(child: CircularProgressIndicator()),
                 ),
-                VerticalSpaces.small10,
               ],
             ),
           ),

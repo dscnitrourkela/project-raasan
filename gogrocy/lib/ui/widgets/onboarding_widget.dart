@@ -27,7 +27,7 @@ class OnBoardingWidget extends StatelessWidget {
                   ),
                 ),
                 Padding(
-                  padding: EdgeInsets.only(top: 0.021 * constants.screenHeight),
+                  padding: EdgeInsets.only(top: 0.005 * constants.screenHeight),
                   child: SizedBox(
                     width: 0.493 * constants.screenWidth,
                     height: 0.049 * constants.screenHeight,
