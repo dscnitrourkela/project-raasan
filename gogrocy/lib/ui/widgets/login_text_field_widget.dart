@@ -78,7 +78,7 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Text(
-                'Let\'s Begin',
+                'Let\'s Begin ',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Gilroy',
@@ -171,7 +171,8 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                 ],
               ),
               Text(
-                'You will receive an OTP for verifying this number',
+                'Verification will be done via OTP for new users and via password for existing users',
+                textAlign: TextAlign.center,
               ),
             ],
           ),
