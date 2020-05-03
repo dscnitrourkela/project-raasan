@@ -28,7 +28,7 @@ class _GridListState extends State<GridList>
     super.build(context);
     if (widget.resultList.length != 0)
       return GridView.builder(
-          itemCount: 8,
+          itemCount: (widget.resultList.length>=8)?8:widget.resultList.length,
           shrinkWrap: true,
           controller: _scrollController,
           gridDelegate: SliverGridDelegateWithFixedCrossAxisCount(
@@ -127,8 +127,8 @@ class _GridListState extends State<GridList>
         mainAxisAlignment: MainAxisAlignment.center,
         children: <Widget>[
           SizedBox(
-              width: 60.0 * constants.scaleRatio,
-              height: 60.0 * constants.scaleRatio,
+              width: 0.146 * constants.screenWidth,
+              height: 0.146 * constants.screenWidth,
               child: Image(
                 image: AssetImage("assets/images/no_products.png"),
               )),
@@ -136,7 +136,7 @@ class _GridListState extends State<GridList>
             "You don't have any orders",
             textAlign: TextAlign.center,
             style: TextStyle(
-                fontSize: 18.0,
+                fontSize: 0.044 * constants.screenWidth,
                 fontFamily: 'Gilroy',
                 fontWeight: FontWeight.bold),
           ),

@@ -29,7 +29,7 @@ class LoginView extends StatelessWidget {
                 children: <Widget>[
                   Hero(tag: 'GoGrocy', child: TitleText()),
                   OnBoardingWidget(controller),
-                  VerticalSpaces.small10,
+                  VerticalSpaces.extraLarge,
                   /*SmoothPageIndicator(
                     controller: controller,
                     count: 3,
@@ -43,7 +43,7 @@ class LoginView extends StatelessWidget {
                       spacing: 0.024 * constants.screenWidth,
                     ),
                   ),*/
-                  VerticalSpaces.extraLarge,
+                  //VerticalSpaces.extraLarge,
                 ],
               ),
               IgnorePointer(

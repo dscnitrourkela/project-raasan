@@ -20,8 +20,8 @@ class OtpTextField extends StatelessWidget {
 
       autoDisposeControllers: false,
       length: 6,
-      fieldHeight: 34 * constants.scaleRatio,
-      fieldWidth: 32 * constants.scaleRatio,
+      fieldHeight: 0.05 * constants.screenHeight,
+      fieldWidth: 0.09 * constants.screenWidth,
       shape: PinCodeFieldShape.box,
       borderRadius: BorderRadius.circular(12.0),
       borderWidth: 1.50,

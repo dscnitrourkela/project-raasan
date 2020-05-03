@@ -25,7 +25,7 @@ class CitySelectionView extends StatelessWidget {
               Center(
                 child: Text(
                   'Select City',
-                  style: TextStyle(fontSize: 20.0 * constants.scaleRatio),
+                  style: TextStyle(fontSize: 0.049 * constants.screenWidth),
                 ),
               ),
               RadioListTile(
@@ -50,8 +50,8 @@ class CitySelectionView extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.symmetric(
-                    horizontal: 100.0 * constants.scaleRatio,
-                    vertical: 50.0 * constants.scaleRatio),
+                    horizontal: 0.336 * constants.screenWidth,
+                    vertical: 0.059 * constants.screenHeight),
                 child: RaisedButton(
                   shape: RoundedRectangleBorder(
                       borderRadius: BorderRadius.circular(10.0)),
@@ -61,6 +61,7 @@ class CitySelectionView extends StatelessWidget {
                     style: TextStyle(
                         color: Colors.white,
                         fontFamily: 'Gilroy',
+                        fontSize: 0.039 * constants.screenWidth,
                         fontWeight: FontWeight.bold),
                   ),
                   onPressed: () async {
@@ -94,6 +95,7 @@ class CitySelectionView extends StatelessWidget {
                       String city =
                           model.selectedCityTile == 1 ? "Jeypore" : "Sunabeda";
                       await _sharedPrefsService.setCity(city);
+                      _navigationService.goBack();
                       _navigationService.navigateTo('home');
                     }
                   },

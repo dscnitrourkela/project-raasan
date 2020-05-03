@@ -39,14 +39,14 @@ class LoginModel extends BaseModel {
       @required String phoneNumber,
       @required String countryCode}) async {
     //var internetStatus = await checkInternetStatus();
-    setState(ViewState.Busy);
+    //setState(ViewState.Busy);
 
     //var finalNumber = countryCode + " " + phoneNumber;
 
     var result = await authenticationService.verifyPhoneNumber(
         context, phoneNumber, countryCode);
 
-    setState(ViewState.Idle);
+    //setState(ViewState.Idle);
 
     if (result is bool) {
       if (result) {
@@ -69,13 +69,13 @@ class LoginModel extends BaseModel {
       @required String countryCode}) async {
     setState(ViewState.Busy);
 
-    /*var result = */
+    var result =
     await authenticationService.signInWithOtp(
         authenticationService.verificationId, otp);
 
     setState(ViewState.Idle);
 
-    /*if (result is bool) {
+    if (result is bool) {
       if (result) {
         print('login success with otp');
         navigationService.goBack();
@@ -96,7 +96,7 @@ class LoginModel extends BaseModel {
           content: Text('Login Unsuccessful'),
         ),
       );
-    }*/
+    }
   }
 
   Future<User> loginWithApi(

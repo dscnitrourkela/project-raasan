@@ -27,7 +27,7 @@ class CartViewModel extends BaseModel {
       print(
           "Updating API calledUpdating API calledUpdating API calledUpdating API calledUpdating API called");
       cartEditResponse =
-          await _apis.editCartList(product_id: productId, quantity: quantity);
+          await _apis.editCartList(productId: productId, quantity: quantity);
       cartList = await _apis.getCartList();
       setState(ViewState.Idle);
     }
@@ -35,7 +35,7 @@ class CartViewModel extends BaseModel {
 
   Future editCartList(String product_id, String quantity) async {
     setState(ViewState.Busy);
-    await _apis.editCartList(product_id: product_id, quantity: quantity);
+    await _apis.editCartList(productId: product_id, quantity: quantity);
     setState(ViewState.Idle);
   }
 }

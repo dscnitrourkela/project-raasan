@@ -1,4 +1,5 @@
 import 'package:get_it/get_it.dart';
+import 'package:gogrocy/core/services/analytics_service.dart';
 import 'package:gogrocy/core/services/authentication_service.dart';
 import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/core/services/shared_prefs.dart';
@@ -22,6 +23,7 @@ GetIt locator = GetIt.instance;
 void setupLocator() {
   locator.registerFactory<SharedPrefsService>(() => SharedPrefsService());
   //locator.registerFactory(()=>SignUpViewModel());
+  locator.registerLazySingleton(() => AnalyticsService());
   locator.registerFactory(() => CitySelectionModel());
   locator.registerFactory<StartupViewModel>(() => StartupViewModel());
   locator.registerFactory<NavigationService>(() => NavigationService());

@@ -6,6 +6,7 @@ import 'package:gogrocy/core/models/orders.dart';
 import 'package:gogrocy/core/models/ProductsByCity.dart';
 import 'package:gogrocy/core/models/cart_edit.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
+import 'package:gogrocy/core/models/place_order.dart';
 import 'package:gogrocy/core/models/product.dart';
 import 'package:gogrocy/core/models/signup_model.dart';
 import 'package:gogrocy/core/models/user.dart';
@@ -158,21 +159,22 @@ class Apis {
   }
 
   Future<CartEdit> editCartList(
-      {@required String product_id, @required String quantity}) async {
-    Map<String, String> body = {"product_id": product_id, "quantity": quantity};
+      {@required String productId, @required String quantity}) async {
+    Map<String, String> body = {"product_id": productId, "quantity": quantity};
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var response = await client.post(editCart,
           headers: {
             'Authorization': 'Bearer $jwt',
           },
           body: body);
+      print(response.body);
       return CartEdit.fromJson(json.decode(response.body));
     } else
-      (print("Network failure"));
+      print("Network failure");
   }
 
   Future<bool> placeOrder({@required String addressId}) async {
@@ -182,14 +184,23 @@ class Apis {
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
-      var response = await client.post(orderRequest,
-          headers: {
-            'Authorization': 'Bearer $jwt',
-          },
-          body: body);
-      return true;
+      try{
+        var response = await client.post(orderRequest,
+            headers: {
+              'Authorization': 'Bearer $jwt',
+            },
+            body: body);
+        if(PlaceOrder.fromJson(json.decode(response.body)).success)
+          return true;
+        else return false;
+      }
+      catch(e)
+      {
+        print(e);
+        return false;
+      }
     } else
       return false;
   }
@@ -197,12 +208,11 @@ class Apis {
   Future<ProductsByCity> getProductsByCity() async {
     Map<String, String> body = {
       "city": await _sharedPrefsService.getCity(),
-      // TODO: Add city here from SharedPrefs
     };
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var response = await client.post(getProductsByCityRequest,
           headers: {
@@ -217,13 +227,12 @@ class Apis {
   Future<ProductsByCity> getProductsByCityCategory(String cat_id) async {
     Map<String, String> body = {
       "city": await _sharedPrefsService.getCity(),
-      // TODO: Add city here from SharedPrefs
       "cat_id": cat_id
     };
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var response = await client.post(getCategoriesByCityRequest,
           headers: {
@@ -238,13 +247,12 @@ class Apis {
   Future<ProductsByCity> searchProductByCity(String query) async {
     Map<String, String> body = {
       "city": await _sharedPrefsService.getCity(),
-      // TODO: Add city here from SharedPrefs
       "query": query
     };
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var response = await client.post(searchByCity,
           headers: {
@@ -259,7 +267,7 @@ class Apis {
   Future<List<Product>> getAllProducts() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var products = List<Product>();
       var response = await client.post(allProducts);
@@ -280,9 +288,8 @@ class Apis {
     String jwt = await _sharedPrefsService.getJWT();
     Map<String, String> body = {
       "city": await _sharedPrefsService.getCity(),
-      // TODO: Add city here from SharedPrefs
     };
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var products = List<Product>();
       var response = await client.post(allProducts,
@@ -307,7 +314,7 @@ class Apis {
     var client = new http.Client();
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var address = List<Address>();
       var response = await client.post(getAddress, headers: {
@@ -330,7 +337,7 @@ class Apis {
     var client = new http.Client();
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var response = await client.post(getOrderRequest, headers: {
         'Content-Type': 'application/json',
@@ -348,7 +355,7 @@ class Apis {
     var client = http.Client();
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
-    if (connectionState) //TODO: Add a proper else return
+    if (connectionState)
     {
       var response = await client.post(cartList, headers: {
         'Content-Type': 'application/json',

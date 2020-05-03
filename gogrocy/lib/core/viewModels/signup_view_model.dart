@@ -1,6 +1,7 @@
 import 'package:flutter/animation.dart';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
+import 'package:gogrocy/core/enums/viewstate.dart';
 import 'package:gogrocy/core/services/api.dart';
 import 'package:gogrocy/core/services/navigation_service.dart';
 import 'package:gogrocy/core/services/shared_prefs.dart';
@@ -33,6 +34,7 @@ class SignUpViewModel extends BaseModel {
 
   final Apis _apiService = locator<Apis>();
   final NavigationService _navigationService = locator<NavigationService>();
+  final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
 
   final GlobalKey<FormState> detailsFormKey = GlobalKey<FormState>();
   GlobalKey<ScaffoldState> signUpScaffoldKey = GlobalKey<ScaffoldState>();
@@ -73,6 +75,7 @@ class SignUpViewModel extends BaseModel {
         );
 
   Future<bool> signUpWithApi() async {
+    setState(ViewState.Busy);
     var signUp = await _apiService.signUpApi(
         name: nameController.text,
         countryCode: countryCode,
@@ -82,7 +85,9 @@ class SignUpViewModel extends BaseModel {
         locality: addressController.text,
         city: cityController.text,
         zip: pinCodeController.text);
+    setState(ViewState.Idle);
     if (signUp.success) {
+      _sharedPrefsService.setLoggedIn(true);
       _navigationService.goBack();
       _navigationService.navigateTo('city');
       return true;
