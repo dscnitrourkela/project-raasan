@@ -63,26 +63,26 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
       PinCodeTextField otpTextField,
       LoginModel model}) {
     return Padding(
-      padding: EdgeInsets.symmetric(horizontal: 16 * constants.scaleRatio),
+      padding: EdgeInsets.symmetric(horizontal: 0.0365 * constants.screenWidth),
       child: Container(
         decoration: BoxDecoration(
           color: Colors.white,
-          borderRadius: BorderRadius.circular(14.0 * constants.scaleRatio),
+          borderRadius: BorderRadius.circular(0.039 * constants.screenWidth),
         ),
         child: Padding(
           padding: EdgeInsets.symmetric(
-            horizontal: 16 * constants.scaleRatio,
+            horizontal: 0.039 * constants.screenWidth,
           ),
           child: Column(
             mainAxisAlignment: MainAxisAlignment.spaceAround,
             mainAxisSize: MainAxisSize.max,
             children: <Widget>[
               Text(
-                'Let\'s Begin',
+                'Let\'s Begin ',
                 style: TextStyle(
                     fontWeight: FontWeight.bold,
                     fontFamily: 'Gilroy',
-                    fontSize: 18 * constants.scaleRatio),
+                    fontSize: 0.044 * constants.screenWidth),
               ),
               Row(
                 children: <Widget>[
@@ -100,14 +100,14 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                         hintText: 'Country code',
                         border: OutlineInputBorder(
                           borderRadius: BorderRadius.circular(
-                            10.0 * constants.scaleRatio,
+                            0.024 * constants.screenWidth,
                           ),
                         ),
                       ),
                     ),
                   ),
                   SizedBox(
-                    width: 7.851 * constants.scaleRatio,
+                    width: 0.019 * constants.screenWidth,
                   ),
                   Expanded(
                     flex: 4,
@@ -117,71 +117,62 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                     flex: 0,
                     child: Visibility(
                       visible: phoneFocusNode.hasFocus,
-                      child: model.state == ViewState.Idle
-                          ? IconButton(
-                              icon: Icon(
-                                Icons.check_circle_outline,
-                                color: model.hasConnection
-                                    ? primaryColor
-                                    : Colors.grey,
-                                size: 31.404 * constants.scaleRatio,
-                              ),
-                              onPressed: () async {
-                                if (model.loginFormKey.currentState
-                                    .validate()) {
-                                  if (model.hasConnection) {
-                                    var status = await model.getUserStatus(
-                                        phoneController.text,
-                                        countryCodeController.text);
-                                    print(status);
-                                    switch (status) {
-                                      case '0':
-                                        controller.animateToPage(1,
-                                            duration:
-                                                Duration(milliseconds: 250),
-                                            curve: Curves.easeOut);
-                                        model.loginWithPhone(
-                                            context: context,
-                                            phoneNumber: phoneController.text,
-                                            countryCode:
-                                                countryCodeController.text);
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.check_circle_outline,
+                          color:
+                              model.hasConnection ? primaryColor : Colors.grey,
+                          size: 0.0976 * constants.screenWidth,
+                        ),
+                        onPressed: () async {
+                          if (model.loginFormKey.currentState.validate()) {
+                            if (model.hasConnection) {
+                              var status = await model.getUserStatus(
+                                  phoneController.text,
+                                  countryCodeController.text);
+                              print(status);
+                              switch (status) {
+                                case '0':
+                                  controller.animateToPage(1,
+                                      duration: Duration(milliseconds: 250),
+                                      curve: Curves.easeOut);
+                                  model.loginWithPhone(
+                                      context: context,
+                                      phoneNumber: phoneController.text,
+                                      countryCode: countryCodeController.text);
 
-                                        break;
-                                      case '1':
-                                        controller.animateToPage(1,
-                                            duration:
-                                                Duration(milliseconds: 250),
-                                            curve: Curves.easeOut);
-                                        model.loginWithPhone(
-                                            context: context,
-                                            phoneNumber: phoneController.text,
-                                            countryCode:
-                                                countryCodeController.text);
-                                        break;
-                                      case '2':
-                                        setState(() {
-                                          userSignedUp = true;
-                                        });
-                                        controller.animateToPage(1,
-                                            duration:
-                                                Duration(milliseconds: 250),
-                                            curve: Curves.easeOut);
-                                    }
-                                  } else {
-                                    model.loginScaffoldKey.currentState
-                                        .showSnackBar(
-                                            SnackBars.noInternetSnackBar);
-                                  }
-                                }
-                              },
-                            )
-                          : CircularProgressIndicator(),
+                                  break;
+                                case '1':
+                                  controller.animateToPage(1,
+                                      duration: Duration(milliseconds: 250),
+                                      curve: Curves.easeOut);
+                                  model.loginWithPhone(
+                                      context: context,
+                                      phoneNumber: phoneController.text,
+                                      countryCode: countryCodeController.text);
+                                  break;
+                                case '2':
+                                  setState(() {
+                                    userSignedUp = true;
+                                  });
+                                  controller.animateToPage(1,
+                                      duration: Duration(milliseconds: 250),
+                                      curve: Curves.easeOut);
+                              }
+                            } else {
+                              model.loginScaffoldKey.currentState
+                                  .showSnackBar(SnackBars.noInternetSnackBar);
+                            }
+                          }
+                        },
+                      ),
                     ),
                   ),
                 ],
               ),
               Text(
-                'You will receive an OTP for verifying this number',
+                'Verification will be done via OTP for new users and via password for existing users',
+                textAlign: TextAlign.center,
               ),
             ],
           ),
@@ -223,24 +214,22 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                     flex: 0,
                     child: Padding(
                       padding:
-                          EdgeInsets.only(left: 6.318 * constants.scaleRatio),
+                          EdgeInsets.only(left: 0.0146 * constants.screenWidth),
                       child: Visibility(
                         visible: passwordFocusNode.hasFocus,
-                        child: model.state == ViewState.Idle
-                            ? IconButton(
-                                icon: Icon(
-                                  Icons.check_circle_outline,
-                                  color: primaryColor,
-                                  size: 0.094 * constants.screenWidth,
-                                ),
-                                onPressed: () async {
-                                  model.loginWithApi(
-                                      phoneNumber: phoneController.text,
-                                      countryCode: countryCodeController.text,
-                                      password: passwordController.text);
-                                },
-                              )
-                            : CircularProgressIndicator(),
+                        child: IconButton(
+                          icon: Icon(
+                            Icons.check_circle_outline,
+                            color: primaryColor,
+                            size: 0.094 * constants.screenWidth,
+                          ),
+                          onPressed: () async {
+                            model.loginWithApi(
+                                phoneNumber: phoneController.text,
+                                countryCode: countryCodeController.text,
+                                password: passwordController.text);
+                          },
+                        ),
                       ),
                     ),
                   ),
@@ -303,32 +292,30 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                     child: Padding(
                       padding:
                           EdgeInsets.only(left: 0.019 * constants.screenWidth),
-                      child: model.state == ViewState.Idle
-                          ? IconButton(
-                              icon: Icon(
-                                Icons.check_circle_outline,
-                                color: primaryColor,
-                                size: 0.094 * constants.screenWidth,
-                              ),
-                              onPressed: () {
-                                if (otpController.text.length == 6) {
-                                  model.loginWithOtp(
-                                      otp: otpController.text,
-                                      phoneNumber: phoneController.text,
-                                      context: context,
-                                      countryCode: countryCodeController.text);
-                                  SystemChannels.textInput
-                                      .invokeMethod('TextInput.hide');
-                                } else {
-                                  Flushbar(
-                                    message: 'OTP must be 6 digits',
-                                    duration: Duration(seconds: 2),
-                                  ).show(context);
-                                }
-                                //Navigator.of(context).pushNamed('awesome');
-                              },
-                            )
-                          : CircularProgressIndicator(),
+                      child: IconButton(
+                        icon: Icon(
+                          Icons.check_circle_outline,
+                          color: primaryColor,
+                          size: 0.094 * constants.screenWidth,
+                        ),
+                        onPressed: () {
+                          if (otpController.text.length == 6) {
+                            model.loginWithOtp(
+                                otp: otpController.text,
+                                phoneNumber: phoneController.text,
+                                context: context,
+                                countryCode: countryCodeController.text);
+                            SystemChannels.textInput
+                                .invokeMethod('TextInput.hide');
+                          } else {
+                            Flushbar(
+                              message: 'OTP must be 6 digits',
+                              duration: Duration(seconds: 2),
+                            ).show(context);
+                          }
+                          //Navigator.of(context).pushNamed('awesome');
+                        },
+                      ),
                     ),
                   ),
                 ],

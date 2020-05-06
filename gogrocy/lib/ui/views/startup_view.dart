@@ -1,3 +1,4 @@
+import 'package:firebase_crashlytics/firebase_crashlytics.dart';
 import 'package:flutter/material.dart';
 import 'package:gogrocy/core/viewModels/startup_view_model.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;

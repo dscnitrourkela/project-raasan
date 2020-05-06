@@ -52,8 +52,8 @@ class AuthenticationService {
       print(currentUser.uid + "    " + currentUser.phoneNumber);
       return currentUser != null;
     } catch (e) {
-      print(e.message);
-      return e.message;
+      print(e);
+      return e;
     }
   }
 

@@ -2,6 +2,8 @@
 
  ### Release submitted at hack:now - [hack:now submission](https://github.com/developer-student-clubs-nitr/project-raasan/releases/tag/v0.2.0%2B2) 
 
+Codemagic Build Dev Branch[![Codemagic build status](https://api.codemagic.io/apps/5e8dd577b386120018de1093/5eb2c6076297a11e6cb1e9b2/status_badge.svg)](https://codemagic.io/apps/5e8dd577b386120018de1093/5eb2c6076297a11e6cb1e9b2/latest_build)
+
 ## Why project-raasan?
 The key idea behind this independent venture is to digitalize ration stores and help forge a connection between the store and the nearest customer. The immediate target of the venture is to deliver the aforementioned items to people at their doorstep so that they do not have to step outside their houses amid a lockdown. The business model is meant to be branded in a manner that attracts customers and creates a customer base at a low budget. An impediment to the otherwise noble venture is the fact that the delivery guys sometimes decline taking out the orders because of the lockdown.
 

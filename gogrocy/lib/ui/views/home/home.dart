@@ -31,7 +31,7 @@ class Home extends StatelessWidget {
               crossAxisAlignment: CrossAxisAlignment.start,
               children: <Widget>[
                 Padding(
-                  padding: EdgeInsets.only(left: 16.0 * constants.scaleRatio),
+                  padding: EdgeInsets.only(left: 0.055 * constants.screenWidth),
                   child: Column(
                     mainAxisAlignment: MainAxisAlignment.start,
                     crossAxisAlignment: CrossAxisAlignment.start,
@@ -40,7 +40,7 @@ class Home extends StatelessWidget {
                         "What are you looking for?",
                         style: TextStyle(
                             fontFamily: 'Gilroy',
-                            fontSize: 18,
+                            fontSize: 0.044 * constants.screenWidth,
                             fontWeight: FontWeight.bold),
                       ),
                       Padding(
@@ -51,7 +51,7 @@ class Home extends StatelessWidget {
                             "Choose from the widest selection of local produce",
                             style: TextStyle(
                                 fontFamily: 'Gilroy',
-                                fontSize: 13,
+                                fontSize: 0.032 * constants.screenWidth,
                                 fontWeight: FontWeight.normal),
                           ),
                         ),
