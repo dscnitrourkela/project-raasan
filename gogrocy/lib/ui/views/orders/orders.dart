@@ -194,7 +194,7 @@ class OrderView extends StatelessWidget {
     for (int i = 0; i < list.length; i++) {
       totalCost += double.parse(list[i].price) * double.parse(list[i].orderQty);
     }
-    totalCost = totalCost > 499 ? totalCost : totalCost + 20;
+    totalCost = totalCost > 499 ? totalCost : totalCost + constants.deliveryCharges;
     return "₹ " + totalCost.toString();
   }
 

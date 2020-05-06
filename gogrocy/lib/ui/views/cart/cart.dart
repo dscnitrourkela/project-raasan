@@ -158,7 +158,7 @@ class CartHeader extends StatelessWidget {
                                   "Grand Total ₹" +
                                       ((model.sum > 499)
                                           ? model.sum.toString().toString()
-                                          : (model.sum + 20).toString()),
+                                          : (model.sum + constants.deliveryCharges).toString()),
                                   style: TextStyle(
                                       fontFamily: 'Gilroy',
                                       fontSize: 0.032 * constants.screenWidth,
