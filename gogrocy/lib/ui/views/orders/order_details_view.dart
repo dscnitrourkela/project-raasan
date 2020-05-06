@@ -4,6 +4,7 @@ import 'package:gogrocy/ui/views/orders/order_bill.dart';
 import 'package:gogrocy/ui/views/orders/ordered_product_list.dart';
 import 'package:gogrocy/ui/widgets/appbars/main_appbar.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
+import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 class OrderDetailsView extends StatelessWidget {
   final Orders orders;
@@ -106,7 +107,7 @@ class OrderDetailsView extends StatelessWidget {
     for (int i = 0; i < list.length; i++) {
       totalCost += double.parse(list[i].price) * double.parse(list[i].orderQty);
     }
-    totalCost = totalCost > 499 ? totalCost : totalCost + 20;
+    totalCost = totalCost > 499 ? totalCost : totalCost + constants.deliveryCharges;
     return "₹ " + totalCost.toString();
   }
 

@@ -2,6 +2,8 @@
 
  ### Release submitted at hack:now - [hack:now submission](https://github.com/developer-student-clubs-nitr/project-raasan/releases/tag/v0.2.0%2B2) 
 
+Codemagic Build Dev Branch[![Codemagic build status](https://api.codemagic.io/apps/5e8dd577b386120018de1093/5eb2c6076297a11e6cb1e9b2/status_badge.svg)](https://codemagic.io/apps/5e8dd577b386120018de1093/5eb2c6076297a11e6cb1e9b2/latest_build)
+
 Codemagic Build Beta Branch
 [![Codemagic build status](https://api.codemagic.io/apps/5e8dd577b386120018de1093/5e8dd577b386120018de1092/status_badge.svg)](https://codemagic.io/apps/5e8dd577b386120018de1093/5e8dd577b386120018de1092/latest_build)
 

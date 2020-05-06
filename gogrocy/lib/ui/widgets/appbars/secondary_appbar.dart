@@ -41,6 +41,14 @@ class SecondaryAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ),
+            Opacity(
+              opacity:0,
+              child: IconButton(
+                icon: Icon(Icons.arrow_back_ios),
+                onPressed: () {
+                },
+              ),
+            ),
           ],
         ));
   }

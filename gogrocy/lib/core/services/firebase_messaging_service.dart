@@ -35,24 +35,14 @@ class FirebaseMessagingService {
     }, onResume: (Map<String, dynamic> message) async {
       print("onResume: $message");
     });
-    fcmInstance.subscribeToTopic('pests');
-    fcmInstance.subscribeToTopic('weather');
     print('FCM Configured!');
   }
 
-  static void reSubscribeWeatherHandler() {
-    fcmInstance.subscribeToTopic('weather');
+  static void subscribeCity(String city) {
+    fcmInstance.subscribeToTopic(city);
   }
 
-  static void reSubscribePestHandler() {
-    fcmInstance.subscribeToTopic('pests');
-  }
-
-  static void unsubscribePestHandler() {
-    fcmInstance.unsubscribeFromTopic('pests');
-  }
-
-  static void unsubscribeWeatherHandler() {
-    fcmInstance.unsubscribeFromTopic('weather');
+  static void unsubscribeCity(String city) {
+    fcmInstance.unsubscribeFromTopic(city);
   }
 }
