@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
 import 'package:gogrocy/core/services/checkout_button_callback.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
+import 'package:gogrocy/ui/shared/constants.dart' as constants;
 
 class CartHeader extends StatelessWidget {
   final CartDataModel model;
@@ -45,7 +46,7 @@ class CartHeader extends StatelessWidget {
                             "Grand Total Rs" +
                                 ((model.sum > 499)
                                     ? model.sum.toString().toString()
-                                    : (model.sum + 20).toString()),
+                                    : (model.sum+constants.deliveryCharges).toString()),
                             style: TextStyle(
                                 fontFamily: 'Gilroy',
                                 fontSize: 14.0,

@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gogrocy/core/models/orders.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
+import 'package:gogrocy/ui/shared/constants.dart' as constants;
+
 
 class OrderBill extends StatelessWidget {
   final List<Details> orders;
@@ -116,9 +118,9 @@ class OrderBill extends StatelessWidget {
       delivery = 0.toString();
       sumTotal = totalCost.toString();
     } else {
-      totalCost += 20;
+      totalCost += constants.deliveryCharges;
       sumTotal = totalCost.toString();
-      delivery = "20";
+      delivery = constants.deliveryCharges.toString();
     }
     return "₹ " + totalCost.toString();
   }

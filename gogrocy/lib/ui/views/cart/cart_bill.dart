@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:gogrocy/core/models/cart_list.dart';
 import 'package:gogrocy/ui/shared/colors.dart' as colors;
+import 'package:gogrocy/ui/shared/constants.dart' as constants;
+
 
 class CartBill extends StatelessWidget {
   CartDataModel cartList;
@@ -9,7 +11,7 @@ class CartBill extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    int delivery = cartList.sum > 499 ? 0 : 20;
+    int delivery = cartList.sum > 499 ? 0 : constants.deliveryCharges;
     return Padding(
       padding: const EdgeInsets.all(8.0),
       child: ClipRRect(

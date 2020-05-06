@@ -11,6 +11,8 @@ final String imageBaseUrl =
 final String playStoreUrl =
     "https://play.google.com/store/apps/details?id=in.gogrocy.gogrocy";
 
+final int deliveryCharges=25;
+
 class LoginConfig {
   static double loginTextFieldWidth = 280 * scaleRatio;
   static double titleTextSize = 22 * scaleRatio;
