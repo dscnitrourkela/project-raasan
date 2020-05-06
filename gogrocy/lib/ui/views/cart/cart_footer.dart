@@ -29,7 +29,7 @@ class _CartFooterState extends State<CartFooter> {
   Widget build(BuildContext context) {
     int cost = widget.model.cartList.sum > 499
         ? widget.model.cartList.sum
-        : (widget.model.cartList.sum + 20);
+        : (widget.model.cartList.sum + constants.deliveryCharges);
     return FutureBuilder(
         future: apis.getAddresses(),
         builder: (context, snapshot) {

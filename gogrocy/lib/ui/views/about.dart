@@ -5,6 +5,9 @@ import 'package:url_launcher/url_launcher.dart';
 final String aboutText =
     "GoGrocy is an online grocery and essentials providing service operating in cities of Odisha, India (began at Jeypore, Koraput). This idea was executed amidst the outrageous pandemic caused by COVID-19 that has forced lives and livelihood to a standstill. While India has taken to a state-enforced lockdown, it has increasingly become difficult for people to avail necessary daily supplements from home. In this backdrop, GoGrocy provides home delivery to customers.\n\nWe are built to scale up and if you are a vendor or someone who can help us scale up to your region, contact us.\nMobile: +91 7978877258\nEmail: gogrocy33@gmail.com\nGSTIN: 21AHHPC7274N1Z7\nLegal Name: KIRANKUMAR SUBUDHI CHINNAR\nAddress: BIDYADHAR MARKET, BIDYADHAR MARKET, M.G.ROAD, JEYPORE, Koraput, Odisha, 764001";
 
+final String projectText="The Mobile Application is developed by Developer Student Clubs NIT Rourkela under the project name project-raasan. DSCs are Google Developers powered program for University students to learn technology for tomorrow. The project is publicly hosted on GitHub. We are open to contributions and suggestions at our repo but contributors from outside the team shown below have no equity unless otherwise stated. The project is built on cross-platform mobile app framework Flutter with Firebase to assist.";
+
+
 class AboutView extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
@@ -20,15 +23,15 @@ class AboutView extends StatelessWidget {
           body: SingleChildScrollView(
             child: Column(
               children: <Widget>[
-                Image.asset(
+                /*Image.asset(
                   'assets/dsc_logo.png',
                   fit: BoxFit.scaleDown,
-                ),
+                ),*/
                 Padding(
                   padding: const EdgeInsets.only(
                       left: 25, right: 25, top: 20, bottom: 30),
                   child: Text(
-                    aboutText,
+                    aboutText+"\n\n$projectText",
                     textAlign: TextAlign.left,
                     style: TextStyle(
                       fontSize: 15,
