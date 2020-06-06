@@ -26,7 +26,7 @@ dependencies:
   firebase_auth: any
   firebase_crashlytics: 0.1.3
   firebase_messaging: ^6.0.13
-  flushbar: 1.9.1
+  flushbar: 1.10.4
   get_it: ^4.0.1
   http: 0.12.0+4
   pin_code_fields: ^2.5.1
