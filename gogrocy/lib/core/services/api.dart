@@ -12,6 +12,7 @@ import 'package:gogrocy/core/models/signup_model.dart';
 import 'package:gogrocy/core/models/user.dart';
 import 'package:gogrocy/core/models/user_status.dart';
 import 'package:gogrocy/core/services/shared_prefs.dart';
+import 'package:gogrocy/core/services/firebase_messaging_service.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:http/http.dart' as http;
 
@@ -32,6 +33,7 @@ const String getProductsByCityRequest = baseUrl + "getProductsByCity";
 const String getCategoriesByCityRequest = baseUrl + "getProductsByCategory";
 const String getOrderRequest = baseUrl + "getorders";
 const String searchByCity = baseUrl + "searchProductsByCity";
+const String setDeviceNotificationToken=baseUrl+"setDeviceToken";
 
 class Apis {
   final SharedPrefsService _sharedPrefsService = locator<SharedPrefsService>();
@@ -152,6 +154,7 @@ class Apis {
         User.fromJson(json.decode((await http.post(login, body: body)).body));
     if (user.success) {
       _sharedPrefsService.setJWT(user.jwt);
+      await setDeviceNotificationTokenAPI();
       return user;
     } else {
       return user;
@@ -391,5 +394,21 @@ class Apis {
       return true;
     } else
       return false;
+  }
+
+  Future<bool> setDeviceNotificationTokenAPI() async {
+    String jwt = await _sharedPrefsService.getJWT();
+    var token = await FirebaseMessagingService.fcmInstance.getToken();
+    await FirebaseMessagingService.fcmInstance.subscribeToTopic('GoGrocy');
+    var client = new http.Client();
+    http.Response result = await client.post(setDeviceNotificationToken,
+        headers: {HttpHeaders.authorizationHeader: "Bearer $jwt"},
+        body: {"token": token});
+    if((json.decode(result.body))["success"]) {
+      print((json.decode(result.body))["message"]);
+      return true;
+    }
+    print("SetDeviceNotificationToken Failed");
+    return false;
   }
 }
