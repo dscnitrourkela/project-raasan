@@ -12,6 +12,16 @@ import 'package:provider/provider.dart';
 import 'package:url_launcher/url_launcher.dart';
 
 class HomePageView extends StatelessWidget {
+  int _initialPage;
+
+  HomePageView({int startingPage}) {
+    _initialPage = startingPage ?? 1;
+    if (startingPage == null) {
+      print("Starting page is null");
+    } else
+      print("Starting page is not null, value is $_initialPage");
+  }
+
   @override
   Widget build(BuildContext context) {
     try {
@@ -23,14 +33,15 @@ class HomePageView extends StatelessWidget {
     // TODO: implement build
     constants.mediaQueryData = MediaQuery.of(context);
     return ChangeNotifierProvider<BottomNavBarProvider>(
-        create: (BuildContext context) => BottomNavBarProvider(),
+        create: (BuildContext context) =>
+            BottomNavBarProvider(initialPage: _initialPage),
         child: Consumer<BottomNavBarProvider>(builder: (context, counter, _) {
           return SafeArea(
             child: Scaffold(
               backgroundColor: Colors.white,
               appBar: MainAppBar(),
               body: ViewCarousel(),
-              bottomNavigationBar: BottomNavBar(),
+              bottomNavigationBar: BottomNavBar(_initialPage),
             ),
           );
         }));

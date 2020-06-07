@@ -61,7 +61,7 @@ class _GoGrocyAppState extends State<GoGrocyApp> {
       debugShowCheckedModeBanner: false,
       title: 'GoGrocy',
       navigatorObservers: [
-        locator<AnalyticsService>().getAnalyticsObserver(),
+        //locator<AnalyticsService>().getAnalyticsObserver(),
 
       ],
       theme: ThemeData(

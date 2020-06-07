@@ -4,6 +4,7 @@ import 'package:gogrocy/core/models/cart_list.dart';
 import 'package:gogrocy/core/services/api.dart';
 import 'package:gogrocy/core/viewModels/base_model.dart';
 import 'package:gogrocy/service_locator.dart';
+import 'package:http/http.dart';
 
 class CartViewModel extends BaseModel {
   Apis _apis = locator<Apis>();
@@ -38,4 +39,12 @@ class CartViewModel extends BaseModel {
     await _apis.editCartList(productId: product_id, quantity: quantity);
     setState(ViewState.Idle);
   }
+
+  Future deleteCartItem(String cart_id, String quantity) async {
+    setState(ViewState.Busy);
+    await _apis.deleteFromCart(cart_id: cart_id, quantity: quantity);
+    setState(ViewState.Idle);
+    getCartList();
+  }
+
 }
