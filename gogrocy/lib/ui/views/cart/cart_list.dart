@@ -111,7 +111,7 @@ class CartList extends StatelessWidget {
                                     fontWeight: FontWeight.bold),
                               ),
                               onPressed: () async {
-                                model.deleteCartItem(
+                                model.editCartList(
                                     usableCartList.cart[index].cartId, "0");
                               },
                             ),

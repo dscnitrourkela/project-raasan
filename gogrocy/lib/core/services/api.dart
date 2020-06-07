@@ -24,8 +24,8 @@ const String signUp = baseUrl + "signup";
 const String verifyUser = baseUrl + "verifyUser";
 const String addAddress = baseUrl + "add_address";
 const String cartList = baseUrl + 'getCartItems';
-const String editCart = baseUrl + "add_to_cart";
-const String removeFromCart=baseUrl+"editCart";
+const String addToCartUrl = baseUrl + "add_to_cart";
+const String editCartUrl = baseUrl + "editCart";
 const String getAddress = baseUrl + "getAddress";
 const String orderRequest = baseUrl + "placeOrder";
 const String getOrders = baseUrl + "getorders";
@@ -51,7 +51,7 @@ class Apis {
     Map<String, String> body = {"quantity": quantity, "product_id": productId};
     String jwt = await _sharedPrefsService.getJWT();
     var result = json.decode((await http.post(
-      editCart,
+      addToCartUrl,
       body: body,
       headers: {
         'Authorization': 'Bearer $jwt',
@@ -61,21 +61,23 @@ class Apis {
     return result["success"];
   }
 
-  Future<bool> deleteFromCart({
+  Future<CartDataModel> editCart({
     @required String cart_id,
     @required String quantity,
   }) async {
     Map<String, String> body = {"cart_id": cart_id, "quantity": quantity};
     String jwt = await _sharedPrefsService.getJWT();
     var result = json.decode((await http.post(
-      removeFromCart,
+      editCartUrl,
       body: body,
       headers: {
         'Authorization': 'Bearer $jwt',
       },
     ))
         .body);
-    return result["success"];
+    CartEditModel temp = CartEditModel.fromJson(result);
+    print(temp.success);
+    return temp.result;
   }
 
   Future<bool> addAddressApi(
@@ -176,6 +178,7 @@ class Apis {
     }
   }
 
+/*
   Future<CartEdit> editCartList(
       {@required String productId, @required String quantity}) async {
     Map<String, String> body = {"product_id": productId, "quantity": quantity};
@@ -192,7 +195,7 @@ class Apis {
       return CartEdit.fromJson(json.decode(response.body));
     } else
       print("Network failure");
-  }
+  }*/
 
   Future<bool> placeOrder({@required String addressId}) async {
     Map<String, String> body = {
