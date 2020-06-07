@@ -8,6 +8,8 @@ import 'package:gogrocy/core/services/shared_prefs.dart';
 import 'package:gogrocy/core/viewModels/base_model.dart';
 import 'package:gogrocy/service_locator.dart';
 import 'package:gogrocy/ui/views/signup_view.dart';
+import 'package:crypto/crypto.dart';
+import 'dart:convert'; // for the utf8.encode method
 
 class SignUpViewModel extends BaseModel {
   final Animation<double> womanScaleAnimation;
@@ -75,12 +77,14 @@ class SignUpViewModel extends BaseModel {
         );
 
   Future<bool> signUpWithApi() async {
+    print(md5.convert(utf8.encode(passwordController.text)).toString());
+    print(passwordController.text);
     setState(ViewState.Busy);
     var signUp = await _apiService.signUpApi(
         name: nameController.text,
         countryCode: countryCode,
-        password: passwordController.text,
-        cPassword: cPasswordController.text,
+        password: md5.convert(utf8.encode(passwordController.text)).toString(),
+        cPassword: md5.convert(utf8.encode(cPasswordController.text)).toString(),
         mobile: mobile,
         locality: addressController.text,
         city: cityController.text,

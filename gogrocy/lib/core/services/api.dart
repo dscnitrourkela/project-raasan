@@ -105,7 +105,8 @@ class Apis {
       "country_code": countryCode,
       "password": password,
       "cpassword": cPassword,
-      "mobile": mobile
+      "mobile": mobile,
+      "ishashed": "true",
     };
     var signUpModel = SignUpModel.fromJson(
         json.decode((await http.post(signUp, body: body)).body));
@@ -147,7 +148,8 @@ class Apis {
     Map<String, String> body = {
       "mobile": mobile,
       "password": password,
-      "country_code": countryCode
+      "country_code": countryCode,
+      "ishashed": "true",
     };
 
     var user =
