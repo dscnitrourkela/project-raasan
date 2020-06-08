@@ -54,9 +54,10 @@ class _CartCounterState extends State<CartCounter> {
                     if (orderedQuanitity + count > 0) {
                       count--;
                       print("Decreased by $count");
-                      widget.model.getCartList(
-                          productId: cart.productId,
-                          quantity: count.toString());
+                      /*widget.model.getCartList(
+                          cart_id: cart.cartId,
+                          quantity: count.toString());*/
+                      widget.model.editCartList(cart.cartId, (orderedQuanitity + count).toString());
                       count = 0;
                     }
                   });
@@ -94,9 +95,10 @@ class _CartCounterState extends State<CartCounter> {
                     if (orderedQuanitity + count < widget.maxQuantity) {
                       count++;
                       print("Increased by $count");
-                      widget.model.getCartList(
-                          productId: cart.productId,
-                          quantity: count.toString());
+                      /*widget.model.getCartList(
+                          cart_id: cart.cartId,
+                          quantity: count.toString());*/
+                      widget.model.editCartList(cart.cartId, (orderedQuanitity + count).toString());
                       count = 0;
                     }
                   });

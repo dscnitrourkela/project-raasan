@@ -1,8 +1,17 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="bc4fb90c-2a39-41bf-ab6b-fbc8c1118d99" name="Default Changelist" comment="" />
-    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <list default="true" id="bc4fb90c-2a39-41bf-ab6b-fbc8c1118d99" name="Default Changelist" comment="">
+      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gogrocy/lib/core/services/bottom_appbar_provider.dart" beforeDir="false" afterPath="$PROJECT_DIR$/gogrocy/lib/core/services/bottom_appbar_provider.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gogrocy/lib/core/services/navigation_service.dart" beforeDir="false" afterPath="$PROJECT_DIR$/gogrocy/lib/core/services/navigation_service.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gogrocy/lib/ui/router.dart" beforeDir="false" afterPath="$PROJECT_DIR$/gogrocy/lib/ui/router.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gogrocy/lib/ui/views/landing_page.dart" beforeDir="false" afterPath="$PROJECT_DIR$/gogrocy/lib/ui/views/landing_page.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gogrocy/lib/ui/views/product_detail_view.dart" beforeDir="false" afterPath="$PROJECT_DIR$/gogrocy/lib/ui/views/product_detail_view.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gogrocy/lib/ui/views/view_carousel.dart" beforeDir="false" afterPath="$PROJECT_DIR$/gogrocy/lib/ui/views/view_carousel.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gogrocy/lib/ui/widgets/bottom_navbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/gogrocy/lib/ui/widgets/bottom_navbar.dart" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/gogrocy/lib/ui/widgets/snackbars/custom_snackbar.dart" beforeDir="false" afterPath="$PROJECT_DIR$/gogrocy/lib/ui/widgets/snackbars/custom_snackbar.dart" afterDir="false" />
+    </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
     <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
@@ -12,22 +21,16 @@
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
   </component>
   <component name="ProjectId" id="1a8E3UE3lppePvxJjAuiOV8sZBL" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
   <component name="PropertiesComponent">
-    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="last_opened_file_path" value="$PROJECT_DIR$/gogrocy" />
     <property name="settings.editor.selected.configurable" value="dart.settings" />
     <property name="show.migrate.to.gradle.popup" value="false" />
-  </component>
-  <component name="RunDashboard">
-    <option name="ruleStates">
-      <list>
-        <RuleState>
-          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
-        </RuleState>
-        <RuleState>
-          <option name="name" value="StatusDashboardGroupingRule" />
-        </RuleState>
-      </list>
-    </option>
   </component>
   <component name="SvnConfiguration">
     <configuration />
@@ -47,10 +50,18 @@
       <map>
         <entry key="MAIN">
           <value>
-            <State />
+            <State>
+              <option name="COLUMN_ORDER" />
+            </State>
           </value>
         </entry>
       </map>
     </option>
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="549" y="167" key="FileChooserDialogImpl" timestamp="1591514677278">
+      <screen x="0" y="0" width="1536" height="824" />
+    </state>
+    <state x="549" y="167" key="FileChooserDialogImpl/0.0.1536.824@0.0.1536.824" timestamp="1591514677278" />
   </component>
 </project>

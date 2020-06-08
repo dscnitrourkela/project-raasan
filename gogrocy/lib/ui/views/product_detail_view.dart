@@ -13,13 +13,15 @@ class ProductDetailView extends StatelessWidget {
   final Result product;
 
   Flushbar successSnackbar = infoSnackBar(
-      message: "Added to cart",
+      message: "Added successfully",
       iconData: Icons.check,
-      iconColor: colors.primaryColor);
+      iconColor: colors.primaryColor,
+      goToCart: true);
   Flushbar failureSnackbar = infoSnackBar(
       message: "Could not add to cart",
       iconData: Icons.error,
-      iconColor: Colors.red);
+      iconColor: Colors.red,
+      goToCart: false);
 
   ProductDetailView(this.product);
 

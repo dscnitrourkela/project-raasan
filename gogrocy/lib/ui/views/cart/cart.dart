@@ -20,7 +20,7 @@ class Cart extends StatelessWidget {
     return Scaffold(
       body: BaseView<CartViewModel>(
         onModelReady: (model) {
-          model.getCartList(productId: null, quantity: null);
+          model.getCartList(cart_id: null, quantity: null);
         },
         builder: (context, model, child) {
           if (model.state == ViewState.Busy)
@@ -29,6 +29,7 @@ class Cart extends StatelessWidget {
             if (model.cartList.sum != 0) {
               return ListView(
                 shrinkWrap: true,
+                addAutomaticKeepAlives: true,
                 controller: scrollController,
                 children: <Widget>[
                   CartHeader(

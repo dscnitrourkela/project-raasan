@@ -87,13 +87,35 @@ class CartList extends StatelessWidget {
                     flex: 3,
                     child: Align(
                         alignment: Alignment.topRight,
-                        child: Text(
-                          '₹ $totalCost',
-                          style: TextStyle(
-                              fontSize: 17.0,
-                              fontWeight: FontWeight.w500,
-                              color: colors.primaryColor),
-                          textAlign: TextAlign.right,
+                        child: Column(
+                          mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                          mainAxisSize: MainAxisSize.max,
+                          children: <Widget>[
+                            Text(
+                              '₹ $totalCost',
+                              style: TextStyle(
+                                  fontSize: 17.0,
+                                  fontWeight: FontWeight.w500,
+                                  color: colors.primaryColor),
+                              textAlign: TextAlign.right,
+                            ),
+                            FlatButton(
+                              shape: RoundedRectangleBorder(
+                                  borderRadius: BorderRadius.circular(10.0)),
+                              color: colors.viewAllButtonBackground,
+                              child: Text(
+                                "Remove",
+                                style: TextStyle(
+                                    color: colors.primaryColor,
+                                    fontSize: 14,
+                                    fontWeight: FontWeight.bold),
+                              ),
+                              onPressed: () async {
+                                model.editCartList(
+                                    usableCartList.cart[index].cartId, "0");
+                              },
+                            ),
+                          ],
                         )),
                   ),
                 ],
