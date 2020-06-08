@@ -88,6 +88,8 @@ Route<dynamic> generateRoute(RouteSettings settings) {
       return SlideLeftRoute(page: AboutView());
     case 'search':
       return MaterialPageRoute(builder: (context) => SearchView());
+    case 'productToCart':
+      return MaterialPageRoute(builder: (context) => HomePageView(startingPage: 0));
     default:
       return MaterialPageRoute(
           builder: (context) => Scaffold(

@@ -18,7 +18,7 @@ class Account extends StatelessWidget {
       backgroundColor: Colors.white,
       body: BaseView<CartViewModel>(
         onModelReady: (model) {
-          model.getCartList(productId: null, quantity: null);
+          model.getCartList(cart_id: null, quantity: null);
         },
         builder: (context, model, child) {
           return ListView(

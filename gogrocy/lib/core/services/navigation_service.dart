@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:gogrocy/ui/views/landing_page.dart';
 
 class NavigationService {
   static final GlobalKey<NavigatorState> navigatorKey =
@@ -11,4 +12,11 @@ class NavigationService {
   void goBack() {
     return navigatorKey.currentState.pop();
   }
+  
+  pushCart(){
+    navigatorKey.currentState.push(MaterialPageRoute(builder: (context)=>HomePageView(startingPage: 0)));
+
+  }
+
+
 }

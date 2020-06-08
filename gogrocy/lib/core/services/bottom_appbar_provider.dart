@@ -1,11 +1,16 @@
 import 'package:flutter/material.dart';
 
 class BottomNavBarProvider with ChangeNotifier {
-  int _currentIndex = 1;
+  int _currentIndex;
+  PageController controller;
 
-  PageController controller = PageController(
-    initialPage: 1, /*keepPage: true*/
-  );
+  BottomNavBarProvider({int initialPage}) {
+    _currentIndex = initialPage ?? 1;
+    controller = PageController(initialPage: initialPage??1, keepPage: true);
+    print("value received at bottmna provider is $_currentIndex");
+  }
+
+
 
   get currentIndex => _currentIndex;
 

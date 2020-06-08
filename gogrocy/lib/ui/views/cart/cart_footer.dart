@@ -86,7 +86,7 @@ class _CartFooterState extends State<CartFooter> {
                     addressId: snapshot.data[selectedIndex].addressId,
                     callback: () {
                       print("Callback is succeeding");
-                      widget.model.getCartList(productId: null, quantity: null);
+                      widget.model.getCartList(cart_id: null, quantity: null);
                     }),
               ],
             );
@@ -240,7 +240,7 @@ class _CartFooterState extends State<CartFooter> {
             ],
           )..show(context);
           _navigationService.navigateTo('orders');
-          widget.model.getCartList(productId: null, quantity: null);
+          widget.model.getCartList(cart_id: null, quantity: null);
         } else
           Flushbar(
             messageText: Text(

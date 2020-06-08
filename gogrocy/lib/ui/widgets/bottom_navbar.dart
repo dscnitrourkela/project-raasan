@@ -4,13 +4,17 @@ import 'package:gogrocy/core/services/bottom_appbar_provider.dart';
 import 'package:provider/provider.dart';
 
 class BottomNavBar extends StatelessWidget {
+  int initialPage;
+
+  BottomNavBar(int initialPage){this.initialPage=initialPage;}
+
   @override
   Widget build(BuildContext context) {
     // TODO: implement build
     var provider = Provider.of<BottomNavBarProvider>(context);
     return FancyBottomNavigation(
       barBackgroundColor: Colors.black,
-      initialSelection: 1,
+      initialSelection: initialPage,
       inactiveIconColor: Colors.grey,
       textColor: Colors.white,
       tabs: [
@@ -22,36 +26,5 @@ class BottomNavBar extends StatelessWidget {
         provider.currentIndex = position;
       },
     );
-
-    /*CurvedNavigationBar(
-      //key: _bottomNavigationKey,
-      index: 0,
-      height: constants.BottomNavBarConfig.bottomNavBarHeight,
-      items: <Widget>[
-        Icon(
-          Icons.shopping_cart,
-          size: constants.BottomNavBarConfig.inactiveIconSize,
-          color: Colors.white,
-        ),
-        Icon(
-          Icons.explore,
-          size: constants.BottomNavBarConfig.inactiveIconSize,
-          color: Colors.white,
-        ),
-        Icon(
-          Icons.person,
-          size: constants.BottomNavBarConfig.inactiveIconSize,
-          color: Colors.white,
-        ),
-      ],
-      color: Colors.black,
-      buttonBackgroundColor: colors.PRIMARY_COLOR,
-      backgroundColor: Colors.transparent,
-      animationCurve: Curves.easeOut,
-      animationDuration: Duration(milliseconds: 400),
-      onTap: (index) {
-        provider.currentIndex = index;
-      },
-    );*/
   }
 }

@@ -25,7 +25,8 @@ const String signUp = baseUrl + "signup";
 const String verifyUser = baseUrl + "verifyUser";
 const String addAddress = baseUrl + "add_address";
 const String cartList = baseUrl + 'getCartItems';
-const String editCart = baseUrl + "add_to_cart";
+const String addToCartUrl = baseUrl + "add_to_cart";
+const String editCartUrl = baseUrl + "editCart";
 const String getAddress = baseUrl + "getAddress";
 const String orderRequest = baseUrl + "placeOrder";
 const String getOrders = baseUrl + "getorders";
@@ -52,7 +53,7 @@ class Apis {
     Map<String, String> body = {"quantity": quantity, "product_id": productId};
     String jwt = await _sharedPrefsService.getJWT();
     var result = json.decode((await http.post(
-      editCart,
+      addToCartUrl,
       body: body,
       headers: {
         'Authorization': 'Bearer $jwt',
@@ -60,6 +61,25 @@ class Apis {
     ))
         .body);
     return result["success"];
+  }
+
+  Future<CartDataModel> editCart({
+    @required String cart_id,
+    @required String quantity,
+  }) async {
+    Map<String, String> body = {"cart_id": cart_id, "quantity": quantity};
+    String jwt = await _sharedPrefsService.getJWT();
+    var result = json.decode((await http.post(
+      editCartUrl,
+      body: body,
+      headers: {
+        'Authorization': 'Bearer $jwt',
+      },
+    ))
+        .body);
+    CartEditModel temp = CartEditModel.fromJson(result);
+    print(temp.success);
+    return temp.result;
   }
 
   Future<bool> addAddressApi(
@@ -163,14 +183,14 @@ class Apis {
     }
   }
 
+/*
   Future<CartEdit> editCartList(
       {@required String productId, @required String quantity}) async {
     Map<String, String> body = {"product_id": productId, "quantity": quantity};
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState)
-    {
+    if (connectionState) {
       var response = await client.post(editCart,
           headers: {
             'Authorization': 'Bearer $jwt',
@@ -180,7 +200,7 @@ class Apis {
       return CartEdit.fromJson(json.decode(response.body));
     } else
       print("Network failure");
-  }
+  }*/
 
   Future<bool> placeOrder({@required String addressId}) async {
     Map<String, String> body = {
@@ -189,20 +209,18 @@ class Apis {
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState)
-    {
-      try{
+    if (connectionState) {
+      try {
         var response = await client.post(orderRequest,
             headers: {
               'Authorization': 'Bearer $jwt',
             },
             body: body);
-        if(PlaceOrder.fromJson(json.decode(response.body)).success)
+        if (PlaceOrder.fromJson(json.decode(response.body)).success)
           return true;
-        else return false;
-      }
-      catch(e)
-      {
+        else
+          return false;
+      } catch (e) {
         print(e);
         return false;
       }
@@ -217,8 +235,7 @@ class Apis {
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState)
-    {
+    if (connectionState) {
       var response = await client.post(getProductsByCityRequest,
           headers: {
             'Authorization': 'Bearer $jwt',
@@ -237,8 +254,7 @@ class Apis {
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState)
-    {
+    if (connectionState) {
       var response = await client.post(getCategoriesByCityRequest,
           headers: {
             'Authorization': 'Bearer $jwt',
@@ -257,8 +273,7 @@ class Apis {
     String jwt = await _sharedPrefsService.getJWT();
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState)
-    {
+    if (connectionState) {
       var response = await client.post(searchByCity,
           headers: {
             'Authorization': 'Bearer $jwt',
@@ -272,8 +287,7 @@ class Apis {
   Future<List<Product>> getAllProducts() async {
     var client = new http.Client();
     bool connectionState = await checkStatus();
-    if (connectionState)
-    {
+    if (connectionState) {
       var products = List<Product>();
       var response = await client.post(allProducts);
       var parsed = json.decode(response.body) as List<dynamic>;
@@ -294,8 +308,7 @@ class Apis {
     Map<String, String> body = {
       "city": await _sharedPrefsService.getCity(),
     };
-    if (connectionState)
-    {
+    if (connectionState) {
       var products = List<Product>();
       var response = await client.post(allProducts,
           headers: {
@@ -319,8 +332,7 @@ class Apis {
     var client = new http.Client();
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
-    if (connectionState)
-    {
+    if (connectionState) {
       var address = List<Address>();
       var response = await client.post(getAddress, headers: {
         'Content-Type': 'application/json',
@@ -342,8 +354,7 @@ class Apis {
     var client = new http.Client();
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
-    if (connectionState)
-    {
+    if (connectionState) {
       var response = await client.post(getOrderRequest, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
@@ -360,8 +371,7 @@ class Apis {
     var client = http.Client();
     bool connectionState = await checkStatus();
     String jwt = await _sharedPrefsService.getJWT();
-    if (connectionState)
-    {
+    if (connectionState) {
       var response = await client.post(cartList, headers: {
         'Content-Type': 'application/json',
         'Accept': 'application/json',
