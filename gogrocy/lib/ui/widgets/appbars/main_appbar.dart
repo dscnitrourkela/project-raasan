@@ -92,21 +92,43 @@ class MainAppBar extends StatelessWidget implements PreferredSizeWidget {
                 ),
               ),
             ),
-            InkWell(
-              onTap: () => _navigationService.navigateTo("search"),
-              focusColor: Colors.black12,
-              child: Container(
-                width: constants.screenWidth / 3,
-                child: Align(
-                  alignment: Alignment.centerRight,
-                  child: Padding(
-                    padding: EdgeInsets.only(
-                        right: constants.AppBarConfig.searchIconPaddingRight),
-                    child: Icon(Icons.search),
+            Container(
+              width: constants.screenWidth / 3,
+              child: Row(
+                mainAxisSize: MainAxisSize.max,
+                mainAxisAlignment: MainAxisAlignment.end,
+                children: <Widget>[
+                  InkWell(
+                    onTap: () => _navigationService.navigateTo("search"),
+                    focusColor: Colors.black12,
+                    child: Container(
+
+                      child: Align(
+                        alignment: Alignment.centerRight,
+                        child: Padding(
+                          padding: EdgeInsets.only(
+                              right: 14.0),
+                          child: Icon(Icons.search),
+                        ),
+                      ),
+                    ),
                   ),
-                ),
+                  InkWell(
+                    onTap: () => _navigationService.pushCart(),
+                    focusColor: Colors.black12,
+                    child: Align(
+                      alignment: Alignment.centerRight,
+                      child: Padding(
+                        padding: EdgeInsets.only(
+                            right: constants.AppBarConfig.searchIconPaddingRight),
+                        child: Icon(Icons.shopping_cart),
+                      ),
+                    ),
+                  ),
+                ],
               ),
             ),
+
           ],
         ));
   }
