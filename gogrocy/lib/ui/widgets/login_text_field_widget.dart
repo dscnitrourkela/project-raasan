@@ -12,6 +12,8 @@ import 'package:gogrocy/ui/widgets/snackbars.dart';
 import 'package:pin_code_fields/pin_code_fields.dart';
 import 'package:provider/provider.dart';
 import 'package:gogrocy/ui/shared/constants.dart' as constants;
+import 'package:crypto/crypto.dart';
+import 'dart:convert'; // for the utf8.encode method
 
 class LoginTextFieldWidget extends StatefulWidget {
   LoginTextFieldWidget();
@@ -227,7 +229,8 @@ class _LoginTextFieldWidgetState extends State<LoginTextFieldWidget> {
                             model.loginWithApi(
                                 phoneNumber: phoneController.text,
                                 countryCode: countryCodeController.text,
-                                password: passwordController.text);
+                                password: md5.convert(utf8.encode(passwordController.text)).toString(),
+                            );
                           },
                         ),
                       ),
