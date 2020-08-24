@@ -7,6 +7,8 @@ Codemagic Build Dev Branch[![Codemagic build status](https://api.codemagic.io/ap
 Codemagic Build Beta Branch
 [![Codemagic build status](https://api.codemagic.io/apps/5e8dd577b386120018de1093/5e8dd577b386120018de1092/status_badge.svg)](https://codemagic.io/apps/5e8dd577b386120018de1093/5e8dd577b386120018de1092/latest_build)
 
+#### Article published at The New Indian Express edex: https://www.edexlive.com/happening/2020/aug/23/why-gogrocy-developed-by-nit-rourkela-student-decided-to-focus-on-tier-ii-adn-tier-iii-cities-13951.html
+
 ## Why project-raasan?
 The key idea behind this independent venture is to digitalize ration stores and help forge a connection between the store and the nearest customer. The immediate target of the venture is to deliver the aforementioned items to people at their doorstep so that they do not have to step outside their houses amid a lockdown. The business model is meant to be branded in a manner that attracts customers and creates a customer base at a low budget. An impediment to the otherwise noble venture is the fact that the delivery guys sometimes decline taking out the orders because of the lockdown.
 
