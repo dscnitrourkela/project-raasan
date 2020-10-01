@@ -1,4 +1,7 @@
 # project-raasan
+<!-- ALL-CONTRIBUTORS-BADGE:START - Do not remove or modify this section -->
+[![All Contributors](https://img.shields.io/badge/all_contributors-1-orange.svg?style=flat-square)](#contributors-)
+<!-- ALL-CONTRIBUTORS-BADGE:END -->
 
  ### Release submitted at hack:now - [hack:now submission](https://github.com/developer-student-clubs-nitr/project-raasan/releases/tag/v0.2.0%2B2) 
 
@@ -60,3 +63,22 @@ The key idea behind this independent venture is to digitalize ration stores and 
 * Orders Option is forever loading, that is a problem on our part, so don't wait for it to load
  
  
+
+## Contributors ✨
+
+Thanks goes to these wonderful people ([emoji key](https://allcontributors.org/docs/en/emoji-key)):
+
+<!-- ALL-CONTRIBUTORS-LIST:START - Do not remove or modify this section -->
+<!-- prettier-ignore-start -->
+<!-- markdownlint-disable -->
+<table>
+  <tr>
+    <td align="center"><a href="https://designrknight-website.web.app/"><img src="https://avatars0.githubusercontent.com/u/27865704?v=4" width="100px;" alt=""/><br /><sub><b>Abel Mathew</b></sub></a><br /><a href="https://github.com/dscnitrourkela/project-raasan/commits?author=DesignrKnight" title="Code">💻</a> <a href="#projectManagement-DesignrKnight" title="Project Management">📆</a></td>
+  </tr>
+</table>
+
+<!-- markdownlint-enable -->
+<!-- prettier-ignore-end -->
+<!-- ALL-CONTRIBUTORS-LIST:END -->
+
+This project follows the [all-contributors](https://github.com/all-contributors/all-contributors) specification. Contributions of any kind welcome!
